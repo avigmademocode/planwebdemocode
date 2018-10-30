@@ -1,0 +1,85 @@
+@model MyProject.Models.CustMaster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h5>Details</h5>
+
+<div>
+    
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustId)
+        <dt>
+            @Html.DisplayNameFor(model => model.CustName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustName)
+        <dt>
+            @Html.DisplayNameFor(model => model.Acronym)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Acronym)
+        <dt>
+            @Html.DisplayNameFor(model => model.NoofBranches)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoofBranches)
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelofAuthority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LevelofAuthority)
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        <dt>
+            @Html.DisplayNameFor(model => model.Ticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ticker)
+        <dt>
+            @Html.DisplayNameFor(model => model.InDemo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InDemo)
+        <dt>
+            @Html.DisplayNameFor(model => model.TieredPricing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieredPricing)
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+    </dl>
+</div>
+<p>
+            @Html.ActionLink("Edit", "Edit", new {
+ 						CustId = Model.CustId 
+ 						}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+ 
+@section Scripts {
+    $("#pageTitle").html("Customer Master");
+
+}

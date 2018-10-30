@@ -1,0 +1,121 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+ 
+  
+    <meta name="viewport" content="width=device-width" />
+    <title>KendoGrid</title>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //Bind with initial data
+            var people = [
+                { firstName: "Hasibul", lastName: "Haque", email: "hasibul2363@gmail.com" }
+                , { firstName: "Jane", lastName: "Smith", email: "jane.smith@kendoui.com" }
+            ];
+
+            $('#grid').kendoGrid({
+                scrollable: true,
+                sortable: true,
+                pageable: true,
+               // selectable: "row",//""multiple row"",
+                filterable: true
+
+                , dataSource: { data: people, pageSize: 10 }
+                , columns:
+                    [
+                        { field: "firstName", title: "First Name" }
+                        , { field: "lastName", title: "Last Name" }
+                        , { field: "email", title: "email" }
+                        , {
+                            title: "Action",
+                            template: ' <input type="button" value="Delete" onclick="RemoveSelectedRow()" />'
+                            , filterable: false
+                        }
+                    ]
+
+
+            });
+
+            $(".k-content").dblclick(DoubleClickAction);
+        });
+
+        function Rebind() {
+            var people = [
+                { firstName: "Robin", lastName: "Hood", email: "robin@gmail.com" }
+                , { firstName: "Hasibul", lastName: "Haque", email: "hasibul@gm.com" }
+                , { firstName: "Fauzul", lastName: "Hossain", email: "fauzul@gmail.com" }
+            ];
+
+            var grid = $("#grid").data("kendoGrid");
+            grid.dataSource.data(people);
+        }
+
+        function InsertNewRow() {
+            var grid = $("#grid").data("kendoGrid");
+            var anis = { firstName: "Anisur", lastName: "Rahaman", email: "anis.com" };
+            grid.dataSource.insert(anis);
+        }
+
+
+        function RemoveSelectedRow() {
+            var grid = $("#grid").data("kendoGrid");
+            var selectedRow = grid.dataItem(grid.select());
+            grid.dataSource.remove(selectedRow);
+
+        }
+
+
+        function IterateThroughAllRows() {
+            var items = $("#grid").data("kendoGrid").dataSource.data();
+            for (i = 0; i < items.length; i++) {
+                alert(items[i].firstName);
+            }
+        }
+
+        function DoubleClickAction() {
+            var grid = $("#grid").data("kendoGrid");
+            var selectedRow = grid.dataItem(grid.select());
+            alert("You have double click on " + selectedRow.firstName);
+        }
+
+        function ReadSelectedRow() {
+            var grid = $("#grid").data("kendoGrid");
+            var selectedRow = grid.dataItem(grid.select());
+            alert("You have selected FirstName: " + selectedRow.firstName + " and Last Name: " + selectedRow.lastName);
+        }
+
+        function EnableSelectedIndexChangeEvent() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.bind("change", RowSelectionChangeEvent);
+        }
+
+        function RowSelectionChangeEvent() {
+            ReadSelectedRow();
+        }
+    </script>
+
+
+</head>
+<body>
+
+
+    <div>
+        <input type="button" value="Rebind" onclick="Rebind()" />
+        <input type="button" value="Insert New Record" onclick="InsertNewRow()" />
+        <input type="button" value="Remove Selected Row" onclick="RemoveSelectedRow()" />
+        <input type="button" value="Iterate" onclick="IterateThroughAllRows()" />
+        <input type="button" value="Read Selected Row" onclick="ReadSelectedRow()" />
+        <input type="button" value="Enable Selected Index Chnage event" onclick="EnableSelectedIndexChangeEvent()" />
+    </div>
+
+    <div id="grid" class="k-content">
+    </div>
+
+</body>
+</html>

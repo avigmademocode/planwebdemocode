@@ -1,0 +1,29 @@
+﻿.input, .select {
+    position: relative;
+    display: block;
+    clear: both;
+    float: left;
+}
+
+.required-tick {
+    color: red;
+    position: absolute;
+    right: 10px;
+    height: 10px;
+    line-height: 10px;
+    top: 50%;
+    margin-top: -5px;
+    z-index: 999;
+}
+
+.select .required-tick {
+    right: 25px;
+}
+
+button {
+    float: left;
+    clear: both;
+}
+.blue {
+    color: blue;
+}

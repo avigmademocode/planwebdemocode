@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "AddMultipleGrantCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/AddMultiGrantCode/jsAddMultiGrantCodeController.js"></script>
+<script src="~/AngularJS/AddMultiGrantCode/jsAddMultiGrantCodeFactory.js"></script>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .table1 td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        /*background-color: #dddddd;*/
+    }
+</style>
+
+<div ng-controller="AddMultiGrantCodeController" class="container">
+
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog" ng-hide="hideModal">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add New Grant Code</h4>
+                        </div>
+                        <div class="modal-body  ">
+                            <div class="col-md-12">
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10 text-center">
+                                    <p>Enter Budget Code detail below. You will be able to add more codes as needed as assign items and quantities to them.</p>
+                                </div>
+                            </div>
+                            <div ng-repeat="obj in GrantCodeData" class="col-md-12">
+                                <div class="col-md-4 text-right"><b>{{obj.GrantTitle}} :</b></div>
+                                <div class="col-md-6">
+                                    <input type="text" ng-model="obj.Data" class="form-control" />
+                                    <br />
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <b><input type="checkbox" ng-model="RemItem" /> Add All Remaining Items</b>
+                                <br /><br />
+
+                                <input type="reset" class="btn btn-danger" value="Clear"  ng-click="ClearData(GrantCodeData)"/>
+                                <input type="button" class="btn btn-primary" ng-click="AddGroup(GrantCodeData)" value="Enter" data-dismiss="modal"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <table class="table1">
+                <tbody ng-repeat="row in Seriallst">
+                    <tr style="background: #3e77ab; color:#ffffff">
+                        <th> Group #  {{row.Serial}}</th>
+                        <th ng-repeat="th in grantcodeOrderdatalst" ng-if="th.GrantOrderSerialId ==  row.GrantOrderSerial">
+                            <p>{{th.GrantTitle}} : {{th.Value}}</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Line Item #</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Extended Price</th>
+                        <th>Add/Remove</th>
+                    </tr>
+                    <tr ng-repeat="obj in row.Data">
+                        <td>{{row.Serial}}-{{$index+1}}</td>
+                        <td>
+                            <select ng-model="obj.SelectedItem" ng-change="CalcTotalAmt(Seriallst)" style="height:25px; width:200px">
+                                <option value="">Select</option>
+                                <option ng-repeat="cat in obj.Items"
+                                        ng-selected="obj.ProductID == cat.ProductID"
+                                        value="{{cat.ODID+','+cat.Rate+','+ cat.Qty + ','+ cat.ProductName}}">
+                                    {{cat.ProductName}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" ng-disabled="obj.SelectedItem ===null" ng-model="obj.SelQty" min="1" value="1" ng-change="CalcTotalAmt(Seriallst)" class="text-right" style="width:30%; height:25px; " />
+                        </td>
+                        <td>
+                            <p ng-model="obj.SelRate">$ {{+obj.SelectedItem.split("\,")[1]}}</p>
+                        </td>
+                        <td ng-init="$parent.total = $parent.total + obj.selqty">
+                            <p>$ {{+obj.SelectedItem.split("\,")[1] * obj.SelQty | number: 2}}</p>
+                        </td>
+                        <td><input type="button" value="-Remove" ng-click="Remove($index,row.Serial)" class="btn btn-danger btn-sm" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Group #{{row.Serial}} Total:</b></td>
+                        <td><b>$ {{+row.TotalAmt | number: 2}}</b></td>
+                        <td><input type="button" value="+Add Row" ng-click="AddNewRow($index,row.Serial)" class="btn btn-success btn-sm" /></td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td></td>
+                    <td><b> OriginalTotal Amount:</b></td>
+                    <td><b>$ {{+OriginalTotalOrderAmount | number: 2}}</b></td>
+
+                    <td><b> Total:</b></td>
+                    <td><b>$ {{+TotalAmount}}</b></td>
+                    <td></td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <div class="col-md-12 container">
+        <div class="col-md-12">
+            <input type="button" value="<< Back" class="btn btn-primary" ng-click="BackToPrevious()" />
+            <input type="button" class="btn btn-primary" value="Add More Grant Code" data-toggle="modal" data-target="#myModal" ng-click="GetNewGrantCode()" />
+            <input type="button" class="btn btn-primary" value="   Save Data   " data-toggle="modal" ng-click="SaveData(Seriallst)" />
+            <br /><br />
+        </div>
+    </div>
+
+</div>
+
+

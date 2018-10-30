@@ -1,0 +1,64 @@
+﻿
+
+<table id="UserTable" class="display">
+    <tr>
+        <th>UserId</th>
+        <th>LoginId</th>
+        <th>Pwd</th>
+        <th>UserName</th>
+        <th>CustId</th>
+        <th>IsPlansonUser</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>CountryId</th>
+        <th>Logins</th>
+        <th>Last_Login</th>
+        <th>Locked</th>
+        <th>IsActive</th>
+        <th>CreatedOn</th>
+        <th>CreatedBy</th>
+        <th>ModifiedOn</th>
+        <th>ModifiedBy</th>
+        <th>DeletedOn</th>
+        <th>DeletedBy</th>
+    </tr>
+</table>
+
+
+@section scripts{
+   
+
+    <script>
+        $(document).ready(function () {
+            $("#UserTable").DataTable({
+                "ajax": {
+                    url: "/User/GetData",
+                    type: "GET",
+                    datatype: "json"
+                },
+                "columns": [
+                    { "data": "UserId" },
+                    { "data": "LoginId" },
+                    { "data": "Pwd" },
+                    { "data": "UserName" },
+                    { "data": "CustId" },
+                    { "data": "IsPlansonUser" },
+                    { "data": "FirstName" },
+                    { "data": "LastName" },
+                    { "data": "CountryId" },
+                    { "data": "Logins" },
+                    { "data": "Last_Login" },
+                    { "data": "Locked" },
+                    { "data": "IsActive" },
+                    { "data": "CreatedOn" },
+                    { "data": "CreatedBy" },
+                    { "data": "ModifiedOn" },
+                    { "data": "ModifiedBy" },
+                    { "data": "DeletedOn" },
+                    { "data": "DeletedBy" }
+
+                ]
+            });
+        });
+    </script>
+}

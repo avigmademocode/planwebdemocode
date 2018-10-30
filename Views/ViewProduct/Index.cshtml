@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/ViewProduct/jsViewProductFactory.js"></script>
+<script src="~/AngularJS/ViewProduct/jsViewProductController.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+<style type="text/css">
+    .myGrid {
+        width: 500px;
+        height: 200px;
+    }
+
+    ​.no_padding {
+        color: #f16839 !important;
+        padding: 0px !important;
+    }
+</style>
+<div class="col-md-12" ng-controller="ViewProductController" ng-init="IsYes = true">
+
+
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h4><b>All Products</b></h4>
+            <hr />
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <b ng-hide="isDisabled">View As: </b>
+            <select ng-model="CustomerId" class="form-control" ng-change="GetCatByCustomerID()" ng-hide="isDisabled">
+                <option value="">Select Customer</option>
+                <option ng-repeat="x in custList" value="{{x.CustId}}">
+                    {{x.CustName}}
+                </option>
+            </select>
+
+        </div>
+        
+        <div class="col-md-7">
+            <br />
+            <a href="/Editproduct/AddProduct" class="btn btn-xs btn-default" ng-hide="isDisabled">Add Product</a>
+            <a href="/ViewProduct/AddMultiProducts" class="btn btn-xs btn-default" ng-hide="isDisabled">Add Multiple Products</a>
+            <a href="#" class="btn btn-xs btn-default" ng-hide="isDisabled">Sort Products</a>
+            <a href="/AddProductCategory/" class="btn btn-xs btn-default" ng-hide="isDisabled">Update Product Categories</a>
+
+
+
+            <a href="/AddManufacture/" class="btn btn-xs btn-default" ng-hide="isDisabled">Edit Manufacturers</a>
+            <a href="#" class="btn btn-xs btn-default" ng-hide="isDisabled">Add Customer</a>
+            <a href="/AddProductCategory/UpdateCategories" class="btn btn-xs btn-default">Edit / Update Customer Categories</a>
+        </div>
+    </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+
+
+                <br />
+                <b>Is Active: </b>
+                <br />
+                <div class="form-control">
+                    Yes&nbsp;<input type="radio" name="status" class="radio-filters" ng-model="IsYes" value="true" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    No&nbsp;<input type="radio" name="status" class="radio-filters" ng-model="IsYes" value="false"/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <br />
+                <b>Category: </b>
+                <select ng-model="CategoryID" class="form-control" required>
+                    <option value="">Select Category</option>
+                    <option ng-repeat="x in Categories" value="{{x.ProdCatId}}">
+                        {{x.ProdCatDesc}}
+                    </option>
+                </select>
+                <br />
+                <br />
+               
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+           
+   
+            <div class="col-md-12">
+
+
+                <b>Search: </b>
+                <input id='filter' class='k-textbox' />
+                &nbsp;<input type="button" ng-click="SearchData()" value="Search Product List" class="btn btn-primary" />
+                &nbsp;<input type="button" value="Export Product List" class="btn btn-primary" />
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <br />
+            <div id="grid" class="k-content">
+                <br />
+            </div>
+
+        </div>
+        <div>
+            <hr />
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+    <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    @section Scripts {
+
+        $("#pageTitle").html("View Products");
+    }
+

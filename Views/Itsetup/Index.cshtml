@@ -1,0 +1,411 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/Itsetup/jsItsetupController.js"></script>
+<script src="~/AngularJS/Itsetup/jsItsetupFactory.js"></script>
+
+
+<div class="container" ng-controller="ItsetupController">
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <div class="col-md-6 text-left" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-12 row">
+                    <h4><b>Request</b></h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><b>Reference</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].ReferenceNo}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Status</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].StatusName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Department</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].Department}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Office</b></div>
+                    <div class="col-md-6">Portland, United States</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Ship To</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].DsiplayName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Line Items</b></div>
+                    <div class="col-md-6">{{Prodcount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Delivery Term</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].IncoTermDesc}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Total (USD)</b></div>
+                    <div class="col-md-6">${{RequestDetails[0].TotalOrderAmount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Created By</b></div>
+                    <div class="col-md-6"> {{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}} </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">{{RequestDetails[0].UserName}}</div>
+                </div>
+
+                <div class="row" ng-repeat="app in ApprovarDetails">
+                    <div class="col-md-4"><b>Approver {{$index + 1}}</b></div>
+                    <div class="col-md-6">{{app.AprName}}<br />({{app.AprEmail}})</div>
+                </div>
+
+                @*<div class="row">
+                    <div class="col-md-4"><b>Financial</b></div>
+                    <div class="col-md-6">Financial Reviewer Name - Financial</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Reviewer</b></div>
+                    <div class="col-md-6">Reviewer<br />(accountspayable@mercycorps.org)</div>
+                </div>*@
+            </div>
+            <div class="col-md-6" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-left:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Shipping Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</div>
+                    <div class="col-md-12"> {{SCity}} ,  {{SState}} ,  {{SZip}}</div>
+
+                    <div class="col-md-12"> {{SCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SEmailId}}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Billing Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{BAdd1}}, {{BAdd2}},  {{BAdd3}}</div>
+                    <div class="col-md-12"> {{BCity}} ,  {{BState}} ,  {{BZip}}</div>
+
+                    <div class="col-md-12"> {{BCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BEmailId}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <hr style="border-top: dotted 1px;" />
+    <!--shipment info-->
+    <div class="row">
+        <div class="col-md-12" style="padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+            <table class="table table-bordered">
+                <caption><b>Shipment Information</b></caption>
+                <tr>
+                    <th>Shipment</th>
+                    <th>Dispatch</th>
+                    <th>Delivery</th>
+                    <th>Carrier</th>
+                    <th>Tracking/Waybill</th>
+                </tr>
+                <tr ng-repeat="itemf in shipData">
+                    <td>{{$index +1}}</td>
+                    <td><input type="date" style="border:none" ng-model="itemf.ShipmentDate" readonly /> </td>
+                    <td><input type="date" style="border:none" ng-model="itemf.DeliveryDate" readonly /></td>
+                    <td>{{itemf.Carrier}}</td>
+                    <td>{{itemf.Waybill}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <hr style="border-top: dotted 1px;" />
+    <!--IT setup form-->
+    <div class="row">
+        <div class="col-md-8">
+            <label for="inputP" class="col-sm-4 control-label" style="font-weight:bold"><b>Please Select Product:</b></label>
+            <div class="col-sm-6">
+                <select class="form-control" ng-model="Productval" ng-change="getproduct(Productval)" ng-init="Productval = null" ng-options="item as item.PartNo for item in CartItems">
+                    <option value="">--select--</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="row">
+        <div class="col-md-8">
+            <!--IT setup form-->
+            <div ng-show="showFlag || ITFlag" style="padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                <h4 id="top" style="text-align:center"><b>Computer Application Form</b></h4>
+                <p style="color:black; font-weight:bold ; font-size:large">
+                    Computer # (Model: {{Productval.PartNo}})
+                </p>
+                    <hr />
+                    <label for="ckk">Copy from previous form data..</label>
+                    <input type="checkbox" id="ckk" ng-disabled="TotalLength == quantity" ng-model="event.type.checked" ng-click="copydata(event.type.checked)" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href=""><span style="font-size:x-large">{{TotalLength}} out of {{quantity}} Forms</span> </a>
+                    <hr />
+                    <form class="form-horizontal" name="form" ng-submit="submitForm()">
+                        <div class="form-group" style="display:none">
+                            <label class="col-sm-3 control-label">ITSetUpId:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="" ng-model="form.EditNow.ITSetUpId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputE" class="col-sm-3 control-label">Employee Name:</label>
+                            <div class="col-sm-6">
+                                <input type="text" required class="form-control" id="inputE" placeholder="Enter Employee Name" ng-model="form.EditNow.EditName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputP" class="col-sm-3 control-label">Employee Type:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" required ng-model="form.EditNow.EditType" ng-init="form.EditNow.EditType = null" ng-options="itemz.UserTypeId as itemz.UserType for itemz in UserTypeVal">
+                                    <option value="">--select--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPa" class="col-sm-3 control-label">Primary Work Location:</label>
+                            <div class="col-sm-6">
+
+                                <select class="form-control" required ng-model="form.EditNow.EditWorkLocation" ng-init="form.EditNow.EditWorkLocation = null" ng-options="itemy.WorkLocationId as itemy.WorkLocation for itemy in WorkLocationVal">
+                                    <option value="">--select--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDL" class="col-sm-3 control-label">Delivery Location:</label>
+                            <div class="col-sm-6">
+                                <input type="text" required class="form-control" id="inputDL" placeholder="Enter Delivery Location" ng-model="form.EditNow.EditDeliveryLocation">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDP" class="col-sm-3 control-label">Department:</label>
+                            <div class="col-sm-6">
+                                <input type="text" required class="form-control" id="inputDP" placeholder="Enter Department" ng-model="form.EditNow.EditDepartment">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAN" class="col-sm-3 control-label">Applications Needed:</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" ng-model="form.EditNow.EditApplications"> </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAdN" class="col-sm-3 control-label">Special Instructions:</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" ng-model="form.EditNow.EditSpecial"> </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Do you want to migrate info from existing computer to new computer?:</label>
+                            <div class="col-sm-6">
+                                <select required class="form-control" ng-model="form.EditNow.Editmigrate" ng-init="form.EditNow.Editmigrate = null" ng-options="item.id as item.name for item in migrateinfo">
+                                    <option value="">--select--</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" value="Next" class="btn btn-primary" ng-disabled="TotalLength == quantity" /> &nbsp;&nbsp;&nbsp;
+                                <input type="submit" ng-hide="btnHide" value="Update Info" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+                                <input type="button" value="Save All" ng-hide="btnITSaveAll" ng-disabled="TotalLength != quantity" ng-click="saveAllData()" class="btn btn-primary" />
+                                <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />
+                            </div>
+                        </div>
+                    </form>
+            </div>
+            <div>
+                <!--Software setup form -->
+                <div class="row" ng-show="showFlag || softflag" style="padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                    <p style="color:black; font-weight:bold ; font-size:large" >Software # (Model: {{Productval.PartNo}})</p>
+
+                    <label for="ckkl">Copy from previous form data..</label>
+                    <input type="checkbox" id="ckkl" ng-disabled="TotalSoftLength == quantity" ng-model="event.type.checked" ng-click="copySoftdata(event.type.checked)" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href=""><span style="font-size:x-large">{{TotalSoftLength}} out of {{quantity}}  Forms</span> </a>
+                    <hr />
+                    <div class="col-md-8" >
+                        <h4 id="top2"><b>Software Application Forms</b></h4>
+                        <form class="form-horizontal" name="form" ng-submit="submitForm2()">
+                            <div class="form-group" style="display:none">
+                                <label class="col-sm-3 control-label">SoftwareSetUpId:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="" ng-model="form.EditSoft.SoftwareSetupId">
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                        <label for="inputSe" class="col-sm-3 control-label">Serial:</label>
+                        <div class="col-sm-6">
+                            <input type="text" required class="form-control" id="inputSe" placeholder="Enter Serial" ng-model="form.EditSoft.Serial">
+                        </div>
+                    </div>*@
+                            <div class="form-group">
+                                <label for="inputUser" class="col-sm-3 control-label">User Name:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" required class="form-control" id="inputUser" placeholder="Enter User Name" ng-model="form.EditSoft.UserName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-3 control-label">User Email:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" required class="form-control" id="inputEmail" placeholder="Enter Email" ng-model="form.EditSoft.UserEmail">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" value="Next" ng-disabled="TotalSoftLength == quantity" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+
+                                    <input type="submit" ng-hide="btnHide" value="Update Info" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+
+                                    <input type="button" value="Save All" ng-hide="btnSoftSaveAll" ng-disabled="TotalSoftLength != quantity" ng-click="saveAllData()" class="btn btn-primary" />
+                                    <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <fieldset>
+                <legend style="text-align:center">Form Details</legend>
+               
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Total Form:</th>
+                        <td><span id="grad">{{Grandqty}}</span> </td> 
+                    </tr>
+                    <tr>
+                        <th>Filled Form:</th>
+                        <td><span id="setup">{{AcutalITLength + AcutalSoftLength}}</span> </td>
+                    </tr>
+                    <tr>
+                        <th><span style="color:red;font-weight:bold">Pending Form:</span></th>
+                        <td><span style="color:red;font-weight:bold" id="finall">00</span></td>
+                    </tr>
+                </table>
+               <br /><br />
+                <table class="table">
+                    <tr>
+                        <th>IT Setup Filled Form: </th>
+                        <td>{{AcutalITLength}}</td>
+                        
+                    </tr>
+                    <tr>
+                        <th>Software Setup Filled Form: </th>
+                        <td>{{AcutalSoftLength}}</td>
+                    </tr>
+
+                </table>
+               
+
+            </fieldset>
+        </div>
+    </div>
+
+    <hr style="border-top: dotted 1px;" />
+    <!--IT setup form dyanmic table-->
+    <div class="row" ng-show="showFlag  || ITFlag" style="padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+        <table class="table table-hover table-bordered">
+            <caption><b>Order IT Setup Data</b></caption>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Employee Name</th>
+                <th>Product Name</th>
+                <th>Employee Type</th>
+                <th>Primary Work Location</th>
+                <th>Delivery Location</th>
+                <th>Department</th>
+                <th>Applications Needed</th>
+                <th>Special Instructions</th>
+                <th>migrate info </th>
+            </tr>
+            <tr ng-repeat="item in ITSetupDataFilter">
+                <td>{{$index+1}} </td>
+                <td><a href="#top" ng-click="GetEdit(item)" title="Here Click Edit...!" class="btn btn-link"><b>{{item.UserName}}</b> </a> </td>
+                <td>{{item.PartNo}}</td>
+                <td>{{item.UserType}}</td>
+                <td>{{item.WorkLocation}}</td>
+                <td>{{item.DeliveryLocation}}</td>
+                <td>{{item.Department}}</td>
+                <td>{{item.Applications}}</td>
+                <td>{{item.SpecialInstructions}}</td>
+                <td>
+                    <select style="border:none;width:100px" disabled class="form-control" ng-model="item.MigrateInfo" ng-options="item.id as item.name for item in migrateinfo"></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+   
+    <br />   <br />
+
+    <!--Software setup form -->
+    <div class="row" ng-show="showFlag || softflag" style="padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+        <hr style="border-top: dotted 1px;" />
+        <table class="table table-hover table-bordered">
+            <caption>Order Software Setup Data</caption>
+            <tr>
+                <th>Sr No.</th>
+                <th>User</th>
+                <th>User Email</th>
+                <th>Product Name</th>
+            </tr>
+            <tr ng-repeat="item in SoftwareSetupDataFilter">
+                <td>{{$index +1}}</td>
+                <td><a href="#top2" ng-click="GetSoftEdit(item)" title="Here Click Edit...!" class="btn btn-link"><b>{{item.UserName}}</b> </a> </td>
+                <td>{{item.UserEmail}}</td>
+                <td>{{item.PartNo}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br /><br /><br />
+</div>
+
+
+<script>
+    function f1() {
+        var x = document.getElementById("grad").innerText;
+        var y = document.getElementById("setup").innerText;
+        var z = Number(x) - Number(y);
+      
+        document.getElementById("finall").innerText = z;
+    }
+    var temp = setInterval(f1, 2000);
+
+</script>

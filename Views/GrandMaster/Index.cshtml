@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script src="~/AngularJS/Language/jsLanguageController.js"></script>
+<script src="~/AngularJS/Language/jsLanguageFactory.js"></script>*@
+<script src="~/AngularJS/GrandMaster/jsGrandMasterController.js"></script>
+<script src="~/AngularJS/GrandMaster/jsGrandMasterFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+<div class="row" ng-controller="GrandMasterController">
+    <div class="col-md-4">
+        <select required class="form-control" ng-model="CustomerId" 
+                ng-options="itemx.CustId as itemx.CustName for itemx in custList" ng-change="GetGrandMasterDetails(CustomerId)">
+            <option value="">--Select-- </option>
+        </select>
+    </div>
+    <br /><br /><br />
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr style="background: #3e77ab; color:#fff">
+                            <th>SrNo</th>
+                            <th>{{Title}}</th>
+                            <th>Serial</th>
+                            <th>Depend On</th>
+                            <th>Field Length</th>
+                            <th>Required</th>
+
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr ng-repeat="frt in GrandMasterList">
+                            <td>{{$index + 1}}.</td>
+                            <td>
+                                <input type="text" class="form-control" ng-model="frt.GrantBudgetTitle" value="{{ frt.GrantBudgetTitle }}" ng-disabled="(frt.IsEdit ? false : true)"  required/>
+                            </td>
+                            <td><input type="number" class="form-control" ng-model="frt.Serial" value="{{ frt.Serial }}" ng-change="ChangeVal({{$index}})" ng-disabled="(frt.IsEdit ? false : true)" /></td>
+                            <td><input type="number" class="form-control" ng-model="frt.DependOn" value="{{ frt.DependOn }}" ng-disabled="(frt.IsEdit ? false : true)" /></td>
+                            <td><input type="number" class="form-control" ng-model="frt.fldlength" value="{{ frt.fldlength }}" ng-disabled="(frt.IsEdit ? false : true)" /></td>
+                            <td style="text-align:center"><input type="checkbox" ng-model="frt.isRequired" value="{{ frt.isRequired }}" ng-disabled="(frt.IsEdit ? false : true)" /></td>
+
+
+                            <td style="text-align:center"><input type="checkbox" ng-model="frt.IsEdit" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsDelete ? true :false)" /></td>
+                            <td style="text-align:center"><input type="checkbox" ng-model="frt.IsDelete" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsEdit ? true :false)" /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="padding-top:20px"><a href="#" class="btn btn-warning btn-xs" ng-click="addRow()">{{btnTitle}}</a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <hr />
+                   
+                    <div class="">
+                        <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />
+
+                        <input type="button" class="btn btn-primary" ng-click="SaveManufacturer(GrandMasterList)" value="{{btnsaveTitle}}" />
+
+
+                    </div>
+                </div>
+</div>
+
+
+
+

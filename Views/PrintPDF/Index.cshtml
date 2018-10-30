@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/PrintPDF/jsPrintPDFFactory.js"></script>
+<script src="~/AngularJS/PrintPDF/jsPrintPDFController.js"></script>
+
+<div class="container">
+    <div class="col-md-12" ng-controller="PrintPDFController">
+
+        <div class="col-md-12">
+            <div class="col-md-6 text-left" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-12 row">
+                    <h4><b>Request</b></h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><b>Reference</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].ReferenceNo}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Status</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].StatusName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Department</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].Department}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Office</b></div>
+                    <div class="col-md-6">Portland, United States</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Ship To</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].DsiplayName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Line Items</b></div>
+                    <div class="col-md-6">{{Prodcount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Delivery Term</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].IncoTermDesc}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Total (USD)</b></div>
+                    <div class="col-md-6">${{RequestDetails[0].TotalOrderAmount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Created By</b></div>
+                    <div class="col-md-6"> {{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}} </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">{{RequestDetails[0].UserName}}</div>
+                </div>
+
+                <div class="row" ng-repeat="app in ApprovarDetails">
+                    <div class="col-md-4"><b>Approver {{$index + 1}}</b></div>
+                    <div class="col-md-6">{{app.AprName}}<br />({{app.AprEmail}})</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Financial</b></div>
+                    <div class="col-md-6">Financial Reviewer Name - Financial</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Reviewer</b></div>
+                    <div class="col-md-6">Reviewer<br />(accountspayable@mercycorps.org)</div>
+                </div>
+            </div>
+            <div class="col-md-6" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-left:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Shipping Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</div>
+                    <div class="col-md-12"> {{SCity}} ,  {{SState}} ,  {{SZip}}</div>
+
+                    <div class="col-md-12"> {{SCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SEmailId}}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Billing Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{BAdd1}}, {{BAdd2}},  {{BAdd3}}</div>
+                    <div class="col-md-12"> {{BCity}} ,  {{BState}} ,  {{BZip}}</div>
+
+                    <div class="col-md-12"> {{BCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BEmailId}}</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-12">
+            <br />
+            <style>
+                table, th, td {
+                    /*border: 1px solid black;*/
+                    padding: 10px;
+                }
+            </style>
+            <table style="width:100%; border: 1px solid #3e77ab;">
+                <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                    <th>SI.No.</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Price (USD)</th>
+                    <th class="text-right">Extended</th>
+                </tr>
+                <tr style="border: 1px solid #3e77ab;" ng-repeat="item in CartItems">
+                    <td>{{$index +1}}</td>
+                    <td>{{item.PartNo}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td class="text-right">${{item.ProdPrice}}</td>
+                    <td class="text-right">${{item.TotalPrice}}</td>
+                </tr>
+            </table>
+
+            @*<table style="width:100%;" class="tbl">
+                    <tr style="background:#e6e4e4">
+                        <th>SINO</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price (USD)</th>
+                        <th>Extended</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>
+                            Lenovo Thinkpad T480s Notebook<br />
+                            Product Specifications [+]
+                        </td>
+                        <td>1</td>
+                        <td>$1,595.00</td>
+                        <td>$1,595.00</td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>
+                            Lenovo ThinkPad Thunderbolt 3 Dock for ThinkPad X1 Carbon 5th Gen or T470s<br />
+                            Product Specifications [+]
+                        </td>
+                        <td>1.</td>
+                        <td>$238.00</td>
+                        <td>$238.00</td>
+                    </tr>
+                </table>*@
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+
+
+        <input type="button" class="btn btn-primary" value="Approval" ng-click="Approve()" />
+        <input type="button" class="btn btn-primary" value="Deny" ng-click="Denny()" />
+        <input type="button" class="btn btn-primary" value="Resubmit" ng-click="OrderResubmit()" />
+        <input type="button" class="btn btn-primary" value="Back" ng-click="OrderBack()" />
+    </div>
+</div>
+

@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "UpdateCategories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<script src="~/AngularJS/UpdateCategories/jsUpdateCategoriesFactory.js"></script>
+<script src="~/AngularJS/UpdateCategories/jsUpdateCategoriesController.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+ 
+<div ng-controller="UpdateCategoriesController">
+
+    <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <h4>
+                <b>Update Products Categories</b>
+            </h4>
+            <b>Update Product Categories Procedure:</b>
+            <br />
+            <p>Please uploaded a excel document in the following format to update each product with a new category:</p>
+            <style>
+                .tbl {
+                    border: #808080 1px solid;
+                    padding: 5px;
+                }
+            </style>
+            <table class="tbl">
+                <tr class="tbl">
+                    <td class="tbl"><b>Model Name</b></td>
+                    <td class="tbl"><b>Category to be assigned</b></td>
+                </tr>
+                <tr class="tbl">
+                    <td class="tbl"><b>Model Name</b></td>
+                    <td class="tbl"><b>Category to be assigned</b></td>
+                </tr>
+            </table>
+            <p>The Model Name and Category Name will need to match the model name and category on the Portal extactly.</p>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="showLoader">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+            <img src="~/Content/Images/tenor.gif"> <!-- or any other spinner -->
+        </div>
+        <!-- so this div containing img will be dislpayed only when the showLoader is equal to true-->
+
+    </div>
+    <div class="col-md-12"  ng-show="display">
+        <div class="col-md-12">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+                <b>Customer</b>
+                <select class="form-control" ng-model="SelectedCustomer">
+                    <option value="">Select Customer</option>
+                    <option ng-repeat="cust in custList" value="{{cust.CustId}}">{{cust.CustName}}</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <b>Product Category</b>
+                <input type="file" id="FileUpload" class="form-control" name="fileupload" value="uf.ImageUpload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="angular.element(this).scope().SelectFileforUpload(this.files)" required />
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <br />
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <input type="button" class="btn btn-primary" value="<< Back" ng-click="Back()" />
+                <input type="button" value="Update Categories" ng-click="UpdateCategories()" class="btn btn-primary" />
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </div>
+    </div>

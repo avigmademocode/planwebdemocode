@@ -1,0 +1,90 @@
+@model MyProject.Models.CustMaster
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h5>Delete</h5>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustId)
+        <dt>
+            @Html.DisplayNameFor(model => model.CustName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustName)
+        <dt>
+            @Html.DisplayNameFor(model => model.Acronym)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Acronym)
+        <dt>
+            @Html.DisplayNameFor(model => model.NoofBranches)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoofBranches)
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelofAuthority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LevelofAuthority)
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        <dt>
+<dt>
+            @Html.DisplayNameFor(model => model.Ticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ticker)
+        <dt>
+            @Html.DisplayNameFor(model => model.InDemo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InDemo)
+        <dt>
+            @Html.DisplayNameFor(model => model.TieredPricing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieredPricing)
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+ 
+@section Scripts {
+    $("#pageTitle").html("Customer Master");
+
+}

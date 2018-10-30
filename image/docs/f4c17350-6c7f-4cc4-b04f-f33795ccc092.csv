@@ -1,0 +1,536 @@
+Model,Partno,Specs,Manufacturer,ProductType,Category,CustomerPrice,Tier1,Tier1Treshold,Tier2,Tier2Treshold
+SCI-IT01: Basic Field laptop kit (Lenovo T Series),,"Kit ID: SCI-IT01
+Intel Dual-Core i5-7300U (Up to 3.5GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) Pointing Device with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x Docking,
+1x 4-in-1 Card Reader (SD, MMC, SDHC, SDXC)
+WIndows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter - EU
+ThinkPad 3-Cell Li-Ion (24Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (24Whr) Rear Battery
+3 Year Global Warranty ",Lenovo,Computer / Language,Kits,1174,1148,11,1125,26
+SCI-IT02: Advance Field laptop kit (Lenovo T Series),,"Kit ID: SCI-IT02
+Intel Dual-Core i7-7600U (Up to 3.90GHz Turbo, 4MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) Pointing Device with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x Docking,
+1x 4-in-1 Card Reader (SD, MMC, SDHC, SDXC)
+WIndows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter 
+ThinkPad 3-Cell Li-Ion (24Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (24Whr) Rear Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1432,1400,11,1372,26
+SCI-IT03: Basic Field laptop kit (Lenovo X Series),,"Kit ID: SCI-IT03
+Intel Dual-Core i5-7300U (Up to 3.50GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive Opal 2.0 - Capable
+No Internal Optical Drive
+12.5"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWANN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 2.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x 4-in-1 Card Reader
+(SD, MMC, SDHC, SDXC), 1x 3.5mm Microphone / Headphone Combo Port
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+ThinkPad 3-Cell Li-Ion (23.2Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (23.2Whr) Rear Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1171,1144,11,1122,26
+SCI-IT05: Basic Field laptop kit (Lenovo L Series),,"Kit ID: SCI-IT05
+
+Intel Dual-Core i5-7300U (Up to 3.5GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel Dual Band 8265AC (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x VGA, 1x miniDisplayPort, 1x 4-in-1 Card Reader,
+1x Microphone / Headphone Combo
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+6-Cell Li-Ion (47Whr) Cylindrical Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1298,1269,11,1244,26
+SCI-IT06: Advance Field laptop kit (Lenovo L Series),,"Kit ID: SCI-IT06
+Intel Dual-Core i7-7600U (Up to 3.9GHz Turbo, 4MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Display with WWAN
+AMD Radeon R5 M330 2GB Graphics Card
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel Dual Band 8260AC (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x VGA, 1x miniDisplayPort, 1x 4-in-1 Card Reader,
+1x Microphone / Headphone Combo
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter
+6-Cell Li-Ion (47Whr) Cylindrical Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1321,1291,11,1266,26
+SCI-IT07: Basic Office laptop kit (Lenovo T Series),,"Kit ID: SCI-IT07
+Intel Dual-Core i5-7300U (Up to 3.5GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) Pointing Device with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x Docking,
+1x 4-in-1 Card Reader (SD, MMC, SDHC, SDXC)
+WIndows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter - EU
+ThinkPad 3-Cell Li-Ion (24Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (24Whr) Rear Battery
+3 Year Global Warranty ",Lenovo,Computer / Language,Kits,1207,1180,11,1157,26
+SCI-IT08: Advance Office laptop kit (Lenovo T Series),,"Kit ID: SCI-IT08
+
+Intel Dual-Core i7-7600U (Up to 3.90GHz Turbo, 4MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) Pointing Device with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x Docking,
+1x 4-in-1 Card Reader (SD, MMC, SDHC, SDXC)
+WIndows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter
+ThinkPad 3-Cell Li-Ion (24Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (24Whr) Rear Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1447,1415,11,1387,26
+SCI-IT09: Basic Office laptop kit (Lenovo X Series),,"Kit ID: SCI-IT09
+
+Intel Dual-Core i5-7300U (Up to 3.50GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive Opal 2.0 - Capable
+No Internal Optical Drive
+12.5"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWANN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 2.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x 4-in-1 Card Reader
+(SD, MMC, SDHC, SDXC), 1x 3.5mm Microphone / Headphone Combo Port
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+ThinkPad 3-Cell Li-Ion (23.2Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (23.2Whr) Rear Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1186,1159,11,1137,26
+SCI-IT10: Advance Office laptop kit (Lenovo X Series),,"Kit ID: SCI-IT10
+Intel Dual-Core i7-7600U (Up to 3.90GHz Turbo, 4MB Cache)
+4GB DDR4-2133MHz SODIMM
+256GB Solid State Drive Opal 2.0 - Capable
+No Internal Optical Drive
+12.5"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWANN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 2.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x 4-in-1 Card Reader
+(SD, MMC, SDHC, SDXC), 1x 3.5mm Microphone / Headphone Combo Port
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+ThinkPad 3-Cell Li-Ion (23.2Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (23.2Whr) Rear Battery
+Publication - English
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1416,1385,11,1358,26
+SCI-IT11: Basic Office laptop kit (Lenovo L Series),,"Kit ID: SCI-IT11
+Intel Dual-Core i5-7300U (Up to 3.5GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel Dual Band 8265AC (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x VGA, 1x miniDisplayPort, 1x 4-in-1 Card Reader,
+1x Microphone / Headphone Combo
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+6-Cell Li-Ion (47Whr) Cylindrical Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1336,1284,11,1259,26
+SCI-IT12: Advance Office laptop kit (Lenovo L Series),,"Kit ID: SCI-IT12
+Intel Dual-Core i7-7600U (Up to 3.9GHz Turbo, 4MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Display with WWAN
+AMD Radeon R5 M330 2GB Graphics Card
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel Dual Band 8260AC (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x VGA, 1x miniDisplayPort, 1x 4-in-1 Card Reader,
+1x Microphone / Headphone Combo
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter
+6-Cell Li-Ion (47Whr) Cylindrical Battery
+3 Year Global Warranty",Lenovo,Computer / Language,Kits,1336,1306,11,1281,26
+SCI-IT13: Standard desktop kit ,,"Kit ID: SCI-IT13
+HP Business Desktop ProDesk 400 G4 
+Intel Quad-Core i5-6500 (3GHz, 3.6GHz Turbo, 6MB Cache)
+4GB 1600MHz DDR4 SDRAM
+256GB Solid State Drive, SATA2.5 Opal 2.0
+Slim SuperMulti 9.5mm DVD+/RW Internal Optical Drive
+Integrated Intel HD 4600 Graphics
+HP Full-Size USB Keyboard, English
+Internal Speakers Small Form Factor, Integrated Audio
+Integrated Realtek RTL8111HSH-CG Gigabit Ethernet 10/100/1000 LAN
+Front Ports: 2x USB 3.0, 1x Microphone Input, 1x Headphone Jack
+Rear Ports: 6x USB 2.0, 1x RJ45, 1x VGA, 1x DisplayPort, 2x PS/2, 1x RS-232
+Serial, 1x Audio Line In, 1x Audio Line Out
+Windows 10 Pro, 64-Bit, Pre-Installed
+180W Small Form Factor 85% Efficient Active PFC Power Supply
+3 Years Onsite Warranty Support",Lenovo,Computer / Language,Kits,808,790,11,775,26
+SCI-IT14: Standard desktop kit (21,,"Kit ID: SCI-IT14
+HP Business Desktop ProDesk 400 G4 
+Intel Quad-Core i5-6500 (3GHz, 3.6GHz Turbo, 6MB Cache)
+4GB 1600MHz DDR4 SDRAM
+256GB Solid State Drive, SATA2.5 Opal 2.0
+Slim SuperMulti 9.5mm DVD+/RW Internal Optical Drive
+Integrated Intel HD 4600 Graphics
+HP Full-Size USB Keyboard, English
+Internal Speakers Small Form Factor, Integrated Audio
+Integrated Realtek RTL8111HSH-CG Gigabit Ethernet 10/100/1000 LAN
+Front Ports: 2x USB 3.0, 1x Microphone Input, 1x Headphone Jack
+Rear Ports: 6x USB 2.0, 1x RJ45, 1x VGA, 1x DisplayPort, 2x PS/2, 1x RS-232
+Serial, 1x Audio Line In, 1x Audio Line Out
+Windows 10 Pro, 64-Bit, Pre-Installed
+180W Small Form Factor 85% Efficient Active PFC Power Supply
+3 Years Onsite Warranty Support",Lenovo,Computer / Language,Kits,808,790,11,775,26
+Lenovo ThinkPad T470 14,20HES1YQ00,"Intel Dual-Core i5-7300U (Up to 3.5GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) Pointing Device with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x Docking,
+1x 4-in-1 Card Reader (SD, MMC, SDHC, SDXC)
+WIndows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter - EU
+ThinkPad 3-Cell Li-Ion (24Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (24Whr) Rear Battery
+3 Year Global Warranty ",Lenovo,,Non-Kits,1003,982,11,962,26
+Lenovo ThinkPad T470 14,20HES1YP00,"Intel Dual-Core i7-7600U (Up to 3.90GHz Turbo, 4MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) Pointing Device with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x Docking,
+1x 4-in-1 Card Reader (SD, MMC, SDHC, SDXC)
+WIndows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter
+ThinkPad 3-Cell Li-Ion (24Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (24Whr) Rear Battery
+3 Year Global Warranty",Lenovo,,Non-Kits,1243,1217,11,1192,26
+Lenovo ThinkPad X270 12.5,20HMS1K700,"Intel Dual-Core i5-7300U (Up to 3.50GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive Opal 2.0 - Capable
+No Internal Optical Drive
+12.5"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWANN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 2.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x 4-in-1 Card Reader
+(SD, MMC, SDHC, SDXC), 1x 3.5mm Microphone / Headphone Combo Port
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+ThinkPad 3-Cell Li-Ion (23.2Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (23.2Whr) Rear Battery
+3 Year Global Warranty",Lenovo,,Non-Kits,982,961,11,943,26
+Lenovo ThinkPad X270 12.5,20HMS1GB00,"Intel Dual-Core i7-7600U (Up to 3.90GHz Turbo, 4MB Cache)
+4GB DDR4-2133MHz SODIMM
+256GB Solid State Drive Opal 2.0 - Capable
+No Internal Optical Drive
+12.5"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWANN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 2.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x 4-in-1 Card Reader
+(SD, MMC, SDHC, SDXC), 1x 3.5mm Microphone / Headphone Combo Port
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+ThinkPad 3-Cell Li-Ion (23.2Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (23.2Whr) Rear Battery
+Publication - English
+3 Year Global Warranty",Lenovo,,Non-Kits,1212,1187,11,1163,26
+Lenovo Thinkpad L470 14,20J5S0U800,"Intel Dual-Core i5-7300U (Up to 3.5GHz Turbo, 3MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Display with WWAN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel Dual Band 8265AC (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x VGA, 1x miniDisplayPort, 1x 4-in-1 Card Reader,
+1x Microphone / Headphone Combo
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+6-Cell Li-Ion (47Whr) Cylindrical Battery
+3 Year Global Warranty",Lenovo,,Non-Kits,1109,1086,11,1064,26
+Lenovo Thinkpad L470 14,20J5S0U900,"Intel Dual-Core i7-7600U (Up to 3.9GHz Turbo, 4MB Cache)
+4GB DDR4-2133 SODIMM
+256GB Solid State Drive, SATA3 Opal 2.0 - Capable
+No Internal Optical Drive
+14"" HD (1366 x 768) Anti-Glare LED Display with WWAN
+AMD Radeon R5 M330 2GB Graphics Card
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel Dual Band 8260AC (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 3.0, 1x RJ45, 1x VGA, 1x miniDisplayPort, 1x 4-in-1 Card Reader,
+1x Microphone / Headphone Combo
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+65W AC Adapter
+6-Cell Li-Ion (47Whr) Cylindrical Battery
+3 Year Global Warranty",Lenovo,,Non-Kits,1132,1108,11,1086,26
+HP Business Desktop ProDesk 400 G2.5,Kit ID: SCI-13,"Intel Quad-Core i5-4590S (3GHz, 3.7GHz Turbo, 6MB Cache) 
+4GB 1600MHz DDR3 SDRAM 
+256GB Solid State Drive, SATA2.5 Opal 2.0 
+Slim SuperMulti 9.5mm DVD+/RW Internal Optical Drive 
+Integrated Intel HD 4600 Graphics 
+HP Full-Size USB Keyboard, English 
+Internal Speakers Small Form Factor, Integrated Audio 
+Integrated Realtek RTL8111HSH-CG Gigabit Ethernet 10/100/1000 LAN 
+Front Ports: 2x USB 3.0, 1x Microphone Input, 1x Headphone Jack 
+Rear Ports: 6x USB 2.0, 1x RJ45, 1x VGA, 1x DisplayPort, 2x PS/2, 1x RS-232 
+Serial, 1x Audio Line In, 1x Audio Line Out 
+Windows 10 Pro, 64-Bit, Pre-Installed 
+Standard Image 
+180W Small Form Factor 85% Efficient Active PFC Power Supply 
+3 Years Onsite Warranty Support 
+ 
+Optional Services Included on Request - No Additional Charge: 
+Alternative Language Keyboard 
+Alternative Language OS and Applications 
+ 
+Included with each item: 
+Qty 1, Services 
+Desktop Imaging - Apply Updates & Licensing 
+Label Desktop with SCI Tracking Number (Dymo Tag) 
+Test Desktop Before Shipping 
+Ship Kit to Destination (Does Not Include Freight Costs) 
+HP ProDisplay P222va 21.5"" Wide Monitor 
+PN: K7X30AA 
+21.5"" Viewable Image Size (Diagonal) 
+LED Technology, Backlit Anti-Glare 
+Native Resolution 1920 x 1080 
+Contrast Ratio 3,000:1 
+Brightness 250 cd/m2 
+Tilt / Swivel Stand 
+VGA, DisplayPort Interfaces 
+ 
+NOTE: The 19"" displays currently available from HP are more expensive than this model monitor. ",Lenovo,,Non-Kits,641,627,11,615,26
+HP ProDisplay P223va 21.5,PN: X7R62AA,"21.5"" Viewable Image Size (Diagonal) 
+LED Technology, Backlit Anti-Glare 
+Native Resolution 1920 x 1080 
+Contrast Ratio 3,000:1 
+Brightness 250 cd/m2 
+Tilt / Swivel Stand 
+VGA, DisplayPort Interfaces 
+ 
+NOTE: The 19"" displays currently available from HP are more expensive than this model monitor. ",Lenovo,,Non-Kits,130,128,11,125,26
+HP ProDisplay P223va 21.5,PN: X7R62AA,"21.5"" Viewable Image Size (Diagonal) 
+LED Technology, Backlit Anti-Glare 
+Native Resolution 1920 x 1080 
+Contrast Ratio 3,000:1 
+Brightness 250 cd/m2 
+Tilt / Swivel Stand 
+VGA, DisplayPort Interfaces ",Lenovo,,Non-Kits,130,128,11,125,26
+Lenovo Preferred Pro USB Keyboard,,"USB Interface 
+English, Alternative Languages Available 
+ 
+Alternative: HP USB Keyboard, $22.00 ea. 
+USB Interface 
+English, Alternative Languages Available ",Lenovo,,Non-Kits,22,21,11,20,26
+Lenovo USB Optical Mouse,,"USB Interface, 3x Buttons, Scroll Wheel 
+ 
+Alternative: HP USB Optical Mouse, $9.00 ea. 
+USB Interface, 3x Buttons, Scroll Wheel ",Lenovo,,Non-Kits,9,8,11,7,26
+Lenovo Thinkpad 65W AC Adapter (Slim Tip),PN: 0A36263,Compatible with Lenovo ThinkPad L Series Notebooks ,Lenovo,,Non-Kits,18,18,11,17,26
+Lenovo Thinkpad 65W AC Adapter (Slim Tip),PN: 0A36263,Compatible with Lenovo ThinkPad T Series Notebooks ,Lenovo,,Non-Kits,18,18,11,17,26
+Lenovo Thinkpad 45W AC Adapter (Slim Tip),P/N: 0B47035,"Compatible With Lenovo ThinkPad X Series Notebooks 
+
+",Lenovo,,Non-Kits,18,16,11,15,26
+"Targus 16"" Laptop Carry Case, Black",,"Compatible with Notebooks up to 16"" 
+Padded Computer Compartment, Detachable Shoulder Strap 
+Dual-Pull, Self-Healing Nylon Zippers 
+Full-Length Rear Document Pocket 
+Luggage Strap, Accessory Pockets, Non-Skid Square Rubber Feet ",Lenovo,,Non-Kits,34,33,11,32,26
+"Targus 15.6"" Laptop Backpack, Black",,"Compatible with Notebooks up to 15.6"" 
+Padded Shoulder Strap, Zippered Closures 
+Front External Pocket, 2x Side Pockets 
+Hand Grip, Shoulder Carrying Straps ",Lenovo,,Non-Kits,36,35,11,34,26
+Logitech PC960 USB Stereo Headset,,"Wired USB Headset 
+On-Ear Headphones and Boom Microphone 
+Frequency Response 20Hz-20kHz 
+Volume, Microphone On / Mute Controls ",Lenovo,,Non-Kits,24,23,11,22,26
+Lenovo Thinkpad Li-ion Battery 68 (3-cell),,"Battery Capacity: 2060mAh 
+Battery Energy: 23.50 Whr 
+Compatible with Certain T Series Notebooks (T440, T450, T450s, T550)",Lenovo,,Non-Kits,88,86,11,84,26
+Lenovo Thinkpad Li-ion Battery 68 (3-cell),,"Battery Capacity: 2060mAh 
+Battery Energy: 23.50 Whr 
+Compatible with Certain X Series Notebooks (X240, X250) ",Lenovo,,Non-Kits,88,86,11,84,26
+Lenovo Thinkpad Li-ion Battery 68 (3-cell),,"Battery Capacity: 2060mAh 
+Battery Energy: 23.50 Whr 
+Compatible with Certain L Series Notebooks (L450)",Lenovo,,Non-Kits,88,86,11,84,26
+Lenovo ThinkPad 256GB Opal 2.0 Solid State Drive,,"Genuine Lenovo Internal Hard Drive 
+Compatible with T450, X250, L450 Notebooks ",Lenovo,,Non-Kits,180,176,11,172,26
+"Lenovo ThinkPad 512GB 2.5"" Solid State Drive",,"Genuine Lenovo Internal Hard Drive 
+Compatible with T450, X250, L450 Notebooks ",Lenovo,,Non-Kits,369,361,11,353,26
+"Lenovo ThinkPad 1TB 5400rpm 2.5"" SATA Hard Drive",,"Genuine Lenovo Internal Hard Drive 
+Compatible with T450, X250, L450 Notebooks 
+ 
+NOTE: At this time, no genuine Lenovo 1TB SSD internal hard drives are available for the requested series. 
+Alternative: Samsung 1TB Internal Solid State Drive 
+Price: $508 ea. ",Lenovo,,Non-Kits,129,126,11,123,26
+"256GB 2.5"" Solid State Drive for Standard Desktops",,"Internal Hard Drive 
+Compatible with HP ProDesk 400 G2.5 Desktops 
+Mounting Bracket Included ",Lenovo,,Non-Kits,161,158,11,154,26
+"512GB 2.5"" Solid State Drive for Standard Desktops",,"Internal Hard Drive 
+Compatible with HP ProDesk 400 G2.5 Desktops 
+Mounting Bracket Included ",Lenovo,,Non-Kits,276,270,11,264,26
+"1TB 2.5"" Solid State Drive for Standard Desktops",,"Internal Hard Drive 
+Compatible with HP ProDesk 400 G2.5 Desktops 
+Mounting Bracket Included",Lenovo,,Non-Kits,508,497,11,486,26
+4GB RAM Memory Module,,"4GB PC3-12800 DDR3L 1600MHz SODIMM 
+Compatible with T470, X270, L470 Notebooks ",Lenovo,,Non-Kits,50,50,11,50,26
+8GB RAM Memory Module,,"8GB PC3-12800 DDR3L 1600MHz SODIMM 
+Compatible with T470, X270, L470 Notebooks ",Lenovo,,Non-Kits,55,55,11,55,26
+16GB RAM Memory Module,,"8GB PC3-12800 DDR3L 1600MHz SODIMM 
+ONLY Compatible with X270 Notebooks 
+ 
+NOTE: While all models support a maximum memory capacity of 16GB, only the X series supports 1x16GB configuration. T series and L series models must reach 16GB capacity with 2x8GB configurations. 
+ONLY Compatible with X250 Notebooks ",Lenovo,,Non-Kits,60,60,11,60,26
+Lenovo External USB DVD-Writer,,,Lenovo,,Non-Kits,50,47,11,46,26
+Jabra Speak 410 MS Conference Phone,,"Wired USB Connectivity 
+1x Phone Line, 1x USB Port, 1x Microphone Port, 1x Headset Port 
+Speakerphone 
+Features: Conference Call, Indicator, Hands-free, Echo Cancellation 
+Volume Control, Mute ",Lenovo,,Non-Kits,76,73,11,72,26
+1TB USB Mass Storage Device,,"External Hard Disk, 1TB Storage 
+USB 3.0 Host Interface, 5Gbps Data Transfer Rate ",Lenovo,,Non-Kits,79,77,11,75,26
+Lenovo Ultraslim Wireless Keyboard & Mouse,,"USB Wireless RF Keyboard - 103 Key (Wi-Fi) 
+USB Wireless RF Mouse - Laser - 3 Button - Scroll Wheel - Symmetrical (Wi-Fi)",Lenovo,,Non-Kits,50,48,11,47,26
+Lenovo ThinkPad Bluetooth Keyboard & Mouse,,"Full-Size Slim Wireless Keyboard with TrackPoint (Bluetooth) 
+Wireless Mouse - Laser - 3 Button - Scroll Wheel - Symmetrical (Bluetooth) ",Lenovo,,Non-Kits,103,101,11,99,26
+APC SurgeArrest Essential Surge Protector,PN: PNOTEPROC8-EC,"Voltage and Frequency: 120-240V, 50/60Hz 
+1x IEC 320 C8 Input 
+Plug Type: IEC 320 C6 
+210J Surge Energy Rating, <300V Let Through Voltage Rating 
+Protection Wkg LED 
+RJ11 Modem / Fax Protection (Two-Wire Line) 
+RJ45 10/100Base-T Ethernet Protection 
+2x Tel Cables (1.8m), 1x Network Patch Cable (30cm), Cord Management 
+Straps, User Manual Included ",Lenovo,,Non-Kits,20,20,11,19,26
+Kensington International Travel Adaptor,,"International Socket Adapter 
+Slide-Out World Travel Plugs for USA / Japan, Australia / China, UK, and Europe 
+2-Pole Adapter, Dual USB Ports 
+2.1 AMP, 110V-250VAC 
+Plug Release Button ",Lenovo,,Non-Kits,29,28,11,27,26
+"Cat6 U/UTP Cat6 Patch Cable, Black, 1m",,,Lenovo,,Non-Kits,3,3,11,3,26
+"Cat6 U/UTP Cat6 Patch Cable, Black, 2m",,,Lenovo,,Non-Kits,4,4,11,4,26
+"Cat6 U/UTP Cat6 Patch Cable, Black, 3m",,,Lenovo,,Non-Kits,5,5,11,5,26
+"Cat6 U/UTP Cat6 Patch Cable, Black, 5m",,,Lenovo,,Non-Kits,6,6,11,6,26
+"Cat6 U/UTP Cat6 Patch Cable, Black, 10m",,,Lenovo,,Non-Kits,8,8,11,8,26
+SCI-IT04: Advance Field laptop kit (Lenovo X Series),,"Kit ID: SCI-IT04
+Intel Dual-Core i7-7600U (Up to 3.90GHz Turbo, 4MB Cache)
+4GB DDR4-2133MHz SODIMM
+256GB Solid State Drive Opal 2.0 - Capable
+No Internal Optical Drive
+12.5"" HD (1366 x 768) Anti-Glare LED Backlit Display with WWANN
+Integrated Intel HD 620 Graphics
+Integrated 720p HD Camera, Microphone, Speakers
+Internal Keyboard, English
+UltraNav (TrackPoint and TouchPad) with Fingerprint Reader
+Gigabit Ethernet, Intel 8265 ac/b/g/n Dual Band (2x2) Wireless + Bluetooth 4.1 vPro
+Upgradeable to Integrated Mobile Broadband
+3x USB 2.0, 1x RJ45, 1x miniDisplayPort, 1x HDMI, 1x 4-in-1 Card Reader
+(SD, MMC, SDHC, SDXC), 1x 3.5mm Microphone / Headphone Combo Port
+Windows 10 Pro, 64-Bit, English
+Security Chip Enabled
+45W AC Adapter
+ThinkPad 3-Cell Li-Ion (23.2Whr) Front Battery
+ThinkPad 3-Cell Li-Ion (23.2Whr) Rear Battery
+Publication - English
+3 Year Global Warranty",Lenovo,,Kits,1401,1370,11,1343,26

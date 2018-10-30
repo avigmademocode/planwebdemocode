@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/OrderSummary/jsOrderSummaryController.js"></script>
+<script src="~/AngularJS/OrderSummary/jsOrderSummaryFactory.js"></script>
+<style>
+    table {
+        /*border-spacing: 10px;
+        border-collapse: separate;
+        font-family: fontawesome; */
+    }
+
+    td, th {
+        padding: 15px;
+    }
+
+    tr.noBorder td {
+        border: 0;
+    }
+</style>
+
+<div ng-controller="OrderSummaryController">
+
+    <div class="col-md-12" style="background:#f0f3f4">
+        <div style="text-align: center; padding: 5px; background-color: #d8dee3;"><h5><b>REQUEST</b></h5></div>
+        <br />
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <p><b>Reference </b></p>
+                <p><b>Status    </b></p>
+                <p><b>Department</b></p>
+                <p><b>Office    </b></p>
+                <p><b>Ship To</b></p>
+                <p><b>Line Items</b></p>
+            </div>
+            <div class="col-md-4">
+                <p>{{Summary.ReferenceNo}}</p>
+                <p>{{Summary.StatusName}}</p>
+                <p>{{Summary.Department}}</p>
+                <p> {{Summary.FirstName}}</p>
+                <p>{{Summary.DsiplayName}}</p>
+                <p>{{LineItems}}</p>
+            </div>
+
+            <div class="col-md-2">
+                <p><b>Delivery Term</b></p>
+                <p><b>Total (USD)</b></p>
+                <p><b>Created By</b></p>
+                <p><b>-</b></p>
+                <p><b>Approver</b></p>
+                <p><b>-</b></p>
+            </div>
+            <div class="col-md-4">
+                <p>{{Summary.IncoTermDesc}}</p>
+                <p>${{Summary.TotalOrderAmount}}</p>
+                <p>
+                    {{Summary.FirstName}} {{Summary.LastName}}
+                </p>
+                <p>
+                    {{Summary.UserName}}
+                </p>
+                <div ng-repeat="Appr in Approver">
+                    <div><b>Approver #{{$index + 1}}</b></div>
+                    <p>
+                        Name :  {{Appr.AprName}}    Title:  {{Appr.AprTitle}}
+                    </p>
+                    <p>
+                        Email: {{Appr.AprEmail}}
+                    </p>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" style="background: #f0f3f4; text-align: center">
+        <div class="col-md-6" style="padding: 5px; background-color: #d8dee3;"><h5><b> Shipping Address</b></h5></div>
+        <div class="col-md-6" style="padding: 5px; background-color: #d8dee3;"><h5><b>Billing Address</b></h5></div>
+        <div class="col-md-12">
+            <br />
+            <div class="col-md-6">
+                <p>
+
+                    {{SAdd1}}   {{SAdd2}}  {{SAdd3}}
+                </p>
+                <p>
+                    {{SCity}}   {{SState}}   {{SZip}}
+                </p>
+                <p>
+                    {{SCountry}}
+                </p>
+                <p>
+                    {{Summary.SContactPerson}}
+                </p>
+                <p>
+                    {{Summary.SContactNo}}
+                </p>
+                <p>
+                    {{Summary.SEmailId}}
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <p>
+                    {{BAdd1}}   {{BAdd2}}  {{BAdd3}}
+                </p>
+                <p>
+                    {{BCity}}   {{BState}}   {{BZip}}
+                </p>
+                <p>
+                    {{BCountry}}
+                </p>
+                <p>
+                    {{Summary.BContactPerson}}
+                </p>
+                <p>
+                    {{Summary.BContactNo}}
+                </p>
+                <p>
+                    {{Summary.BEmailId}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" style="background:#f0f3f4">
+        <hr />
+        <table style="width:100%; padding:20px" border="1|0">
+            <tr bgcolor="#d8dee3">
+                <th>SrNo</th>
+                <th>Product</th>
+                <th class="text-right">Price</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-right">Total Price</th>
+            </tr>
+            <tr ng-repeat="prod in ProductSummary">
+                <td>{{$index + 1}}</td>
+                <td>{{prod.PartNo}}</td>
+                <td class="text-right">{{prod.ProdPrice}}</td>
+                <td class="text-center">{{prod.Quantity}}</td>
+                <td class="text-right">${{prod.TotalPrice}}</td>
+            </tr>
+            <tfoot>
+                <tr class="noBorder">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right"><b>Total Amount: &nbsp;&nbsp;&nbsp;&nbsp;</b> </td>
+                    <td class="text-right"><b>${{Summary.TotalOrderAmount}}</b></td>
+                </tr>
+            </tfoot>
+        </table>
+        <br />
+        <hr />
+        <div class="col-md-3">
+            @*<a href="" ng-click="BackToPrevious()">Back :Product Cart</a>*@
+            <input class="btn btn-primary" type="button" value="Back to Product Cart" ng-click="BackToPrevious()">
+        </div>
+
+        <div class="col-md-3 " ng-hide="btnUnHide">
+            @*<a href="" ng-click="SaveOrderDetails('2')">Save</a>*@
+            <input class="btn btn-primary" type="button" value="Save" ng-click="SaveOrderDetails(2)" ng-hide="btnUnHide">
+        </div>
+
+
+        @*<div class="col-md-3" ng-hide="btnUnHide">
+
+            <input class="btn btn-primary" type="button" value="Next: Submit for Freight Quote" ng-click="SaveOrderDetails(1)" ng-hide="btnUnHide">
+        </div>*@
+
+        <div class="col-md-3 " ng-hide="btnITUnHide" >
+            
+            <input class="btn btn-primary" type="button" value="Add IT SetUp" ng-click="AddITSetup(1)" ng-hide="btnITUnHide">
+        </div>
+
+
+        <div class="col-md-3" ng-hide="btnSubmithide">
+            @*<a href="" ng-click="SaveOrderDetails('1')">Next: Submit for Freight Quote</a>*@
+            <input class="btn btn-primary" type="button" value="Next: Submit for Freight Quote" ng-click="SaveOrderDetails(3)">
+        </div>
+        <div class="col-md-3" ng-hide="btnHide">
+
+            <input class="btn btn-primary" type="button" value="   Next  " ng-click="Next()" ng-hide="btnHide">
+        </div>
+
+        @*<div class="col-md-3 text-center btn btn-default" ng-hide="btnHide">
+            <a href="" ng-click="Next()" style="color:#000000">Next </a>
+        </div>*@
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+
+</div>

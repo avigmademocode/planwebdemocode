@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/Reports/jsReportsController.js"></script>
+<script src="~/AngularJS/Reports/jsReportsFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+<style>
+    #collapse1 {
+        overflow-y: scroll;
+        height: 500px;
+    }
+</style>
+
+@*<h2>Reports</h2>*@
+
+
+<div class="container" ng-controller="ReportsController">
+    <div class="row">
+        <form name="form" ng-submit="submitForm()">
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>Customer Name:</h5>
+                </div>
+                <div class="col-md-4">
+                    <select required class="form-control" ng-model="form.CustomerId" ng-options="itemx.CustId as itemx.CustName for itemx in custList" ng-change="GetCustStatus(form.CustomerId)">
+                        <option value="">--Select-- </option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <h5>Status </h5>
+                </div>
+                <div class="col-md-4">
+                    <select  class="form-control" ng-model="form.StatusId" ng-options="itemx.StatusId as itemx.StatusName for itemx in StatusList">
+                        <option value="">--Select-- </option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>Start Date:</h5>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" placeholder="Enter Start Date" id="start" ng-model="form.startDate" ng-change='checkErr(form.startDate,form.endDate)' name="start" type="date" required />
+                </div>
+
+                <div class="col-md-2">
+                    <h5>End Date:</h5>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" placeholder="Enter End Date" id="end" ng-model="form.endDate" ng-change='checkErr(form.startDate,form.endDate)' name="end" type="date" required />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+               
+
+                <input type="submit" value="Generate Report" class="btn btn-primary" />
+                &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" ng-hide="hideChekcbox" id="ckk" ng-model="valCounrty" ng-change="checkval(valCounrty)" />  &nbsp; <label for="ckk" ng-hide="hideChekcbox" style="font-weight:bold">Generate Reports by country</label>
+                &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" ng-hide="hideChekcbox" id="ckkd" ng-model="valDetails" ng-change="checkdetails(valDetails)" />  &nbsp; <label for="ckkd" ng-hide="hideChekcbox" style="font-weight:bold">Generate Details Reports </label>
+                &nbsp;&nbsp;&nbsp;
+                <a href="x" download="down.xls" ng-show="TableShow" id="btnExportx" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"> </span>
+                    Export Excel
+                </a>
+                <a href="x" download="down.xls" ng-show="DetailsTableShow" id="btnExportz" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"> </span>
+                    Export Excel
+                </a>
+            </div>
+        </form>
+        @*ng-click="ExportReport(valCounrty,valDetails)"*@
+    </div>
+    <hr />
+    <br /><br />
+    <div class="row" ng-show="TableShow">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <div id="dvCountyData">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Total Order Amount</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Request</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Country Name</th>
+                        </tr>
+                        <tr ng-repeat="item in CounrtyByData">
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.TotalOrderAmount}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.Request}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.CountryName}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+   
+    <div class="row" ng-show="DetailsTableShow">
+        <div class="col-md-12" id="collapse1">
+            <div class="table-responsive">
+                <div id="dtlsTable">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Reference</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">SO #</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Department</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Country</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Requesters Name</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Requesters Email</th>
+
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Billing Address Email</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Est. Lead Time</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Est. Ship Date</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Actual Ship Date</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Status</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">FOB</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Freight</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Tax</th>
+                            <th style="border: 1px solid #3e77ab;text-align:center;">Total</th>
+                        </tr>
+                        <tr ng-repeat="item in ReportsData">
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.ReferenceNo}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.SalesOrderNo}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.Department}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.CountryName}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.Requesters_Name}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.Requesters_Email}}</td>
+
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.BillingCotactEmail}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.LeadTime}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.Est_Ship_Date}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.ShipmentDate}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.StatusName}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.FOB}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.Feight}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.TaxValue}}</td>
+                            <td style="border: 1px solid #3e77ab;text-align:center;">{{item.TotalOrderAmount}}</td>
+                        </tr>
+                    </table>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+    $(function () {
+        $("#tab").tabs();
+    });
+</script>
+
+
+<script>
+    //excel for
+
+    $("#btnExportx").click(function (e) {
+        $(this).attr({
+            'download': "Reports.xls",
+            'href': 'data:application/csv;charset=utf-8,' + encodeURIComponent($('#dvCountyData').html())
+        })
+    });
+
+    $("#btnExportz").click(function (e) {
+        $(this).attr({
+            'download': "Reports.xls",
+            'href': 'data:application/csv;charset=utf-8,' + encodeURIComponent($('#dtlsTable').html())
+        })
+    });
+
+</script>

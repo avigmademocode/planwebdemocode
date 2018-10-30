@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "AddRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddRole</h2>
+<div class="container">
+
+
+    <div class="col-md-12" ng-controller="">
+
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background: #f1f4f5">
+            <table style="width:100%;" class="tbl">
+                <tr style="background: #3e77ab; color:#fff">
+                    <th>SrNo</th>
+                    <th>Role Name</th>
+                    @*<th>Status</th>*@
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    @*<th>Remove</th>*@
+                </tr>
+                <tr class="tbl" ng-repeat="frt in ManufactureList">
+                    <td>{{$index + 1}}.</td>
+                    <td>
+                        <input type="text" style="width:75%" ng-model="frt.ManufacturerDesc" value="{{ frt.ManufacturerDesc }}" ng-disabled="(frt.IsEdit ? false : true)" />
+                    </td>
+                    @*<td>*@
+                    @*<a href="#" ng-model="frt.IsActive" ng-click="UpdateStatus($index)">{{frt.IsActive ? 'Active' : 'InActive'}}</a>*@
+                    @*<input type="checkbox" ng-model="frt.IsActive" value="" /> {{frt.IsActive ? 'Active' : 'InActive'}}*@
+                    @*</td>*@
+                    <td><input type="checkbox" ng-model="frt.IsEdit" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsDelete ? true :false)" /></td>
+                    <td><input type="checkbox" ng-model="frt.IsDelete" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsEdit ? true :false)" /></td>
+                    @*<td><input type="button" ng-click="removeRow($index)" class="btn-danger fa fa-star" value="Remove" /></td>*@
+                </tr>
+                <tr class="tbl">
+                    <td></td>
+                    <td style="padding-top:20px"><a href="#" class="btn btn-warning btn-xs" ng-click="addRow()">+ Add More Manufacturer</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+            <hr />
+            <div class="text-center">
+                <input type="button" class="btn btn-primary" value="<< Back" ng-click="Back()" />
+                <input type="button" class="btn btn-primary" ng-click="SaveManufacturer(ManufactureList)" value="Save Manufacturer" />
+
+            </div>
+            <br />
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+</div>
+
+
+

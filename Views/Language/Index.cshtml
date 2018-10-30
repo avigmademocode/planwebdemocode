@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/Language/jsLanguageController.js"></script>
+<script src="~/AngularJS/Language/jsLanguageFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+<div class="col-md-12" ng-controller="LanguageController">
+    <div class="col-md-10">
+       
+        <div class="col-md-5">
+            <select ng-model="CustomerId" class="form-control" ng-change="GetLanguageDetails(CustomerId)">
+                <option value="">Select Customer</option>
+                <option ng-repeat="x in custList" value="{{x.CustId}}">
+                    {{x.CustName}}
+                </option>
+            </select>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+    <div class="col-md-10" style="background: #f1f4f5">
+        <table style="width:100%;" class="table table-bordered">
+            <tr style="background: #3e77ab; color:#fff">
+                <th>SrNo</th>
+                <th>Language</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr ng-repeat="frt in LanguageList">
+                <td>{{$index + 1}}.</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="frt.LanguageName" value="{{ frt.LanguageName }}" ng-disabled="true" />
+                </td>
+                <td style="text-align:center">
+                    <input type="checkbox" ng-model="frt.IsEdit" ng-change="(frt.Ischange = 1); EditStatus(frt)"
+                           ng-disabled="(frt.IsDelete ? true :false)" data-toggle="modal" data-target="#myModal" />
+                </td>
+                <td style="text-align:center"><input type="checkbox" ng-model="frt.IsDelete" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsEdit ? true :false)" /></td>
+            </tr>
+            <tr class="tbl">
+                <td>
+
+                    <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" ng-click="ResetData()">+Add More Language</a>
+                </td>
+                @*<td style="padding-top:20px"><a href="#" class="btn btn-warning btn-xs" ng-click="addRow()">+ Add More Language</a></td>*@
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <hr />
+        <div class="">
+
+
+            <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />
+            <input type="button" class="btn btn-primary" ng-click="SaveManufacturer(LanguageList)" value="Delete Language" />
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="Checked()">&times;</button>
+                        <h4 class="modal-title">Add Language </h4>
+                    </div>
+                    <div class="modal-body">
+                        <b>Language</b>
+                        <input type="text" ng-model="LanguageName" class="form-control" />
+
+                        <div class="col-md-12" style="border-bottom:1px solid #d9d3d3">
+
+                            <div class="row" style="border-bottom:1px solid #d9d3d3">
+                                <div class="col-md-6">
+                                    <b>Customers List</b>
+                                </div>
+                                <div class="col-md-6  text-center">
+                                    <b>Select Customers</b>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row" ng-repeat="x in Finalcustlist">
+                                <div class="col-md-6">
+                                    {{x.CustName}}
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <input type="checkbox" ng-model="x.IsCat" ng-checked="x.IsCat==true" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center" style="padding-top:30%">
+                            <input type="button" class="btn btn-primary" ng-click="SaveStatus()" value="Save Language" />
+                            <input type="button" class="btn btn-danger" ng-click="Checked()" data-dismiss="modal" value="Close">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="cancelModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Are you sure want to Delete  Language?</h4>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="text-center">
+                        <a href="" class="btn btn-primary" ng-click="UpdateStatus(GetStatusDataList)" data-dismiss="modal">Ok</a>
+                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    </div>
+
+</div>
+
+

@@ -1,0 +1,6 @@
+namespace MyProject.Data
+{
+
+}
+
+ 

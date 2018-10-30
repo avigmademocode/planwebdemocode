@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/AddProductCategory/jsAddProductCategoryController.js"></script>
+<script src="~/AngularJS/AddProductCategory/jsAddProductCategoryFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+<div ng-controller="AddProductCategoryController">
+    <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+            <select ng-model="CustomerId" class="form-control" ng-change="GetCategoryByCustomer()">
+                <option value="">Select Customer</option>
+                <option ng-repeat="x in custList" value="{{x.CustId}}">
+                    {{x.CustName}}
+                </option>
+            </select>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background: #f1f4f5">
+            <table style="width:100%;" class="tbl">
+                <tr style="background: #3e77ab; color:#fff">
+                    <th>SrNo</th>
+                    <th>Category</th>
+                    @*<th> Status</th>*@
+                    <th> Edit</th>
+                    <th> Delete</th>
+                </tr>
+                <tr class="tbl" ng-repeat="frt in ProductCategories">
+                    <td>{{$index + 1}}.</td>
+                    <td>
+                        @*<input type="text" style="width:75%" ng-model="frt.ProdCatDesc" value="{{ frt.ProdCatDesc }}" ng-disabled="(frt.IsEdit ? false : true)" />*@
+                        <input type="text" style="width:75%" ng-model="frt.ProdCatDesc" value="{{ frt.ProdCatDesc }}" ng-disabled="true" />
+                    </td>
+
+
+                    @*<td>
+                            <input type="checkbox" ng-model="frt.IsActive" value="" /> {{frt.IsActive ? 'Active' : 'InActive'}}
+                        </td>*@
+                    @*<td><input type="checkbox" ng-model="frt.IsEdit" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsDelete ? true :false)"/></td>*@
+                    <td><input type="checkbox" ng-model="frt.IsEdit" value="{{IsChecked}}" ng-change="(frt.Ischange = 1); EditCategory(frt)" ng-disabled="(frt.IsDelete ? true :false)" data-toggle="modal" data-target="#myModal"/></td>
+                    <td><input type="checkbox" ng-model="frt.IsDelete" ng-change="(frt.Ischange = 1)" ng-disabled="(frt.IsEdit  ? true :false)" /></td>
+                </tr>
+                <tr class="tbl">
+                    <td></td>
+                    <td style="padding-top:20px">
+                        @*<a href="#" class="btn btn-warning btn-xs" ng-click="addRow()">+ Add More Category</a>*@
+                        <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"  ng-click="ResetData()">+ Add More Category</a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <hr />
+            <div class="text-center">
+                <input type="button" class="btn btn-primary" value="<< Back" ng-click="Back()" />
+                <input type="button" class="btn btn-primary" ng-click="SaveProductCatgry(ProductCategories)" value="Save Category" />
+            </div>
+
+            <br />
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" ng-click="Checked()">&times;</button>
+                            <h4 class="modal-title">Add Product Category</h4>
+                        </div>
+                        <div class="modal-body">
+                            <b>Category Name</b>
+                            <input type="text" ng-model="categoryname" class="form-control" />
+                            <br />
+                            @*<b>Select Customers</b>*@
+                            @*<select multiple ng-model="Customers" class="form-control">
+                                    <option ng-repeat="x in custList" value="{{x.CustId}}">
+                                        {{x.CustName}}
+                                    </option>
+                                </select>*@
+                            @*<table>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Select</th>
+                                    </tr>
+                                    <tr ng-repeat="x in custList">
+                                        <td hidden>{{{{x.CustId}}}}</td>
+                                        <td>{{x.CustName}}</td>
+                                        <td><input type="checkbox" /></td>
+                                    </tr>
+                                </table>*@
+
+                            <div class="col-md-12" style="border-bottom:1px solid #d9d3d3">
+
+                                <div class="row" style="border-bottom:1px solid #d9d3d3">
+                                    <div class="col-md-6">
+                                        <b>Customers List</b>
+                                    </div>
+                                    <div class="col-md-6  text-center">
+                                        <b>Select Customers</b>
+                                    </div>
+                                </div>
+
+                                <div class="row" ng-repeat="x in Finalcustlist">
+                                    <div class="col-md-6">
+                                        {{x.CustName}}
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        @*{{x.CustId}}{{CustID}}*@
+                                        <input type="checkbox" ng-model="x.IsCat" ng-checked="x.IsCat==true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center" style="padding-top:30%">
+                                <input type="button" ng-click="SaveCategory()" class="btn btn-primary" value="Save Category" />
+                                <input type="button" class="btn btn-danger" ng-click="Checked()" data-dismiss="modal" value="Close">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+</div>

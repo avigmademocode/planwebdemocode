@@ -1,0 +1,1974 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/ViewRequest/jsViewRequestController.js"></script>
+<script src="~/AngularJS/ViewRequest/jsViewRequestFactory.js"></script>
+@*<script src="~/AngularJS/FileUpload/ImageFileUpload.js"></script>*@
+<div class="container" ng-controller="ViewRequestController" ng-init="form.MessageType=null">
+    <div class="col-md-12">
+        <div class="col-md-10">
+            <div>
+                <b>Order Status: </b>Awaiting Planson Action
+                <br />
+                ​<div class="progress">
+                    <style>
+                        .red-background {
+                            background-color: dimgray !important;
+                        }
+
+                        .green-background {
+                            background-color: green !important;
+                        }
+                    </style>
+
+                    <div role="progressbar" ng-repeat="st in Status" style="width: 12%; font-size: 10px;" class="progress-bar {{st.StatusCheck? 'green-background':'red-background'}}">>>&nbsp;&nbsp;{{st.StatusName}}</div>
+                </div>
+
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <div>
+             
+
+
+                    <table width="50%">
+                        <tr>
+                            <td width="10px" ng-repeat="btn in Buttonlist" style="padding: 3px !important;">
+                                <div ng-switch="btn.ButtonId">
+
+                                    <div ng-switch-when="1" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Select Products" class="btn btn-primary" ng-click="SelectProduct()" />
+                                    </div>
+                                    <div ng-switch-when="2" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Edit Request" class="btn btn-primary" ng-click="EditCustomer()" />
+                                    </div>
+                                    <div ng-switch-when="3" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Review Order" class="btn btn-primary" />
+                                    </div>
+                                    <div ng-switch-when="4" ng-if="btn.IsPlanson ==true || btn.IsUser == true">
+                                        <input type="button" value="Contact Us About This Request" class="btn btn-primary" data-toggle="modal" data-target="#EmailModal" ng-click="EmailPOPUP()" />
+                                    </div>
+                                    <div ng-switch-when="5" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        @*<input type="button" value="Print Excel" class="btn btn-primary" ng-click="PrintExcel()" />*@
+                                        <a href="x" download="down.xls" id="btnExport" class="btn btn-primary"  ng-click="PrintExcel()">
+                                            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"> </span>
+                                            Export Excel
+                                        </a>
+                                    </div>
+                                    <div ng-switch-when="6" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Cancel Request" class="btn btn-primary" data-toggle="modal" data-target="#cancelModal" />
+                                    </div>
+                                    <div ng-switch-when="7" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Add Freight Quote" class="btn btn-primary" ng-click="AddFreight()" />
+                                    </div>
+                                    <div ng-switch-when="8" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#ApproveModal" value="Approve Request" data-dismiss="modal" />
+                                    </div>
+                                    <div ng-switch-when="9" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+
+
+                                        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#DennyModal" value="Deny Request" data-dismiss="modal" />
+                                    </div>
+                                    <div ng-switch-when="10" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Resubmit for Approval" class="btn btn-primary" />
+                                    </div>
+                                    <div ng-switch-when="11" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Add Budget Quote" class="btn btn-primary" ng-click="AddBudget(0)" />
+                                    </div>
+                                    <div ng-switch-when="12" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Enter Sales Order Number" class="btn btn-primary" data-toggle="modal" data-target="#OrderReview" data-dismiss="modal" />
+                                    </div>
+                                    <div ng-switch-when="13" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Put Request on Hold" class="btn btn-primary" data-toggle="modal" data-target="#RemarkModal" data-dismiss="modal" />
+                                    </div>
+                                    <div ng-switch-when="14" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Add Delivery Time" class="btn btn-primary" />
+                                    </div>
+                                    <div ng-switch-when="16" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Contact Planson"
+                                               class="btn btn-primary" data-toggle="modal" data-target="#EmailModal" ng-click="EmailPOPUP()" />
+                                    </div>
+                                    <div ng-switch-when="17" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Approve" class="btn btn-primary" ng-click="Approve()" />
+                                    </div>
+                                    <div ng-switch-when="18" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Use Own Freight Forwarder" class="btn btn-primary" ng-click="FreightForwarder()" />
+                                    </div>
+                                    <div ng-switch-when="19" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Request Revision" class="btn btn-primary" />
+                                    </div>
+                                    <div ng-switch-when="20" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        @*<input type="button" value="Print Excel" class="btn btn-primary" ng-click="PrintExcel()" />*@
+                                        <a href="x" download="down.xls" id="btnExport"  ng-click="PrintExcel()" class="btn btn-primary ">
+                                            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"> </span>
+                                            Export Excel
+                                        </a>
+                                    </div>
+                                    <div ng-switch-when="21" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Upload Order Document" class="btn btn-primary" data-toggle="modal" data-target="#manageFilesModal" />
+                                    </div>
+                                    <div ng-switch-when="22" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Print Request" class="btn btn-primary" ng-click="PrintPdf()" />
+                                    </div>
+                                    <div ng-switch-when="23" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Contact us About Request" class="btn btn-primary" data-toggle="modal" data-target="#EmailModal" ng-click="EmailPOPUP()" />
+                                    </div>
+                                    <div ng-switch-when="24" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Add Grant Code Quote" class="btn btn-primary" ng-click="AddGrantCode()" ng-hide="btnAdd" />
+                                        <input type="button" value="Edit Grant Code Quote" class="btn btn-primary" ng-click="GoToEditGrantCode(1)" ng-hide="btnEdit" />
+                                    </div>
+
+                                    <div ng-switch-when="25" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                                        <input type="button" value="Enter Ship Details" class="btn btn-primary" ng-click="ShipDetails()" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                    @*<table style="margin-left:-7px">
+            <tr>
+                <td>
+                    <input type="button" value="Contact Planson" class="btn btn-primary" data-toggle="modal" data-target="#EmailModal" ng-click="EmailPOPUP()" />
+                </td>
+                <td>
+                    <a href="/AddFreightQuote?{{OrderID}}" class="btn btn-primary">Add Freight Quote</a>
+                </td>
+                <td>
+                    <a href="/RequestFinalize?{{OrderID}}" class="btn btn-primary">Add Budget Quote</a>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <a href="/AddNewGrantCode?{{OrderID}}" class="btn btn-primary">Add Grant Code Quote</a>
+                </td>
+                <td>
+                    <a href="#" ng-click="GoToEditGrantCode()" class="btn btn-primary">Edit Grant Code Quote</a>
+                </td>
+            </tr>
+        </table>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div ng-repeat="btn in Buttonlist">
+                <div ng-switch="btn.ButtonId">
+                    <div ng-switch-when="15" ng-if="btn.IsPlanson == true || btn.IsUser == true">
+                        <b>Admin Tools:</b>
+                        <input type="button" class="btn-default" data-toggle="modal" data-target="#confirmationModal" value="Revert To Last Status " data-dismiss="modal" />
+                        <br />
+                        <input type="button" class="btn-default" data-toggle="modal" data-target="#changeStatus" value="Change To Any Status" data-dismiss="modal" />
+                        <br />
+                        <input type="button" class="btn-default" data-toggle="modal" data-target="#changedLeadTiemModal" value="Update Est. Lead Time" />
+                        <br />
+                        <input type="button" class="btn-default" data-toggle="modal" data-target="#cancelModal" value="Cancel Request" data-dismiss="modal" />
+                        <br />
+                        <input type="button" class="btn-default" data-toggle="modal" data-target="#manageFilesModal" value="Manage File" />
+
+                        <br />
+                        <input type="button" class="btn-default" value="Print" ng-click="PrintPdf()" />
+
+                        <br />
+                        <input type="button" class="btn-default" value="Edit Budget Code" ng-click="AddBudget(1)" ng-hide="Budgethide" />
+
+                        @*<br />
+                        <input type="button" class="btn-default" value="Add IT SetUp" ng-click="AddITSetup(1)"   />*@
+                        @*<button class="btn btn-primary" onclick='printDiv();'>
+            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span> Print Bill
+        </button>*@
+                        @*<input type="button" class="btn-default" ng-click="AddFFreightQuote()" value="Add Freight Quote" />*@
+
+                        @*<div ng-switch="btn.ButtonId">
+            <br />
+
+            <div ng-switch-when="7">
+                <input type="button" value="Add Freight Quote" class="btn-default" ng-click="AddFreight()" />
+
+            </div>
+
+            <div ng-switch-when="11">
+                <input type="button" value="Add BudgetCode Quote" class="btn-default" ng-click="AddBudget()" />
+
+            </div>
+
+
+            <div ng-switch-when="24">
+                <input type="button" value="Add Grant Code Quote" class="btn-default" ng-click="AddGrantCode()" ng-hide="btnAdd()" />
+
+                <br />v
+                <input type="button" value="Edit Grant Code Quote" class="btn-default" ng-click="GoToEditGrantCode()" ng-hide="btnEdit()" />
+
+            </div>
+
+        </div>*@
+
+
+                    </div>
+                </div>
+            </div>
+            @*Model Popup*@
+
+
+            <div class="modal fade" id="ApproveModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>Are you sure want to Aprrove request?</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="" class="btn btn-primary" ng-click="Approve()" data-dismiss="modal">Ok</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="DennyModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>Are you sure want to Deny request?</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="" class="btn btn-primary" ng-click="Denny()" data-dismiss="modal">Ok</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="changeStatus" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Change To Any Status</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Select the new status:</p>
+                            <select class="form-control" ng-model="ChangedStatus">
+                                <option value="">Select</option>
+                                <option ng-repeat="obj in Status" value="{{obj.StatusId}}">{{obj.StatusName}}</option>
+                            </select>
+                            <br />
+                            Reason for change(Optional):
+                            <input type="text" ng-model="Reason" class="form-control" />
+                        </div>
+                        <div class="modal-footer" style="width:100%">
+                            <a href="" class="btn btn-primary" ng-click="SaveStatusChange()" data-dismiss="modal">Submit Status Change</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+
+                            @*<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="LastStatusChange()">SubmitStatusChange</button>*@
+                            @*<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="confirmationModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>
+                        </div>
+                        <div class="modal-body">
+                            @*<i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;*@
+                            <p>By clicking "confirm" your are confirming that you would like to move your order back one stage. Would you like to  proceed?</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="" class="btn btn-primary" ng-click="LastStatusChange()" data-dismiss="modal">Ok</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <br />
+                            <br />
+                            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="changedLeadTiemModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Update Est. Lead Time</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Insert a new Lead Time In work days:</p>
+                            <input type="number" ng-model="LeadTime" class="form-control" />
+                            <br />
+                            <p>Reason for change:</p>
+                            <input type="text" ng-model="LeadReason" class="form-control" />
+                        </div>
+                        <div class="modal-footer">
+                            <a href="" class="btn btn-primary" ng-click="FreightChange()">Submit Lead Time Change</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+
+                            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="manageFilesModal" role="dialog" style="width:100%">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Order Documents</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <table style="width:100%">
+                                <tr style="background:#3e77ab; color:#ffffff">
+                                    <th>Attach File</th>
+                                    <th>Description</th>
+                                    <th>Add/Remove</th>
+                                </tr>
+                                <tbody ng-repeat="uf in uploadfiles">
+                                    <tr>
+                                        <td>
+                                            <input type="file" name="fileupload" value="uf.ImageUpload" accept="image/*"
+                                                   onchange="angular.element(this).scope().SelectFileforUpload(this.files)" required />
+                                        </td>
+                                        <td><textarea class="form-control" rows="3" cols="50" ng-model="uf.Description">Enter Description Here...</textarea></td>
+                                        <td><input type="button" ng-click="Remove($index)" class="btn btn-danger" value="Remove" /></td>
+                                    </tr>
+                                </tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><input type="button" ng-click="Add()" class="btn btn-success" value="+ Add More" /></td>
+                                </tr>
+                                @*<tfoot>
+                                        <tr>
+                                            <td>
+                                                <input type="file" name="fileupload1" value="uf.ImageUpload" multiple accept="image/*" ng-model="ImageUpload" onchange="angular.element(this).scope().SelectFileforUpload(this.files)" required />
+                                            </td>
+                                            <td><input type="button" ng-click="Remove($index)" class="btn btn-danger" value="Remove" /></td>
+
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                            <hr />
+                            <input type="button" value="Upload File" class="btn btn-primary" ng-click="SaveFile()" />
+                            <input type="button" value="Print Order" class="btn btn-primary" ng-click="PrintPdf()" />
+                            <input type="button" value="Goto Next Status" class="btn btn-primary" ng-click=" $scope.Approve()" />
+                        </div>
+
+                        <div class="modal-header">
+                            <table width="100%">
+                                <tr style="background:#3e77ab; color:#ffffff">
+                                    <th>SI.NO.</th>
+                                    <th>Document Link</th>
+                                    <th>Description</th>
+                                    <th>Download</th>
+                                </tr>
+                                <tr ng-repeat="img in UploadedFiles">
+                                    <td>{{$index + 1}}.</td>
+                                    <td><a href="{{img.FileLocation}}">{{img.FileName}}</a></td>
+                                    @*<td>{{img.FileLocation}}</td>*@
+                                    <td>
+                                        @*<a class="tooltip" ng-too>
+                                                {{img.Description}}
+                                                <span class="tooltiptext">{{img.Description}}</span>
+                                            </a>*@
+
+                                        <a href="#" style="color:#0094ff;" data-toggle="tooltip" title="{{img.Description}}">{{img.Description | limitTo:30}} ...</a>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('[data-toggle="tooltip"]').tooltip();
+                                            });
+                                        </script>
+                                    </td>
+                                    <td>
+                                        <a href="{{img.FileLocation}}" download="{{img.FileName}}" class="btn btn-default btn-sm download-btn"><i class="fa fa-download"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="cancelModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>Are you sure want to cancel request?</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="" class="btn btn-primary" ng-click="CancelStatusChange()" data-dismiss="modal">Ok</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="IncotermModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            @*<h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>*@
+                        </div>
+                        <div class="modal-body text-center">
+                            @*<p>Are you sure want to cancel request?</p>*@
+                            <a href="" id="incoterm" class="btn btn-primary" ng-click="HideShowIncoterm()">Revise Quote with Different Incoterm</a>
+                            <a href="" class="btn btn-primary" ng-click="ChangeStatustoOne">Revise the Order</a>
+                            <br />
+                            <br />
+                            <br />
+                            <div id="incoterms" class="text-left">
+                                <b>Please Select Incoterm -</b>
+                                <select name="incoterms" class="form-control" ng-model="Incoterm">
+                                    <option value="">Select Incoterms</option>
+                                    <option value="{{item.IncoTermId}}" ng-repeat="item in IncoTermlist">{{item.IncoTermCode}}</option>
+                                </select>
+                                <br />
+                                <a href="#" class="btn btn-primary" ng-click="SaveDifferentIncoterm()">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        @*<a href="" class="btn btn-primary" ng-click="CancelStatusChange()">Ok</a>
+                            <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <br />
+                            <br />*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12">
+            <br />
+           
+        
+            <div id="tab">
+                <ul>
+                    <li><a href="#tab-1">Details</a></li>
+                    <li><a href="#tab-2">Items</a></li>
+                    <li ng-hide="Granthide"><a href="#tab-3">Grant Items</a></li>
+                    <li ng-hide="Budgethide"><a href="#tab-4">Budget Items</a></li>
+
+                    <li ng-hide="HideShowItSetUp"><a href="#tab-5">IT SetUp</a></li>
+                    <li ng-hide="HideShowSoftwareSetup"><a href="#tab-6">Software SetUp</a></li>
+
+                    <li><a href="#tab-7">Event Log</a></li>
+
+                </ul>
+
+                <div id="tab-1">
+                    <div class="col-md-7 text-left" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                        <div class="col-md-12 row">
+                            <h4><b>Request</b></h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>Reference</b></div>
+                            <div class="col-md-6">{{RequestDetails[0].ReferenceNo}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Status</b></div>
+                            <div class="col-md-6">{{RequestDetails[0].StatusName}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Department</b></div>
+                            <div class="col-md-6">{{RequestDetails[0].Department}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Office</b></div>
+                            <div class="col-md-6">Portland, United States</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Ship To</b></div>
+                            <div class="col-md-6">{{RequestDetails[0].DsiplayName}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Line Items</b></div>
+                            <div class="col-md-6">{{Prodcount}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Delivery Term</b></div>
+                            <div class="col-md-6">{{RequestDetails[0].IncoTermDesc}}</div>
+                        </div>
+                        <div class="row" ng-hide="Feighthide">
+                            <div class="col-md-4"><b>Freight</b></div>
+                            <div class="col-md-6">${{Feight}}</div>
+                        </div>
+                        <div class="row" ng-hide="Taxhide">
+                            <div class="col-md-4"><b>Tax</b></div>
+                            <div class="col-md-6">${{TaxAmount}}({{Taxval}})</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>Total (USD)</b></div>
+                            <div class="col-md-6">${{RequestDetails[0].TotalOrderAmount}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Created By</b></div>
+                            <div class="col-md-6"> {{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}} </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">{{RequestDetails[0].UserName}}</div>
+                        </div>
+
+                        <div class="row" ng-repeat="app in ApprovarDetails">
+                            <div class="col-md-4"><b>Approver {{$index + 1}}</b></div>
+                            <div class="col-md-6">{{app.AprName}}<br />({{app.AprEmail}})</div>
+                        </div>
+
+                        @*<div class="row">
+                            <div class="col-md-4"><b>Financial</b></div>
+                            <div class="col-md-6"> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Reviewer</b></div>
+                            <div class="col-md-6"> </div>
+                        </div>*@
+                    </div>
+                    <div class="col-md-5" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-left:#ffffff 4px solid; border-radius:10px">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <h4>
+                                    <b>
+                                        Shipping Address
+                                    </b>
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+
+                            </div>
+                            <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                            <div class="col-md-12"> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</div>
+                            <div class="col-md-12"> {{SCity}}   {{SState}} ,  {{SZip}}</div>
+
+                            <div class="col-md-12"> {{SCountry}}</div>
+                            <div class="col-md-12"><br /></div>
+                            <div class="col-md-12">{{RequestDetails[0].SContactPerson}}</div>
+                            <div class="col-md-12">{{RequestDetails[0].SContactNo}}</div>
+                            <div class="col-md-12">{{RequestDetails[0].SEmailId}}</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <h4>
+                                    <b>
+                                        Billing Address
+                                    </b>
+                                </h4>
+                            </div>
+                            <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                            <div class="col-md-12"> {{BAdd1}}, {{BAdd2}},  {{BAdd3}}</div>
+                            <div class="col-md-12"> {{BCity}}   {{BState}} ,  {{BZip}}</div>
+
+                            <div class="col-md-12"> {{BCountry}}</div>
+                            <div class="col-md-12"><br /></div>
+                            <div class="col-md-12">{{RequestDetails[0].BContactPerson}}</div>
+                            <div class="col-md-12">{{RequestDetails[0].BContactNo}}</div>
+                            <div class="col-md-12">{{RequestDetails[0].BEmailId}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-2">
+                    <style>
+                        table, th, td {
+                            /*border: 1px solid black;*/
+                            padding: 10px;
+                        }
+                    </style>
+                    <table style="width:100%; border: 1px solid #3e77ab;">
+                        <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                            <th>SINO</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th class="text-right">Price (USD)</th>
+                            <th class="text-right">Extended</th>
+                        </tr>
+                        <tr style="border: 1px solid #3e77ab;" ng-repeat="item in CartItems">
+                            <td>{{$index +1}}</td>
+                            <td>{{item.PartNo}}</td>
+                            <td>{{item.Quantity}}</td>
+                            <td class="text-right">${{item.ProdPrice}}</td>
+                            <td class="text-right">${{item.TotalPrice}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-3" ng-hide="Granthide">
+                    <input type="button" value="View Grant Code" class="btn btn-link" ng-click="GoToEditGrantCode(2)" ng-hide="ViewGrantbtnHide" />
+                    <table class="table1">
+                        <tbody ng-repeat="row in Seriallst">
+                            <tr style="background: #3e77ab; color:#ffffff">
+                                <th> Group #  {{row.Serial}}</th>
+                                <th ng-repeat="th in grantcodeOrderdatalst" ng-if="th.GrantOrderSerialId ==  row.GrantOrderSerial">
+                                    <p>{{th.GrantTitle}} : {{th.Value}}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Line Item #</th>
+                                <th>Item Name</th>
+                                <th class="text-right">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Extended Price</th>
+                            </tr>
+                            <tr ng-repeat="obj in row.Data">
+                                <td>{{row.Serial}}-{{$index+1}}</td>
+                                <td>
+                                    {{obj.ProductName}}
+
+                                </td>
+                                <td class="text-right">
+                                    {{obj.SelQty}}
+
+                                </td>
+                                <td class="text-right">
+                                    <p ng-model="obj.SelRate">$ {{+obj.SelRate}}</p>
+                                </td>
+                                <td ng-init="$parent.total = $parent.total + obj.selqty" class="text-right">
+                                    <p>$ {{+obj.SelRate * obj.SelQty}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Group #{{row.Serial}} Total:</b></td>
+                                <td class="text-right"><b>$ {{+row.Total}}</b></td>
+                            </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div id="tab-4" ng-hide="Budgethide">
+                    <input type="button" class="btn btn-link" value="View Budget Code" ng-click="AddBudget(2)" ng-hide="ViewGrantbtnHide" />
+                    <table class="table1">
+                        <tbody ng-repeat="row in Seriallst">
+                            <tr style="background: #3e77ab; color:#ffffff">
+                                <th> Group #  {{row.Serial}}</th>
+                                <th ng-repeat="th in grantcodeOrderdatalst" ng-if="th.BudgetOrderSerialId ==  row.BudgetOrderSerialId">
+                                    <p>{{th.BudgetTitle}} : {{th.strValue}}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Line Item #</th>
+                                <th>Item Name</th>
+                                <th class="text-right">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Extended Price</th>
+                            </tr>
+                            <tr ng-repeat="obj in row.Data">
+                                <td>{{row.Serial}}-{{$index+1}}</td>
+                                <td>
+                                    {{obj.ProductName}}
+
+                                </td>
+                                <td class="text-right">
+                                    {{obj.Qty}}
+
+                                </td>
+                                <td class="text-right">
+                                    <p ng-model="obj.Rate">$ {{+obj.Rate}}</p>
+                                </td>
+                                <td ng-init="$parent.total = $parent.total + obj.Qty" class="text-right">
+                                    <p>$ {{obj.Amount}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Group #{{row.Serial}} Total:</b></td>
+                                <td class="text-right"><b>$ {{+row.Total}}</b></td>
+                            </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div id="tab-5" ng-hide="HideShowItSetUp">
+                    @*<input type="button" class="btn btn-link" value="View Budget Code" ng-click="AddBudget(2)" ng-hide="ViewGrantbtnHide" />*@
+                    <table class="table1">
+                        <tbody ng-repeat="row in ItSetUpList">
+                            <tr style="background: #3e77ab; color:#ffffff">
+                                @*<th> Group #  {{row.Serial}}</th>*@
+                                <th colspan="7" style="text-align:center">
+                                    <p>{{row.PartNo}}</p>
+                                </th>
+                                
+
+
+                            </tr>
+                            <tr>
+                             
+                                
+                                <th>User Name</th>
+                                <th >User Type</th>
+                                <th >Work Location</th>
+                                <th >Delivery Location</th>
+                                <th >Applications</th>
+                                <th >SpecialInstructions</th>
+                            </tr>
+                            <tr ng-repeat="obj in row.DataIt">
+                               <td>
+                                    {{obj.UserName}}
+
+                                </td>
+                                <td>
+                                    {{obj.UserType}}
+
+                                </td>
+                                <td>
+                                    {{obj.WorkLocation}}
+                                </td>
+                                <td>
+                                    {{obj.DeliveryLocation}}
+                                </td>
+                                <td>
+                                    {{obj.Applications}}
+                                </td>
+                                <td>
+                                    {{obj.SpecialInstructions}}
+                                </td>
+                            </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div id="tab-6" ng-hide="HideShowSoftwareSetup">
+                    @*<input type="button" class="btn btn-link" value="View Budget Code" ng-click="AddBudget(2)" ng-hide="ViewGrantbtnHide" />*@
+                    <table class="table1">
+                        <tbody ng-repeat="row in SSsetUpList">
+                            <tr style="background: #3e77ab; color:#ffffff">
+                                @*<th> Group #  {{row.Serial}}</th>*@
+                             
+                                <th colspan="3" style="text-align:center">
+                                    <p>{{row.PartNo}}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                
+                               
+                                <th >Serial</th>
+                                <th >User Name</th>
+                                <th >User Email</th>
+                                
+                            </tr>
+                            <tr ng-repeat="obj in row.DataSS">
+                                
+                                <td>
+                                    {{obj.Serial}}
+
+                                </td>
+                                <td>
+                                    {{obj.UserName}}
+
+                                </td>
+                                <td>
+                                    {{obj.UserEmail}}
+                                </td>
+                               
+                            </tr>
+
+                    </table>
+
+                </div>
+
+                <div id="tab-7">
+                    <table style="width:100%; border: 1px solid #3e77ab;">
+                        <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                            <th>Event</th>
+                            <th>Date / Time</th>
+                            <th>User</th>
+                            <th>Comments</th>
+                        </tr>
+                        <tr style="border: 1px solid #3e77ab;" ng-repeat="log in OrderLog">
+                            <td>{{log.NewStatus}}</td>
+                            <td>{{log.ActionDate}}</td>
+                            <td>{{log.FullName}}</td>
+                            <td>{{log.Remarks}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+
+
+
+
+        <div class="container">
+            <!-- Email popUp action="" -->
+            <!-- Modal -->
+            <div class="modal fade" id="EmailModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content action=""-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Contact Planson</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="saveTemplateData" class="form-horizontal" ng-submit="submitForm()">
+                                <table class="table-bordered" style="width:550px">
+                                    <tr>
+                                        <td><b>Message Type:</b>  </td>
+                                        <td>
+                                            <select required class="form-control" ng-model="form.MessageType" ng-change="SelectSub(form.MessageType)" ng-options="itemx.OrderIdRequired as itemx.ContactType for itemx in Contactlist">
+                                                <option value="">--Select-- </option>
+                                            </select>
+                                            @*{{form.MessageType}}*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Subject:</b>  </td>
+                                        <td><input type="text" class="form-control" ng-model="form.Subject" /> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Message:</b></td>
+                                        <td> <textarea class="form-control" cols="15" rows="4" ng-model="form.Message"> </textarea> </td>
+                                    </tr>
+                                </table>
+                                <br /><br />
+
+                                <input type="submit" ngClick="Submit" class="btn btn-primary" value="Send" />
+                                &nbsp;&nbsp;
+                                <input type="button" class="btn btn-danger" value="Close" data-dismiss="modal" />
+
+                            </form>
+                        </div>
+                        @*<div class="modal-footer">
+
+                            </div>*@
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <br />
+        <br />
+
+
+
+    </div>
+
+    @*OrderReview*@
+
+    <div class="modal fade" id="OrderReview" role="dialog" style="width:100%">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Order Review</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Enter Sale Order No</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="SalesOrderNum" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Send Processing Mail</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="checkbox" ng-model="Email" />
+                        </div>
+                    </div>
+
+                    <hr />
+                    <input type="button" value="Save" class="btn btn-primary " ng-click="EnterSON()" data-dismiss="modal" />
+                    <input type="button" class="btn btn-danger" value="Close" data-dismiss="modal" />
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    @*Remark*@
+    <div class="modal fade" id="RemarkModal" role="dialog" style="width:100%">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remarks</h4>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="row" ng-repeat="x in PlanComments">
+                        <div class="col-md-6">
+                            {{x.Comments}}
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Remark</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea class="form-control" ng-model="HoldRemark"></textarea>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <input type="button" value="Save" class="btn btn-primary " ng-click="OnHold()" data-dismiss="modal" />
+                    <input type="button" class="btn btn-danger" value="Close" data-dismiss="modal" />
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--Pdf print div-->
+    <div>
+        <div>
+            <div id='DivIdToGrantPrint' style="display:none">
+                <div class="modal-header">
+                    <img src="~/Content/Images/Planson-logo.png" style="height:100px;width:200px;" />
+                    <h4 class="modal-title" id="myModalLabel" style="text-align:center">
+                        INVOICE
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <hr />
+                    <table class="table" style="background:#e6e4e4; padding:15px; border-right:#ffffff 4px solid; border-radius:10px">
+                        <thead>
+                            <tr>
+                                <th>Request</th>
+                                <th></th>
+                                <th>Shipping Address:</th>
+                                <th>
+                                    Billing Address:
+                                </th>
+                            </tr>
+                        </thead>
+
+
+                        <tr>
+                            <th><b>Reference:</b></th>
+                            <td>{{RequestDetails[0].ReferenceNo}}</td>
+                            <td>{{RequestDetails[0].CustomerName}}</td>
+                            <td>{{RequestDetails[0].CustomerName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>{{RequestDetails[0].StatusName}}</td>
+                            <td> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</td>
+                            <td>{{BAdd1}}, {{BAdd2}},  {{BAdd3}}</td>
+                        </tr>
+                        <tr>
+                            <th>Department:</th>
+                            <td>{{RequestDetails[0].Department}}</td>
+                            <td>{{SCity}}   {{SState}} ,  {{SZip}}</td>
+                            <td>{{BCity}}   {{BState}} ,  {{BZip}}</td>
+                        </tr>
+                        <tr>
+                            <th>Office:</th>
+                            <td>Portland, United States</td>
+                            <td>{{SCountry}}</td>
+                            <td>{{BCountry}}</td>
+                        </tr>
+                        <tr>
+                            <th>Ship To:</th>
+                            <td>{{RequestDetails[0].DsiplayName}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Line Items:</th>
+                            <td>{{Prodcount}}</td>
+                            <td>{{RequestDetails[0].SContactPerson}}</td>
+                            <td>{{RequestDetails[0].BContactPerson}}</td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Term:</th>
+                            <td>{{RequestDetails[0].IncoTermDesc}}</td>
+                            <td>{{RequestDetails[0].SContactNo}}</td>
+                            <td>{{RequestDetails[0].BContactNo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total (USD):</th>
+                            <td>${{RequestDetails[0].TotalOrderAmount}}</td>
+                            <td>{{RequestDetails[0].SEmailId}}</td>
+                            <td>{{RequestDetails[0].BEmailId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Created By:</th>
+                            <td>{{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>{{RequestDetails[0].UserName}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr ng-repeat="app in ApprovarDetails">
+                            <th><b>Approver: {{$index + 1}}</b></th>
+                            <td>{{app.AprName}}<br />({{app.AprEmail}})</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                    <hr />
+
+                    <br /> <br />
+                    <h4 style="text-align:center">Items</h4>
+
+                    <table style="width:100%; border: 1px solid #3e77ab;">
+                        <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                            <th>SINO</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th class="text-right">Price (USD)</th>
+                            <th class="text-right">Extended</th>
+                        </tr>
+                        <tr style="border: 1px solid #3e77ab;" ng-repeat="item in CartItems">
+                            <td>{{$index +1}}</td>
+                            <td>{{item.PartNo}}</td>
+                            <td>{{item.Quantity}}</td>
+                            <td class="text-right">${{item.ProdPrice}}</td>
+                            <td class="text-right">${{item.TotalPrice}}</td>
+                        </tr>
+                    </table>
+                    <hr style="border-top: dotted 1px;" />
+                    <h4 style="text-align:center">Grant Items</h4>
+                    <table class="table" ng-hide="Granthide">
+                        <tbody ng-repeat="row in Seriallst">
+                            <tr style="background: #3e77ab; color:#ffffff;text-align:center;align-items:center">
+                                <th> Group #  {{row.Serial}}</th>
+                                <th ng-repeat="th in grantcodeOrderdatalst" ng-if="th.GrantOrderSerialId ==  row.GrantOrderSerial">
+                                    <p>{{th.GrantTitle}} : {{th.Value}}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Line Item #</th>
+                                <th>Item Name</th>
+                                <th class="text-right">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Extended Price</th>
+                            </tr>
+                            <tr ng-repeat="obj in row.Data">
+                                <td>{{row.Serial}}-{{$index+1}}</td>
+                                <td>
+                                    {{obj.ProductName}}
+
+                                </td>
+                                <td class="text-center">
+                                    <span style="align-items:center"> {{obj.SelQty}}</span>
+
+                                </td>
+                                <td class="text-center">
+                                    <p ng-model="obj.SelRate">$ {{+obj.SelRate}}</p>
+                                </td>
+                                <td ng-init="$parent.total = $parent.total + obj.selqty" class="text-center">
+                                    <p>$ {{+obj.SelRate * obj.SelQty}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Group #{{row.Serial}} Total:</b></td>
+                                <td class="text-center"><b>$ {{+row.Total}}</b></td>
+                            </tr>
+
+
+                    </table>
+
+
+                    <hr style="border-top: dotted 1px;" />
+                    <h4 style="text-align:right;padding-right:80px">Total Amount: ${{RequestDetails[0].TotalOrderAmount}} </h4>
+                    <hr style="border-top: dotted 1px;" />
+                    <div ng-hide="HideShowItSetUp">
+                        <h4 style="text-align:center">IT SetUp</h4>
+                        <table class="table1" style="text-align:center;align-items:center">
+                            <tbody ng-repeat="row in ItSetUpList">
+                                <tr style="background: #3e77ab; color:#ffffff">
+                                    @*<th> Group #  {{row.Serial}}</th>*@
+                                    <th colspan="7" style="text-align:center">
+                                        <p>{{row.PartNo}}</p>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>User Type</th>
+                                    <th>Work Location</th>
+                                    <th>Delivery Location</th>
+                                    <th>Applications</th>
+                                    <th>SpecialInstructions</th>
+                                </tr>
+                                <tr ng-repeat="obj in row.DataIt">
+                                    <td>
+                                        {{obj.UserName}}
+
+                                    </td>
+                                    <td>
+                                        {{obj.UserType}}
+
+                                    </td>
+                                    <td>
+                                        {{obj.WorkLocation}}
+                                    </td>
+                                    <td>
+                                        {{obj.DeliveryLocation}}
+                                    </td>
+                                    <td>
+                                        {{obj.Applications}}
+                                    </td>
+                                    <td>
+                                        {{obj.SpecialInstructions}}
+                                    </td>
+                                </tr>
+
+                        </table>
+                    </div>
+                    <hr style="border-top: dotted 1px;" />
+                    <br /> <br />
+                    <div ng-hide="HideShowSoftwareSetup">
+                        <h4 style="text-align:center">Software SetUp</h4>
+                        <table class="table1" style="width:700px;text-align:center;align-items:center">
+                            <tbody ng-repeat="row in SSsetUpList">
+                                <tr style="background: #3e77ab; color:#ffffff">
+                                    <th colspan="3" style="text-align:center">
+                                        <p>{{row.PartNo}}</p>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Serial</th>
+                                    <th>User Name</th>
+                                    <th>User Email</th>
+                                </tr>
+                                <tr ng-repeat="obj in row.DataSS">
+                                    <td>
+                                        {{obj.Serial}}
+                                    </td>
+                                    <td>
+                                        {{obj.UserName}}
+                                    </td>
+                                    <td>
+                                        {{obj.UserEmail}}
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id='DivIdBudgetToPrint' style="display:none">
+                <div class="modal-header">
+                    <img src="~/Content/Images/Planson-logo.png" style="height:100px;width:200px;" />
+                    <h4 class="modal-title" id="myModalLabel" style="text-align:center">
+                        INVOICE
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <hr />
+                    <table class="table" style="background:#e6e4e4; padding:15px; border-right:#ffffff 4px solid; border-radius:10px">
+                        <thead>
+                            <tr>
+                                <th>Request</th>
+                                <th></th>
+                                <th>Shipping Address:</th>
+                                <th>
+                                    Billing Address:
+                                </th>
+                            </tr>
+                        </thead>
+
+
+                        <tr>
+                            <th><b>Reference:</b></th>
+                            <td>{{RequestDetails[0].ReferenceNo}}</td>
+                            <td>{{RequestDetails[0].CustomerName}}</td>
+                            <td>{{RequestDetails[0].CustomerName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>{{RequestDetails[0].StatusName}}</td>
+                            <td> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</td>
+                            <td>{{BAdd1}}, {{BAdd2}},  {{BAdd3}}</td>
+                        </tr>
+                        <tr>
+                            <th>Department:</th>
+                            <td>{{RequestDetails[0].Department}}</td>
+                            <td>{{SCity}}   {{SState}} ,  {{SZip}}</td>
+                            <td>{{BCity}}   {{BState}} ,  {{BZip}}</td>
+                        </tr>
+                        <tr>
+                            <th>Office:</th>
+                            <td>Portland, United States</td>
+                            <td>{{SCountry}}</td>
+                            <td>{{BCountry}}</td>
+                        </tr>
+                        <tr>
+                            <th>Ship To:</th>
+                            <td>{{RequestDetails[0].DsiplayName}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Line Items:</th>
+                            <td>{{Prodcount}}</td>
+                            <td>{{RequestDetails[0].SContactPerson}}</td>
+                            <td>{{RequestDetails[0].BContactPerson}}</td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Term:</th>
+                            <td>{{RequestDetails[0].IncoTermDesc}}</td>
+                            <td>{{RequestDetails[0].SContactNo}}</td>
+                            <td>{{RequestDetails[0].BContactNo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total (USD):</th>
+                            <td>${{RequestDetails[0].TotalOrderAmount}}</td>
+                            <td>{{RequestDetails[0].SEmailId}}</td>
+                            <td>{{RequestDetails[0].BEmailId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Created By:</th>
+                            <td>{{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>{{RequestDetails[0].UserName}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr ng-repeat="app in ApprovarDetails">
+                            <th><b>Approver: {{$index + 1}}</b></th>
+                            <td>{{app.AprName}}<br />({{app.AprEmail}})</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                    <hr />
+                    <h4 style="text-align:center">Items</h4>
+
+                    <table style="width:100%; border: 1px solid #3e77ab;">
+                        <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                            <th>SINO</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th class="text-right">Price (USD)</th>
+                            <th class="text-right">Extended</th>
+                        </tr>
+                        <tr style="border: 1px solid #3e77ab;" ng-repeat="item in CartItems">
+                            <td>{{$index +1}}</td>
+                            <td>{{item.PartNo}}</td>
+                            <td>{{item.Quantity}}</td>
+                            <td class="text-right">${{item.ProdPrice}}</td>
+                            <td class="text-right">${{item.TotalPrice}}</td>
+                        </tr>
+                    </table>
+                    <hr style="border-top: dotted 1px;" />
+                    <h4 style="text-align:center">Budget Items</h4>
+                    <table class="table" style="border: 1px solid #3e77ab;">
+                        <tbody ng-repeat="row in Seriallst">
+                            <tr style="background: #3e77ab; color:#ffffff;text-align:center;align-items:center">
+                                <th> Group #  {{row.Serial}}</th>
+                                <th ng-repeat="th in grantcodeOrderdatalst" ng-if="th.BudgetOrderSerialId ==  row.BudgetOrderSerialId">
+                                    <p>{{th.BudgetTitle}} : {{th.strValue}}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Line Item #</th>
+                                <th>Item Name</th>
+                                <th class="text-right">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Extended Price</th>
+                            </tr>
+                            <tr ng-repeat="obj in row.Data">
+                                <td>{{row.Serial}}-{{$index+1}}</td>
+                                <td>
+                                    {{obj.ProductName}}
+
+                                </td>
+                                <td class="text-right">
+                                    {{obj.Qty}}
+
+                                </td>
+                                <td class="text-right">
+                                    <p ng-model="obj.Rate">$ {{+obj.Rate}}</p>
+                                </td>
+                                <td ng-init="$parent.total = $parent.total + obj.Qty" class="text-right">
+                                    <p>$ {{obj.Amount}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Group #{{row.Serial}} Total:</b></td>
+                                <td class="text-right"><b>$ {{+row.Total}}</b></td>
+                            </tr>
+
+
+                    </table>
+                    <hr style="border-top: dotted 1px;" />
+                    <h4 style="text-align:right;padding-right:80px">Total Amount: ${{RequestDetails[0].TotalOrderAmount}} </h4>
+                    <hr style="border-top: dotted 1px;" />
+
+                    <div ng-hide="HideShowItSetUp">
+                        <h4 style="text-align:center">IT SetUp</h4>
+                        <table class="table1" style="text-align:center;align-items:center;border: 1px solid #3e77ab;" >
+                            <tbody ng-repeat="row in ItSetUpList">
+                                <tr style="background: #3e77ab; color:#ffffff">
+                                    @*<th> Group #  {{row.Serial}}</th>*@
+                                    <th colspan="7" style="text-align:center">
+                                        <p>{{row.PartNo}}</p>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>User Type</th>
+                                    <th>Work Location</th>
+                                    <th>Delivery Location</th>
+                                    <th>Applications</th>
+                                    <th>SpecialInstructions</th>
+                                </tr>
+                                <tr ng-repeat="obj in row.DataIt">
+                                    <td>
+                                        {{obj.UserName}}
+
+                                    </td>
+                                    <td>
+                                        {{obj.UserType}}
+
+                                    </td>
+                                    <td>
+                                        {{obj.WorkLocation}}
+                                    </td>
+                                    <td>
+                                        {{obj.DeliveryLocation}}
+                                    </td>
+                                    <td>
+                                        {{obj.Applications}}
+                                    </td>
+                                    <td>
+                                        {{obj.SpecialInstructions}}
+                                    </td>
+                                </tr>
+
+                        </table>
+                    </div>
+                    <hr style="border-top: dotted 1px;" />
+                    <br /> <br />
+                    <div ng-hide="HideShowSoftwareSetup">
+                        <h4 style="text-align:center">Software SetUp</h4>
+                        <table class="table1" style="width:700px;text-align:center;align-items:center;border: 1px solid #3e77ab">
+                            <tbody ng-repeat="row in SSsetUpList">
+                                <tr style="background: #3e77ab; color:#ffffff">
+                                    <th colspan="3" style="text-align:center">
+                                        <p>{{row.PartNo}}</p>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Serial</th>
+                                    <th>User Name</th>
+                                    <th>User Email</th>
+                                </tr>
+                                <tr ng-repeat="obj in row.DataSS">
+                                    <td>
+                                        {{obj.Serial}}
+                                    </td>
+                                    <td>
+                                        {{obj.UserName}}
+                                    </td>
+                                    <td>
+                                        {{obj.UserEmail}}
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!--excel print div-->
+    <div id="dvBudgetData" style="display:none">
+        <table border="1" style="width:1000px">
+            <tr>
+                <td style="background-color:#e04a5e;height:50px" colspan="7"><h4>{{RequestDetails[0].CustomerName  | uppercase}}</h4> </td>
+                <td style="background-color:#e04a5e;height:50px;text-align:right" colspan="3"><h4>PURCHASE ORDER</h4></td>
+
+            </tr>
+            <tr>
+                <th colspan="10">
+                    This Purchase Order is issued subject to the terms and conditions on the reverse of this document. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </th>
+            </tr>
+            <tr style="height:30px">
+                <td style="background-color:lightgray" colspan="1">Date:</td>
+                <td colspan="4" style="text-align:left">06-09-2018</td>
+                <td style="background-color:lightgray;text-align:center;vertical-align:central" rowspan="2" colspan="2">PO No:</td>
+                <td colspan="3">30280902</td>
+            </tr>
+            <tr style="height:30px">
+                <td colspan="4">Reference to framework agreement:(if relevant)</td>
+                <td></td>
+                <td colspan="3">Test</td>
+            </tr>
+            <tr>
+                <td colspan="5">SUPPLIER</td>
+                <td colspan="5">DELIVERY / COLLECTION ADDRESS</td>
+            </tr>
+            <tr>
+                <td colspan="1">Company name: </td>
+                <td colspan="4">Planson International</td>
+                <td colspan="2">Contact Name:</td>
+                <td colspan="3">{{RequestDetails[0].SContactPerson}}</td>
+            </tr>
+            <tr>
+                <td colspan="1">Contact Name: </td>
+                <td colspan="4">Sara Burnheimer</td>
+                <td colspan="2">E-mail:</td>
+                <td colspan="3"> <a href="">{{RequestDetails[0].SEmailId}}</a> </td>
+            </tr>
+            <tr>
+                <td colspan="1" style="height:90px;">E-mail: </td>
+                <td colspan="4">sara@plansonintl.com </td>
+                <td rowspan="2" colspan="2">Address:</td>
+                <td rowspan="2" colspan="3">{{RequestDetails[0].CustomerName}} <br /> {{SAdd1}}, {{SAdd2}},  {{SAdd3}} </td>
+            </tr>
+            <tr>
+                <td colspan="1">Phone:</td>
+                <td colspan="4">001 2079263100</td>
+            </tr>
+            <tr>
+                <td colspan="1">Fax:</td>
+                <td colspan="4">0000000</td>
+                <td colspan="5">SAVE THE CHILDREN INVOICING ADDRESS </td>
+            </tr>
+            <tr>
+                <td colspan="1">Mobile:</td>
+                <td colspan="4"></td>
+                <td colspan="2">Contact Name:</td>
+                <td colspan="3">{{RequestDetails[0].SContactPerson}}</td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="2" style="height:90px;">Address:</td>
+                <td colspan="4" rowspan="2">363 Penny Road, New Gloucester, ME 04260, USA.</td>
+                <td colspan="2">E-mail:</td>
+                <td colspan="3"> <a href="">{{RequestDetails[0].SEmailId}}</a> </td>
+            </tr>
+            <tr>
+                <td colspan="2">Address:</td>
+                <td colspan="3">{{RequestDetails[0].CustomerName}} <br /> {{SAdd1}}, {{SAdd2}},  {{SAdd3}} </td>
+            </tr>
+            <tr>
+                <td colspan="10"><hr style="border-top: dotted 1px;" /></td>
+            </tr>
+
+            <tr>
+                <td colspan="1">Delivery method: <br /> (if applicable)</td>
+                <td colspan="4"></td>
+                <td colspan="2">Required delivery date:</td>
+                <td>000000000</td>
+                <td>Payment terms:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th style="background-color:#91b0e2">PR no.</th>
+                <th style="background-color:#91b0e2">SOF code</th>
+                <th style="background-color:#91b0e2">Project code</th>
+                <th style="background-color:#91b0e2">Line Item No.</th>
+                <th style="background-color:#91b0e2">Description of Goods / Services <br /> (add technical specification as attachment if very detailed)</th>
+                <th style="background-color:#91b0e2">Unit / Form</th>
+                <th style="background-color:#91b0e2">Quantity required</th>
+                <th style="background-color:#91b0e2">Currency</th>
+                <th style="background-color:#91b0e2">Unit Price</th>
+                <th style="background-color:#91b0e2">Total Price</th>
+            </tr>
+
+            <tbody ng-repeat="row in Seriallst">
+
+                <tr>
+
+                    <th style="background-color:#ada8a8" ng-repeat="th in grantcodeOrderdatalst" ng-if="th.BudgetOrderSerialId ==  row.BudgetOrderSerialId">
+                        <P><b>{{th.BudgetTitle}} : {{th.strValue}}</b></P>
+                    </th>
+
+           
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+
+
+                <tr ng-repeat="obj in row.Data">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>[{{row.Serial}}-{{$index+1}}]</td>
+                    <td>{{obj.ProductName}}</td>
+                    <td>--</td>
+                    <td>{{obj.Qty}}</td>
+                    <td>USD</td>
+                    <td>$ {{+obj.Rate}}</td>
+                    <td ng-init="$parent.total = $parent.total + obj.Qty" class="text-center">
+                        <p>$ {{obj.Amount}}</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Group #{{row.Serial}} Total:</b></td>
+                    <td style="border:1px solid black" class="text-center"><b>$ {{+row.Total}}</b></td>
+                </tr>
+
+            </tbody>
+
+
+            <tr>
+                <td colspan="8" style="text-align:right"><b>Subtotal</b> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right"><b>Sales tax (if applicable)</b> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right"><b>Other charges (if applicable)</b> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right"><b>TOTAL</b> </td>
+                <td></td>
+                <td>${{RequestDetails[0].TotalOrderAmount}}</td>
+            </tr>
+            <tr>
+                <th colspan="10">
+                    The Purchase Order number must be quoted on all correspondance and documents including delivery note and invoice. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </th>
+            </tr>
+            <tr>
+                <td colspan="5"> Prepared by: </td>
+                <td colspan="5"> Authorised by Budget Holder (authorised under SoD):</td>
+            </tr>
+            <tr>
+                <td colspan="2">Name:</td>
+                <td colspan="3"></td>
+                <td colspan="2">Name:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Title:</td>
+                <td colspan="3"></td>
+                <td colspan="2">Title:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="">Signature:</td>
+                <td colspan="3"></td>
+                <td style="height:40px;" colspan="2">Signature:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Date:</td>
+                <td colspan="3"></td>
+                <td colspan="2">Date:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="10"><hr style="border-top: dotted 1px;" /></td>
+            </tr>
+            <tr>
+                <td colspan="5"> Supplier acceptance: </td>
+                <td colspan="5"> Supplier Stamp:</td>
+            </tr>
+            <tr>
+                <td colspan="2">Name:</td>
+                <td colspan="3"></td>
+                <td colspan="5" rowspan="4"> </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">Title:</td>
+                <td colspan="3"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2" style="">Signature:</td>
+                <td colspan="3"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2">Date:</td>
+                <td colspan="3"></td>
+
+            </tr>
+
+
+        </table>
+    </div>
+
+
+    <div id="dvGrantData" style="display:none">
+        <table border="1" style="width:1000px">
+            <tr>
+                <td style="background-color:#e04a5e;height:50px" colspan="7"><h4>{{RequestDetails[0].CustomerName  | uppercase}}</h4> </td>
+                <td style="background-color:#e04a5e;height:50px;text-align:right" colspan="3"><h4>PURCHASE ORDER</h4></td>
+
+            </tr>
+            <tr>
+                <th colspan="10">
+                    This Purchase Order is issued subject to the terms and conditions on the reverse of this document. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </th>
+            </tr>
+            <tr style="height:30px">
+                <td style="background-color:lightgray" colspan="1">Date:</td>
+                <td colspan="4" style="text-align:left">06-09-2018</td>
+                <td style="background-color:lightgray;text-align:center;vertical-align:central" rowspan="2" colspan="2">PO No:</td>
+                <td colspan="3">30280902</td>
+            </tr>
+            <tr style="height:30px">
+                <td colspan="4">Reference to framework agreement:(if relevant)</td>
+                <td></td>
+                <td colspan="3">Test</td>
+            </tr>
+            <tr>
+                <td colspan="5">SUPPLIER</td>
+                <td colspan="5">DELIVERY / COLLECTION ADDRESS</td>
+            </tr>
+            <tr>
+                <td colspan="1">Company name: </td>
+                <td colspan="4">Planson International</td>
+                <td colspan="2">Contact Name:</td>
+                <td colspan="3">{{RequestDetails[0].SContactPerson}}</td>
+            </tr>
+            <tr>
+                <td colspan="1">Contact Name: </td>
+                <td colspan="4">Sara Burnheimer</td>
+                <td colspan="2">E-mail:</td>
+                <td colspan="3"> <a href="">{{RequestDetails[0].SEmailId}}</a> </td>
+            </tr>
+            <tr>
+                <td colspan="1" style="height:90px;">E-mail: </td>
+                <td colspan="4">sara@plansonintl.com </td>
+                <td rowspan="2" colspan="2">Address:</td>
+                <td rowspan="2" colspan="3">{{RequestDetails[0].CustomerName}} <br /> {{SAdd1}}, {{SAdd2}},  {{SAdd3}} </td>
+            </tr>
+            <tr>
+                <td colspan="1">Phone:</td>
+                <td colspan="4">001 2079263100</td>
+            </tr>
+            <tr>
+                <td colspan="1">Fax:</td>
+                <td colspan="4">0000000</td>
+                <td colspan="5">SAVE THE CHILDREN INVOICING ADDRESS </td>
+            </tr>
+            <tr>
+                <td colspan="1">Mobile:</td>
+                <td colspan="4"></td>
+                <td colspan="2">Contact Name:</td>
+                <td colspan="3">{{RequestDetails[0].SContactPerson}}</td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="2" style="height:90px;">Address:</td>
+                <td colspan="4" rowspan="2">363 Penny Road, New Gloucester, ME 04260, USA.</td>
+                <td colspan="2">E-mail:</td>
+                <td colspan="3"> <a href="">{{RequestDetails[0].SEmailId}}</a> </td>
+            </tr>
+            <tr>
+                <td colspan="2">Address:</td>
+                <td colspan="3">{{RequestDetails[0].CustomerName}} <br /> {{SAdd1}}, {{SAdd2}},  {{SAdd3}} </td>
+            </tr>
+            <tr>
+                <td colspan="10"><hr style="border-top: dotted 1px;" /></td>
+            </tr>
+
+            <tr>
+                <td colspan="1">Delivery method: <br /> (if applicable)</td>
+                <td colspan="4"></td>
+                <td colspan="2">Required delivery date:</td>
+                <td>000000000</td>
+                <td>Payment terms:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th style="background-color:#91b0e2">PR no.</th>
+                <th style="background-color:#91b0e2">SOF code</th>
+                <th style="background-color:#91b0e2">Project code</th>
+                <th style="background-color:#91b0e2">Line Item No.</th>
+                <th style="background-color:#91b0e2">Description of Goods / Services <br /> (add technical specification as attachment if very detailed)</th>
+                <th style="background-color:#91b0e2">Unit / Form</th>
+                <th style="background-color:#91b0e2">Quantity required</th>
+                <th style="background-color:#91b0e2">Currency</th>
+                <th style="background-color:#91b0e2">Unit Price</th>
+                <th style="background-color:#91b0e2">Total Price</th>
+            </tr>
+
+            <tbody ng-repeat="row in Seriallst">
+
+                <tr>
+
+                    <th style="background-color:#ada8a8" ng-repeat="th in grantcodeOrderdatalst" ng-if="th.GrantOrderSerialId ==  row.GrantOrderSerial">
+                        <P><b>{{th.GrantTitle}} : {{th.Value}}</b></P>
+                    </th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+
+
+                <tr ng-repeat="obj in row.Data">
+                    <td>Group #  {{row.Serial}}</td>
+                    <td></td>
+                    <td></td>
+                    <td>[{{row.Serial}}-{{$index+1}}]</td>
+                    <td>{{obj.ProductName}}</td>
+                    <td>--</td>
+                    <td>{{obj.SelQty}}</td>
+                    <td>USD</td>
+                    <td>$ {{+obj.SelRate}}</td>
+                    <td ng-init="$parent.total = $parent.total + obj.selqty" class="text-center">
+                        <p>$ {{+obj.SelRate * obj.SelQty}}</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Group #{{row.Serial}} Total:</b></td>
+                    <td style="border:1px solid black" class="text-center"><b>$ {{+row.Total}}</b></td>
+                </tr>
+
+            </tbody>
+
+
+            <tr>
+                <td colspan="8" style="text-align:right"><b>Subtotal</b> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right"><b>Sales tax (if applicable)</b> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right"><b>Other charges (if applicable)</b> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right"><b>TOTAL</b> </td>
+                <td></td>
+                <td>${{RequestDetails[0].TotalOrderAmount}}</td>
+            </tr>
+            <tr>
+                <th colspan="10">
+                    The Purchase Order number must be quoted on all correspondance and documents including delivery note and invoice. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </th>
+            </tr>
+            <tr>
+                <td colspan="5"> Prepared by: </td>
+                <td colspan="5"> Authorised by Budget Holder (authorised under SoD):</td>
+            </tr>
+            <tr>
+                <td colspan="2">Name:</td>
+                <td colspan="3"></td>
+                <td colspan="2">Name:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Title:</td>
+                <td colspan="3"></td>
+                <td colspan="2">Title:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="">Signature:</td>
+                <td colspan="3"></td>
+                <td style="height:40px;" colspan="2">Signature:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Date:</td>
+                <td colspan="3"></td>
+                <td colspan="2">Date:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="10"><hr style="border-top: dotted 1px;" /></td>
+            </tr>
+            <tr>
+                <td colspan="5"> Supplier acceptance: </td>
+                <td colspan="5"> Supplier Stamp:</td>
+            </tr>
+            <tr>
+                <td colspan="2">Name:</td>
+                <td colspan="3"></td>
+                <td colspan="5" rowspan="4"> </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">Title:</td>
+                <td colspan="3"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2" style="">Signature:</td>
+                <td colspan="3"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2">Date:</td>
+                <td colspan="3"></td>
+
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+    $(function () {
+        $("#tab").tabs();
+    });
+</script>
+
+ 
+
+
+<script> //Pdf for
+   
+</script>
+
+

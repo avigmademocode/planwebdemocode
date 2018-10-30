@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "AddEditCustomerStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+    #sortable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        /*width: 50%;*/
+    }
+
+        #sortable li {
+            margin: 0 3px 3px 3px;
+            padding: 0.2em;
+            padding-left: 1.5em;
+            /*font-size: 1.4em;*/
+            /*height: 18px;*/
+        }
+
+            #sortable li span {
+                position: absolute;
+                margin-left: -1.3em;
+            }
+</style>
+
+<script>
+    $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+</script>
+
+<script src="~/AngularJS/CustomerData/jsAddEditCustomerStatusFactory.js"></script>
+<script src="~/AngularJS/CustomerData/jsAddEditCustomerStatusController.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3" ng-controller="AddEditCustomerStatusController" >
+
+        <div class="col-md-12">
+            @*<select ng-model="CustomerId" class="form-control" ng-change="GetCustStatus(CustomerId)">
+                <option value="0">--Select-- </option>
+                <option ng-repeat="obj in custList" value="{{obj.CustId}}" ng-selected="CustomerId == obj.CustId">
+                    {{obj.CustName}}
+
+                </option>
+            </select>*@
+
+            <select required class="form-control" ng-model="CustomerId" ng-change="GetCustStatus(CustomerId)"
+                    ng-options="itemx.CustId as itemx.CustName for itemx in custList">
+                @*<option value="">--Select-- </option>*@
+            </select>
+            <br />
+            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Add New Status" />
+            <input type="button" class="btn btn-primary" value="Edit Status Emails" />
+
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" ng-click="Checked()">&times;</button>
+                            <h4 class="modal-title">Add A Status</h4>
+                        </div>
+                        <div class="modal-body">
+                            <b>Status Name</b>
+                            <input type="text" ng-model="StatusName" class="form-control" />
+                            <br />
+                            <b>Alt Name</b>
+                            <input type="text" ng-model="AltName" class="form-control" />
+                            <br />
+                            <b>User Action</b>
+                            <input type="checkbox" ng-model="UserAction" ng-checked="UserAction ==1" />
+                            <br />
+                            <div class="col-12 text-center">
+                                <input type="button" ng-click="SaveNewStatus()" class="btn btn-primary" value="Save Status" />
+                                <input type="button" class="btn btn-danger" ng-click="Checked()" data-dismiss="modal" value="Close">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <div class="col-md-12">
+            <ul id="sortable" ng-model="CustStatusList">
+                <li ng-repeat="obj in CustStatusList" class="ui-state-default">
+                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{obj.StatusOrder}}.{{obj.StatusName}}&nbsp;&nbsp;&nbsp;
+                    <input class="btn btn-default btn-xs" type="checkbox" ng-model="obj.IsDelete" />
+                </li>
+            </ul>
+            <p>*Checkbox to delete the status.</p>
+
+            <br />
+
+        </div>
+
+        <br />
+        <div class="col-md-12">
+            <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />
+            <input type="button" class="btn btn-primary" value="Save" ng-click="SaveStatus(CustStatusList)" />
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        </div>
+        <br />
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+

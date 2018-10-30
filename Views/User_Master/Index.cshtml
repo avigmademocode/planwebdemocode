@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+<script src="~/AngularJS/User_Master/jsEditUserController.js"></script>
+<script src="~/AngularJS/User_Master/jsUserMasterFactory.js"></script>
+<script src="~/Scripts/common.js"></script>
+
+
+<h2>User Master</h2>
+
+<div class="container" ng-controller="EditUser" ng-init="form.IsPlansonUser=true">
+    <form name="form"  ng-submit="submitForm(1)">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="LoginId">Login Id</label>
+                <input type="text" required class="form-control" id="LoginId" ng-model="form.LoginId"  ng-disabled="flagHide || form.LoginId != null && newUserFlag">
+            </div>
+            <div class="col-md-6">
+                <label for="UserName">User Name</label>
+                <input type="text" required class="form-control" id="UserName" ng-model="form.UserName"  ng-disabled="flagHide || form.LoginId != null && newUserFlag">
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-md-6">
+                <label for="CustmerName">Custmer Name</label>
+                <select required class="form-control" ng-change="GetBranchList(form.CustomerId)" ng-model="form.CustomerId" ng-options="itemx.CustId as itemx.CustName for itemx in custList"  ng-disabled="flagHide">
+                    <option value="">--Select-- </option>
+                </select>
+                
+            </div>
+            <div class="col-md-6">
+                <label for="BranchName">Branch Name</label>
+                <select required class="form-control" ng-model="form.SelBranchID" ng-options="itemx.BranchId as itemx.DisplayName for itemx in BranchList" ng-disabled="flagHide">
+                    <option value="0">--Select Branch-- </option>
+                </select>
+
+             
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <label for="FirstName">First Name</label>
+                <input type="text" required class="form-control" id="FirstName" ng-model="form.FirstName"  ng-disabled="flagHide">
+            </div>
+            <div class="col-md-6">
+                <label for="LastName">Last Name</label>
+                <input type="text" required class="form-control" id="LastName" ng-model="form.LastName"  ng-disabled="flagHide">
+            </div>
+        </div>
+        <br />
+        <div class="row" ng-hide="flagHide">
+            <div class="col-md-6">
+                <label for="Password">Password</label>
+                <input type="password" required class="form-control" id="Password" ng-model="form.Pwd" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required  ng-disabled="flagHide">
+            </div>
+            <div class="col-md-6">
+                <label for="ConfirmPassword">Confirm Password</label>
+                <input type="password" required class="form-control" id="ConfirmPassword" ng-model="form.ConfirmPassword" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Confirm Password" required  ng-disabled="flagHide">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6" ng-hide="flagHide">
+                <label for="Country">Country</label>
+                <angucomplete-alt id="ex2" required
+                                  placeholder="Country"
+                                  pause="100"
+                                  selected-object="selectedCountryTo"
+                                  local-data="CountryList"
+                                  search-fields="CountryName"
+                                  title-field="CountryName"
+                                  minlength="1"
+                                  initial-value="initialSCountryValue"
+                                  match-class="highlight"
+                                  input-class="form-control" ng-disabled="true" />
+
+            </div>
+
+            <div class="col-md-6" ng-hide="UnflagHide">
+                <label for="Country">Country</label>
+                <input type="text" class="form-control" ng-model="form.ReadCountry" ng-disabled="flagHide">
+            </div>
+
+            <div class="col-md-6" ng-hide="flagHide">
+                <label for="City">City</label>
+                <angucomplete-alt id="ex1" required
+                                  placeholder="City"
+                                  pause="100"
+                                  selected-object="selectedCityTo"
+                                  local-data="CityList"
+                                  search-fields="CityName"
+                                  title-field="CityName"
+                                  minlength="1"
+                                  initial-value="initialSCityValue"
+                                  match-class="highlight"
+                                  input-class="form-control" />
+            </div>
+
+            <div class="col-md-6" ng-hide="UnflagHide">
+                <label for="City">City</label>
+                <input type="text"  class="form-control" ng-model="form.ReadCity" ng-disabled="flagHide">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <label for="PlansonUser">Is Planson User</label>
+                <input type="checkbox" id="PlansonUser" ng-model="form.IsPlansonUser"  ng-disabled="flagHide">
+            </div>
+
+            <div class="col-md-2" style="margin-left:-50px">
+                <label for="Locked">Locked</label>
+                <input type="checkbox" id="Locked" ng-model="form.Locked"  ng-disabled="flagHide">
+            </div>
+            <div class="col-md-2" style="margin-left:-50px">
+                <label for="IsActive">IsActive</label>
+                <input type="checkbox" id="IsActive" ng-model="form.IsActive"  ng-disabled="flagHide">
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary"  ng-click="clicked()" ng-hide="flagHide">Back</button>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary" style="margin-left:-18px" ng-hide="flagHide">Save </button>
+            </div>
+
+            <div class="col-md-3" ng-if="form.LoginId != null">
+                <button type="button" class="btn btn-primary" style="margin-left:-20px" data-toggle="modal" data-target="#myModal" > Change Password</button>
+            </div>
+            <div class="col-md-1" ng-if="form.LoginId != null">
+                <button type="button" class="btn btn-primary" style="margin-left:-125px" data-toggle="modal" data-target="#myRole" ng-hide="flagHide" ng-click="EditStatus()">Assign Role</button>
+                <button type="button" class="btn btn-primary" style="margin-left:-125px" data-toggle="modal" data-target="#myRole"  ng-hide="UnflagHide" ng-click="EditStatus()">View Role</button>
+            </div>
+
+        </div>
+
+        <br />
+
+    </form>
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <form  ng-submit="SaveChangePassword()" >
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="oldpsw">Old Password</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" placeholder="Old password" class="form-control" required id="oldpsw" ng-model="form.OldPassword">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="password">New Password</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="password" class="form-control" name="password" type="password" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required ng-model="form.Newpwd">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="password_two">Confirm Password</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="password_two" class="form-control" name="password_two" type="password" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" required ng-model="form.NewCofirmpwd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">Change password</button>
+                            </div>
+                            <p style="text-align:center">
+                                Must be at least 5 characters long <br />
+                                Must contain at least one letter <br />
+                                Must contain at least one number
+                            </p>
+                        </div>
+                    </div>
+                </form>
+                   
+
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="myRole">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">User Role</h5>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="UserName">User Name:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label><span><b>{{form.UserName}}</b></span></label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="RoleUserId">First Name:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label><span><b>{{form.FirstName}}</b></span></label>
+                            </div>
+                        </div>
+                        <br />
+
+                        <fieldset>
+                            <legend>
+                                <label>Add And Remove Roles</label>
+                            </legend>
+
+                            <table class="table">
+                                <tr ng-repeat="x in Finalcustlist">
+                                    <th><span><b> {{x.RoleName}}</b> </span></th>
+                                    <td> <input type="checkbox" ng-model="x.IsCat" ng-checked="x.IsCat==true" ng-disabled="{{flagHide}} " ng-change="CheckVal(x)"   /></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <button  type="button" ng-click="Role(Finalcustlist)" class="btn btn-primary"  ng-hide="flagHide" >Save</button>
+                                       
+                                        <button style="float: none;margin-left:20px;" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>

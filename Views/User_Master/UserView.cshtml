@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "UserView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/User_Master/jsUser_MasterController.js"></script>
+<script src="~/AngularJS/User_Master/jsUserMasterFactory.js"></script>
+<div class="container" ng-controller="UserView">
+    <div class="row">
+        <div class="col-md-6">
+            <input id='filter' class='k-textbox' placeholder="Search" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <div id="grid" class="k-content">
+            </div>
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <input type="button" value="Add New User" class="btn btn-primary" ng-click="AddNewUser()" />
+        </div>
+        <div class="col-md-1">
+            <input type="submit" style="margin-left:-25px" value="Submit" ng-click="Save()" class="btn btn-primary"  />
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary" style="margin-left:-18px"  ng-click="AddNewRole()">Add New Role</button>
+        </div>
+
+    </div>
+</div>
+

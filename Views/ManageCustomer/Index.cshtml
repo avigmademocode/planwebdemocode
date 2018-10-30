@@ -1,0 +1,117 @@
+﻿
+
+
+
+<script src="~/AngularJS/ManageCustomer/jsManageCustomerController.js"></script>
+<script src="~/AngularJS/ManageCustomer/jsManageCustomerFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+<div class="container" ng-controller="ManageCustomerController" ng-init="selectedCustomer=null">
+    <div class="row">
+        <h3>Manage Customer:</h3>
+        <div class="col-md-3">
+            <select ng-model="selectedCustomer" id="selectx" class="form-control-" ng-change="setCustomersList(selectedCustomer)">
+                <option value="">Select Customer</option>
+                <option ng-repeat="x in custList"
+                        ng-selected="selectedCustomer == x.CustId"
+                        value="{{x.CustId}}">
+                    {{x.CustName}}
+                </option>
+            </select>
+            <br /><br />
+            <a href=""class="btn btn-primary" ng-click="Add()">Add Customer </a>
+
+            <br /><br />
+         
+            <a href="/SupportingEmails/Index" class="btn btn-primary" >Add or Edit Supporting Emails</a>
+            <br /><br />
+
+            <a href="/CustomerApprover/Index"class="btn btn-primary" ng-disabled="selectedCustomer < 1">Add or Edit Approvers</a>
+        </div>
+
+        <div class="col-md-3">
+            @*<br /><br />
+        <a href="" class="btn btn-primary btn-xs" ng-disabled="selectedCustomer < 1">Add or Edit Customer Field Offices</a>*@
+            <br /><br />
+            <a href="/CustomerData/AddEditStatus/Index"  class="btn btn-primary">Add or Edit Statuses</a>
+            <br /><br />
+
+
+            <a href="/CustomerData/AddEditCustomerStatus"  class="btn btn-primary">Add or Edit Customer Statuses</a>
+            <br /><br />
+            @*<a href="" class="btn btn-primary btn-xs" ng-disabled="selectedCustomer < 1">Add or Edit Customer Supporting Emails</a>
+        <br /><br />*@
+             <a href="/GrandMaster/Index?val=1"  class="btn btn-primary" ng-hide="IsgrantbtnHide" ng-disabled="selectedCustomer < 1">Edit Grants For Item Groups</a>
+
+            <a href="/GrandMaster/Index?val=2"  class="btn btn-primary" ng-hide="IsBudgetbtnHide" ng-disabled="selectedCustomer < 1">Edit Budget For Item Groups</a>
+            <br /><br />
+
+         
+        </div>
+
+        <div class="col-md-3">
+            @*<br /><br />
+        <a href="" class="btn btn-primary btn-xs" ng-disabled="selectedCustomer < 1">Alter Upgrade Categories For Customers</a>*@
+            <br /><br />
+            <a href="/CustomerData/ChangeIncoterms/Index"  class="btn btn-primary" >Change Incoterms</a>
+            <br /><br />
+            <a href="/CustomerSettings/Index" class="btn btn-primary" ng-disabled="selectedCustomer < 1 ">Change Customer Settings</a>
+            <br /><br />
+
+          
+        </div>
+
+        <div class="col-md-3">
+            <br /><br />
+            @*<a href="" class="btn btn-primary btn-xs" ng-disabled="selectedCustomer < 1">Add or Edit Supporting Emails</a>*@
+            <a href="/Language/Index"  class="btn btn-primary">Add or Edit Customer Language</a>
+            <br /><br />
+            <a href="/CustomerBranches/Index"   class="btn btn-primary" ng-disabled="selectedCustomer < 1">Add or Edit Customer Addresses</a>
+            <br /><br />
+            @*<a href="" class="btn btn-primary btn-xs" ng-disabled="selectedCustomer < 1">Sales Order Expert</a>*@
+            <br /><br />
+            @*<a href="" class="btn btn-primary btn-xs" ng-disabled="selectedCustomer < 1">GRN Report Export</a>
+        <br />*@
+        </div>
+    </div>
+        <hr />
+        <div class="container">
+            <br />
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <form name="saveTemplateData"  ng-init="form.custNameg = ''" >
+
+                    <table class="table table-bordered">
+                        <caption>Edit Customer</caption>
+                        <tr>
+                            <th>Name</th>
+                            <th>Acronym</th>
+                            <th>Is Active</th>
+                            <th>Sign Up Code</th>
+                            <th>Ticker</th>
+                            <th>In Demo</th>
+                            <th>TieredPricing</th>
+                        </tr>
+                        <tr>
+                            <td style="width:250px"><input type="text" class="form-control" id="custName" ng-model="form.custNameg"  required /></td>
+                            <td><input type="text" class="form-control" ng-model="form.Acronym" required/></td>
+                            <td style="text-align:center"><input type="checkbox" ng-model="form.IsActive" /></td>
+                            <td><input type="text" class="form-control" ng-model="form.Code" required/></td>
+                            <td><input type="text" class="form-control" ng-model="form.Ticker" /></td>
+                            <td style="text-align:center"><input type="checkbox" ng-model="form.Demo" /></td>
+                            <td style="text-align:center"><input type="checkbox" ng-model="form.TieredPricing" /></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <input class="btn btn-primary" type="submit" ng-click="submitForm(1)" ng-hide="IsEditHide" ng-disabled="selectedCustomer < 1" value="Edit Customer">
+                    <input class="btn btn-primary" type="submit" ng-click="submitForm(0)" ng-hide="IsSaveHide" value="Save Customer">
+                </form>
+            </div>
+        </div>
+</div>
+<script>
+     //var sel = document.getElementById("selectx");
+     //   var CustN = sel.options[sel.selectedIndex].text;
+     //   document.getElementById("custName").value = CustN;
+</script>

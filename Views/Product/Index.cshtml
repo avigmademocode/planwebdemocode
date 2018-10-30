@@ -1,0 +1,402 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/Product/jsProductController.js"></script>
+<script src="~/AngularJS/Product/jsProductFactory.js"></script>
+<style>
+    #back2Top {
+        width: 40px;
+        line-height: 40px;
+        overflow: hidden;
+        z-index: 999;
+        display: none;
+        cursor: pointer;
+        -moz-transform: rotate(270deg);
+        -webkit-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        transform: rotate(270deg);
+        position: fixed;
+        bottom: 50px;
+        right: 0;
+        background-color: #DDD;
+        color: #555;
+        text-align: center;
+        font-size: 30px;
+        text-decoration: none;
+    }
+
+        #back2Top:hover {
+            background-color: #DDF;
+            color: #000;
+        }
+
+</style>
+<div class="col-md-12" ng-controller="ProductController" style="margin-bottom:100px;">
+    <div>
+        @*<div class="col-md-3">
+                <h4>Select Category</h4>
+            </div>*@
+        <div class="col-md-4">
+            @*<angucomplete-alt id="ex1"
+                placeholder="Select Category"
+                pause="100"
+                selected-object="selectedCategory"
+                local-data="CatList"
+                search-fields="CatName"
+                title-field="CatName"
+                minlength="1"
+                initial-value="initialproduct"
+                match-class="highlight"
+                input-class="form-control" />*@
+            <h4>Select Category</h4>
+            <select ng-model="formData.SelectedCategory" class="form-control" ng-change="BidProducts()" required>
+                <option value="">Select Category</option>
+                <option ng-repeat="x in CatList" value="{{x.CatId}}">{{x.CatName}}</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <h4>Search By Product</h4>
+            <input type="text" placeholder="Search" ng-model="userSearch" class="form-control">
+        </div>
+
+        <div class="col-md-5" style="padding-top:39px;">
+            <a href="#" data-toggle="modal" data-target="#myModalProduct" class="btn btn-primary"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp;Cart ({{CartCount}})</i></a>
+
+
+            <!-- Modal -->
+            <div id="myModalProduct" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Cart Products</h4>
+                        </div>
+                        <div class="modal-body table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th class="text-left">SrNo.</th>
+                                    <th>Product Name</th>
+                                    <th class="text-right">Price</th>
+                                </tr>
+                                <tr ng-repeat="prod in CartProducts">
+                                    <td class="text-left">{{$index + 1}}.</td>
+                                    <td>{{prod.ProdName}}</td>
+                                    <td class="text-right">$ {{prod.ProdPrice}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <a href="#" class="btn btn-primary" ng-click="GoToCart()">Continue To Cart >></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            @*<input type="button" value="Back To Previous" class="btn btn-primary" ng-click="BackToPrevious()" ng-hide="btnHide">*@
+
+            <a href="#" class="btn btn-primary" ng-click="BackToPrevious()" ng-hide="btnHide">
+                <i class="fa fa-reply" style="font: normal normal normal 14px/1 FontAwesome"> Back To Previous</i>
+            </a>
+        </div>
+
+
+    </div>
+
+    @*<div class="col-md-10 col-offset-1">
+            <div class="col-md-3">
+                <h4>Search Products</h4>
+            </div>
+            <div class="col-md-5">
+                <input type="text" placeholder="Search" ng-model="userSearch" class="form-control">
+            </div>
+        </div>*@
+    <div class="col-md-10 col-offset-1">
+        <br />
+        <div ng-repeat="prod in ProductList | filter:userSearch" class="col-md-12" style="border: double 1px #d8d0d0;">
+            <br />
+            <div class="col-md-3">
+                <img ng-src="{{prod.ImagePath}}" width="100%" />
+                @*<img ng-src="~/image/product/noimage.jpg" width="100%" ng-show="!prod.ImagePath" />*@
+                <br />
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-3"><b>Product Name:</b></div>
+                    <div class="col-md-7">
+                        {{prod.ProdName}}
+                    </div>
+                    <div class="col-md-2" style="text-align:right;">
+                        <a href="" class="btn btn-default btn-sm" ng-click="AddToCart(prod)">ADD   <i style="font:fntawesome" class="fa fa-cart-arrow-down"></i></a>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3"><b>Price:</b></div>
+                    <div class="col-md-9">
+                        $ {{prod.ProdPrice}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" style="color:#0094ff" data-toggle="modal" data-target="#myModal1" ng-click="ViewProdDesc(prod)" class="" ng-hide=" {{prod.TierCount == 0}}">Check Offers</a>
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3"><b>Description:</b></div>
+                    @*<div class="col-md-3" ng-show="{{prod.ProdPart.length < 1}}"><br/><br/></div>*@
+                    <div class="col-md-9">
+
+                        <p ng-show="{{prod.ProdPart.length < 1}}">- - - - - - - - - -</p>
+                        <div style="text-align:left">
+                            {{prod.Desc | limitTo: 100}}
+                            <a href="#" data-toggle="modal" ng-show="{{prod.Desc.length > 100}}" ng-click="ViewProdDesc(prod)" data-target="#myModal" style="color:#0094ff">View More...</a>
+                            <br />
+                            <br />
+                        </div>
+
+
+                        <div class="container">
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">{{ProductName}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{{ProductDescription}}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="container">
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal1" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">{{ProductName}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            @*<style>
+                                                    tr, td {
+                                                        border: #808080 2px solid;
+                                                    }
+                                                </style>*@
+                                            <table style="width:100%; bor">
+                                                <tr>
+                                                    <th class="text-center">Sr.NO</th>
+                                                    <th class="text-center">Quantity</th>
+                                                    <th class="text-center">Price</th>
+                                                </tr>
+                                                <tr ng-repeat="obj in prod.TierData" ng-if="ProductID==obj.ProdID">
+                                                    @*{{ProductID}}*@
+                                                    @*ng-if=" productid= =obj.ProdID"*@
+                                                    @*<td>{{ProductID}}  {{obj.ProdID}}</td>*@
+                                                    <td class="text-center">{{obj.Serial}}.</td>
+                                                    <td class="text-center">{{obj.Qty}}</td>
+                                                    <td class="text-center">$ {{obj.Price}}</td>
+                                                </tr>
+                                                @*<tr>
+                                                        <th>2.</th>
+                                                        <td>{{prod.ProdName}}</td>
+                                                        <td>03</td>
+                                                        <td>$3400</td>
+                                                    </tr>*@
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+                @*<a id="button" href="#popup">Click me</a>
+                    <div id="popup" style="text-align:center;">
+                        <a id="close" href="#">X</a>
+
+                        <h2>Custom  CSS Popup Box</h2>
+
+                        Popup using the <span style="color:#DF7401;">:target</span> and transition with opacity.
+                        <br>
+                        <br>
+                    </div>*@
+
+
+
+
+            </div>
+
+        </div>
+
+        <a id="back2Top" title="Back to top" href="#">&#10148;</a>
+        <br />
+        <br />
+
+        <div class="col-md-10" col-md-offset="1">
+            <br />
+            <input type="button" value="Back To Previous" class="btn btn-primary" ng-click="BackToPrevious()" ng-hide="btnHide">
+            @*<a href="#" class="btn btn-primary" ng-click="BackToPrevious()" ng-hide="btnHide">
+                <i class="fa fa-reply" style="font: normal normal normal 14px/1 FontAwesome"> Back To Previous</i>
+            </a>*@
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<style type="text/css">
+        body {
+            background-color: #D77A61;
+        }
+
+        #button {
+            position: relative;
+            top: 100px;
+            left: 50vw;
+            margin-left: -30px;
+            width: 60px;
+            font-size: 16px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            font-family: arial;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+
+            #button:hover {
+                background-color: #EFF1F3;
+                color: #D77A61;
+            }
+
+        #popup {
+            position: relative;
+            top: 25vh;
+            left: 25vw;
+            width: 50vw;
+            background-color: #EFF1F3;
+            color: black;
+            -khtml-opacity: 0;
+            -moz-opacity: 0;
+            -ms-filter: "alpha(opacity=0)";
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+            filter: alpha(opacity=0);
+            opacity: 0;
+            padding: 20px;
+            border-style: solid;
+            border-radius: 15px;
+            border-color: #bbd8b3;
+            transition: all 1s;
+            -webkit-transition: all 1s;
+        }
+
+            #popup:target {
+                -khtml-opacity: 1;
+                -moz-opacity: 1;
+                -ms-filter: "alpha(opacity=100)";
+                filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+                filter: alpha(opacity=100);
+                opacity: 1;
+            }
+
+        /* Bouton fermeture */
+
+        #close {
+            position: absolute;
+            left: 100%;
+            top: -20px;
+            margin-left: -10px;
+            background-color: #EFF1F3;
+            font-size: 12px;
+            padding: 5px 7px;
+            border-radius: 50px;
+            border-style: solid;
+            border-color: #bbd8b3;
+            font-weight: bold;
+            color: #bbd8b3;
+            text-decoration: none;
+            font-family: arial;
+        }
+
+            #close:hover {
+                background-color: #EFF1F3;
+                border-color: #bbd8b3;
+                color: #D77A61;
+            }
+
+            #close:active {
+                background-color: #A9F5F2;
+                color: black;
+            }
+    </style>*@

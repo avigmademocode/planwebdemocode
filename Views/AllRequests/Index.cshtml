@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+
+    .myGrid {
+        width: 500px;
+        height: 200px;
+    }
+
+    ​.no_padding {
+        color: #f16839 !important;
+        padding: 0px !important;
+    }
+
+
+</style>
+<script src="~/AngularJS/AllRequest/jsAllRequestController.js"></script>
+<script src="~/AngularJS/AllRequest/jsAllRequestFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+
+
+
+<div ng-controller="AllRequestController">
+    <div class="container" style="background:#e4e4e4;">
+        <div class="row">
+
+            @*<h4>All Requests</h4>*@
+            <div class="col-md-6" style="background:#e4e4e4; padding:10px">
+                <div ng-hide="divEnabled">
+                    <div class="col-md-2">
+                        Customer :
+                    </div>
+                    <div class="col-md-10">
+                        <select ng-model="CustomerId" class="form-control" required>
+                            <option value="">Select Customer</option>
+                            <option ng-repeat="x in custList" value="{{x.CustId}}">{{x.CustName}}</option>
+                        </select>
+                    </div>
+                    <br />
+
+
+                </div>
+                <br />
+                <div class="col-md-2">
+                    Country :
+                </div>
+                <div class="col-md-10">
+                    <angucomplete-alt id="ex1"
+                                      placeholder="Country"
+                                      pause="100"
+                                      selected-object="selectedCountryTo"
+                                      local-data="CountryList"
+                                      search-fields="CountryName"
+                                      title-field="CountryName"
+                                      minlength="1"
+                                      initial-value="initialCountryValue"
+                                      match-class="highlight"
+                                      input-class="form-control"
+                                      style="color:black" />
+                </div>
+                <br />
+                <br />
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <input type="checkbox" ng-model="CancelOrder" />&nbsp;Show Cancelled Orders
+                </div>
+                <br />
+                <br />
+                <div class="col-md-2">
+                    Search :
+                </div>
+                <div class="col-md-10">
+
+                    <input id='filter' class='k-textbox' />
+                </div>
+
+            </div>
+            <div class="col-md-6 text-center" style="background:#e4e4e4; border:solid;" ng-hide="divHide">
+                <div class="col-md-6 text-left" style="background:#e4e4e4; padding:10px;">
+                    <a href="#" ng-repeat="dt in OrderStatus" ng-show="dt.StatusId %2 == 0">
+
+                        &nbsp;<input type="checkbox" ng-model="dt.StatusChk" />&nbsp;{{dt.StatusName}}
+                        <br />
+                    </a>
+                </div>
+                <div class="col-md-6 text-left" style="background:#e4e4e4; padding:10px;">
+                    <a href="#" ng-repeat="dt in OrderStatus" ng-show="dt.StatusId %2 != 0">
+
+                        &nbsp;<input type="checkbox" ng-model="dt.StatusChk" />&nbsp;{{dt.StatusName}}
+                        <br />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <div class="col-md-12 text-center" style="background:#e4e4e4; padding:10px;">
+        <input type="button" ng-click="SearchData(OrderStatus)" class="btn btn-primary" value="Search" />
+    </div>
+
+
+
+
+
+    <div class="col-md-12">
+        <br />
+        <div id="grid" class="k-content">
+        </div>
+
+    </div>
+
+</div>
+<div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+@section Scripts {
+
+    $("#pageTitle").html("All Requests");
+}

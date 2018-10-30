@@ -1,0 +1,292 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<script src="~/AngularJS/NewRequest/jsNewRequestController.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+ 
+<style>
+    .error {
+        color: #ff6a00;
+    }
+</style>
+<form name="myForm" ng-controller="NewRequestController" ng-submit="SaveNewRequest(ApprovarArray)">
+
+    <div class="col-md-12">
+        <div class="col-md-12 col-md-offset-1" ng-hide="divEnabled">
+            <div class="col-md-2"><b>Customer</b></div>
+            <div class="col-md-6">
+                <select ng-model="formData.selectedCustomer" class="form-control" ng-change="GetDeleveryAndTerms()">
+                    <option value="">Select Customer</option>
+                    <option ng-repeat="x in custList"
+                            ng-selected="formData.selectedCustomer == x.CustId"
+                            value="{{x.CustId}}">
+                        {{x.CustName}}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-2"><b>Reference Number</b> </div>
+            <div class="col-md-6">
+                <input type="text" ng-model="formData.Refernce" class="form-control" placeholder="Reference Number" ng-disabled="isDisabled">
+
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-2"><b>Department</b> </div>
+            <div class="col-md-6"><input type="text" ng-model="formData.Department" class="form-control" placeholder="Department" required></div>
+        </div>
+        
+        <div class="col-md-12 col-md-offset-1" ng-hide="true">
+            <div class="col-md-2"><b>Office</b> </div>
+            <div class="col-md-6"><input type="text" ng-model="formData.Office" class="form-control"></div>
+        </div>
+
+        <br />
+        <br />
+        <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-2"><b>Ship To</b> </div>
+            <div class="col-md-6">
+                @*<select ng-model="formData.BranchID" class="form-control" ng-change="selectedShipTo(formData.BranchID)">
+                    <ng-options ng-repeat="x in ShipTo"
+                                value="{{x.BranchID}}">
+                        {{x.DisplayName}}
+
+
+                    </ng-options>
+                </select>*@
+
+
+                <select ng-model="formData.BranchID" class="form-control" ng-change="selectedShipTo(formData.BranchID)"
+                        
+                          ng-options="itemx.BranchID as itemx.DisplayName for itemx in ShipTo">
+                        
+                    
+                </select>
+ 
+
+                @*<angucomplete-alt id="ex1"
+        placeholder="Select Present Shipping Address"
+        pause="100"
+        selected-object="selectedShipTo"
+        local-data="ShipTo"
+        search-fields="DisplayName"
+        title-field="DisplayName"
+        minlength="1"
+        initial-value="initialproduct"
+        match-class="highlight"
+        input-class="form-control"
+        field-required="true" />
+
+        <div class="error-message" ng-message="autocomplete-required">
+            Please enter a valid address from dropdown
+        </div>*@
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-2"><b>Delivery Terms</b> </div>
+            <div class="col-md-6">
+                @*<select ng-model="formData.DeliveryTo" class="form-control">
+            <option ng-repeat="x in Delivery"
+                     ng-selected="formData.DeliveryTo == x.IncoTermID"
+                    value="{{x.IncoTermID}}">{{x.IncoTermInfo}}
+            </option>
+        </select>*@
+
+
+                <select ng-model="formData.DeliveryTo" class="form-control" 
+                        ng-options="itemx.IncoTermID as itemx.IncoTermInfo for itemx in Delivery"></select>
+
+
+                @*<angucomplete-alt id="ex1"
+        placeholder="Select Delivery Terms(Incoterms) "
+        pause="100"
+        selected-object="selectedDeliveryTo"
+        local-data="Delivery"
+        search-fields="IncoTermInfo"
+        title-field="IncoTermInfo"
+        minlength="1"
+        initial-value="initialproduct"
+        match-class="highlight"
+        input-class="form-control"
+        field-required=" true" />*@
+
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-2"><b>Shipping Address</b></div>
+            <div class="col-md-6">
+
+                <input type="text" ng-model="formData.SAdd1" class="form-control" placeholder="Street Address" required>
+                <input type="text" ng-model="formData.SAdd2" class="form-control">
+                <input type="text" ng-model="formData.SAdd3" class="form-control">
+
+                @* <input type="text" ng-model="formData.SCity" class="form-control" placeholder="City">*@
+                <div>
+                    <angucomplete-alt id="ex1"
+                                      placeholder="City"
+                                      pause="100"
+                                      selected-object="selectedCityTo"
+                                      local-data="SCity"
+                                      search-fields="CityName"
+                                      title-field="CityName"
+                                      minlength="1"
+                                      initial-value="initialSCityValue"
+                                      match-class="highlight"
+                                      input-class="form-control" />
+                </div>
+                <input type="text" ng-model="formData.SState" class="form-control" placeholder="State / Province / Region">
+                <input type="text" ng-model="formData.SZip" class="form-control" placeholder="Postal / Zip Code">
+
+                @* <input type="text" ng-model="formData.SCountry" class="form-control" placeholder="Country">*@
+                <div>
+                    <angucomplete-alt id="ex2"
+                                      placeholder="Country"
+                                      pause="100"
+                                      selected-object="selectedCountryTo"
+                                      local-data="SCountry"
+                                      search-fields="CountryName"
+                                      title-field="CountryName"
+                                      minlength="1"
+                                      initial-value="initialSCountryValue"
+                                      match-class="highlight"
+                                      input-class="form-control" />
+
+                </div>
+                <input type="text" ng-model="formData.Sname" class="form-control" placeholder="Delivery Contact Name">
+                <input type="text" ng-model="formData.Sphone" class="form-control" placeholder="Delivery Contact Phone">
+                <input type="text" ng-model="formData.Semail" class="form-control" placeholder="Delivery Contact Email">
+            </div>
+        </div>
+
+        <div class="col-md-12 col-md-offset-1">
+            <br />
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <input type="checkbox" ng-click="CoppyAddress()" ng-model="chkCoppy" />Copy from Above
+            </div>
+        </div>
+
+        <div class="col-md-12 col-md-offset-1">
+            <br />
+            <div class="col-md-2"><b>Billing Address</b></div>
+            <div class="col-md-6">
+                <input type="text" ng-model="formData.BAdd1" class="form-control" placeholder="Street Address">
+                <input type="text" ng-model="formData.BAdd2" class="form-control">
+                <input type="text" ng-model="formData.BAdd3" class="form-control">
+                @*<input type="text" ng-model="formData.BCity" class="form-control" placeholder="City">*@
+                <div>
+                    <angucomplete-alt id="ex3"
+                                      placeholder="City"
+                                      pause="100"
+                                      selected-object="selectedBCityTo"
+                                      local-data="BCity"
+                                      search-fields="CityName"
+                                      title-field="CityName"
+                                      minlength="1"
+                                      initial-value="initialBCityValue"
+                                      match-class="highlight"
+                                      input-class="form-control"
+                                      override-suggestions="true" />
+
+
+
+
+                </div>
+                <input type="text" ng-model="formData.BState" class="form-control" placeholder="State / Province / Region">
+                <input type="text" ng-model="formData.BZip" class="form-control" placeholder="Postal / Zip Code">
+                @*<input type="text" ng-model="formData.BCountry" class="form-control" placeholder="Country">*@
+
+                <div>
+                    <angucomplete-alt id="ex4"
+                                      placeholder="Country"
+                                      pause="100"
+                                      selected-object="selectedBCountryTo"
+                                      local-data="BCountry"
+                                      search-fields="CountryName"
+                                      title-field="CountryName"
+                                      minlength="1"
+                                      initial-value="initialBCountryValue"
+                                      match-class="highlight"
+                                      input-class="form-control" />
+                </div>
+                </br>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-12 col-md-offset-1" ng-repeat="Appr in ApprovarArray">
+            <br />
+            <div class="col-md-2"><b>{{Appr.LabelName}}</b></div>
+            <div class="col-md-6" style="background-color:#ddd2d2">
+                <br />
+                <div class="col-md-12 row">
+                    <div class="col-md-2"><b>Name</b></div>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="Appr.AprName"  class="form-control">
+                       
+                    </div>
+                </div>
+                <br /><br />
+                <div class="col-md-12 row" ng-show="desg==true">
+                    <div class="col-md-2"><b>Title</b></div>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="Appr.AprTitle"  class="form-control">
+                    </div>
+                </div>
+                <br /><br />
+                <div class="col-md-12 row">
+                    <div class="col-md-2"><b>Email</b></div>
+                    <div class="col-md-8">
+                        <ng-form angular-validator-submit="SaveNewRequest(ApprovarArray)" name="EmailForm" class="form-horizontal" novalidate angular-validator>
+                            <input type="email" name="input" ng-model="Appr.AprEmail"   class="form-control" required>
+
+                            <span class="error" ng-show="EmailForm.input.$error.email">
+                                Not valid email!
+                            </span>
+                        </ng-form>
+
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+            </div>
+            
+        </div>
+
+        <div class="col-md-12 col-md-offset-1">
+            <br />
+            <div class="col-md-3" style="float:left;margin-left: 162px;">
+                <input type="submit" value="Submit" class="btn btn-primary" style="width:100%" />
+            </div>
+
+            <div class="col-md-5" style="float:left;">
+                <input type="button" value="Back To Previous" class="btn btn-primary" ng-click="BackToPrevious()" ng-hide="buttonsPEnabled" ng-show="buttonsPEnabled">
+                <input type="button" value="Next" class="btn btn-primary" ng-click="Next()" ng-hide="buttonsEnabled" ng-show="buttonsEnabled" >
+            </div>
+            <br /><br /><br /><br />
+        </div>
+    </div>
+
+
+
+</form>

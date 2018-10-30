@@ -1,0 +1,281 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form name="myform" id="myform">
+    <div class="col-md-12" ng-controller="RequestFinalizeController" ng-init="ddltype=0">
+        <div class="col-md-12">
+            <div class="col-md-6 text-left" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-12 row">
+                    <h4><b>Request</b></h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><b>Reference</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].ReferenceNo}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Status</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].StatusName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Department</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].Department}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Office</b></div>
+                    <div class="col-md-6">Portland, United States</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Ship To</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].DsiplayName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Line Items</b></div>
+                    <div class="col-md-6">{{Prodcount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Delivery Term</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].IncoTermDesc}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Total (USD)</b></div>
+                    <div class="col-md-6">${{RequestDetails[0].TotalOrderAmount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Created By</b></div>
+                    <div class="col-md-6"> {{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}} </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">{{RequestDetails[0].UserName}}</div>
+                </div>
+
+                <div class="row" ng-repeat="app in ApprovarDetails">
+                    <div class="col-md-4"><b>Approver {{$index + 1}}</b></div>
+                    <div class="col-md-6">{{app.AprName}}<br />({{app.AprEmail}})</div>
+                </div>
+
+                @*<div class="row">
+                    <div class="col-md-4"><b>Financial</b></div>
+                    <div class="col-md-6">Financial Reviewer Name - Financial</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Reviewer</b></div>
+                    <div class="col-md-6">Reviewer<br />(accountspayable@mercycorps.org)</div>
+                </div>*@
+            </div>
+            <div class="col-md-6" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-left:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Shipping Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</div>
+                    <div class="col-md-12"> {{SCity}} ,  {{SState}} ,  {{SZip}}</div>
+
+                    <div class="col-md-12"> {{SCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SEmailId}}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Billing Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{BAdd1}}, {{BAdd2}},  {{BAdd3}}</div>
+                    <div class="col-md-12"> {{BCity}} ,  {{BState}} ,  {{BZip}}</div>
+
+                    <div class="col-md-12"> {{BCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BEmailId}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <br />
+            <b>Assign budget codes by:</b>
+            <select id="" class="form-control" style="width:50%" ng-model="ddltype" ng-change="GetSetType(ddltype)" ng-options="item3.id as item3.name for item3 in AmountAndPer">
+                <option value="">--Select-- </option>
+            </select>
+        </div>
+        <style>
+            .tbl {
+                border: 1px solid #808080;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+
+
+        <div class="col-md-12" style="overflow-x:auto;">
+
+            <br />
+            <table style="width:100%" class="table-responsive" id="blacklistgrid">
+                <tr style="background: #3e77ab; color:#fff">
+                    <th ng-repeat="(col, val) in BudgetList[0]">{{val}}</th>
+
+                    <td></td>
+                </tr>
+
+                <tr ng-repeat="row in BudgetListRecords">
+                    <td ng-repeat="(key, value) in row" ng-switch="key">
+                        <div ng-switch-when="Total_1">
+                            <input ng-model="row[key]" ng-model-options="{updateOn: 'blur'}" type="text" ng-change="CalculateValue(key, row[key])" ng-disabled="true" />
+                        </div>
+                        <div ng-switch-default>
+                            <input ng-model="row[key]" ng-model-options="{updateOn: 'blur'}" type="text" ng-change="CalculateValue(key, row[key])" ng-disabled="{{BudEnableDisable}}"/>
+                        </div>
+                       
+                      
+                    </td>
+
+                    <td>
+                        <input type="button" class="btn btn-danger" id="btnAdd" value="Remove" ng-click="Remove($index)" ng-hide="ButtonEnableDisable"/>
+                    </td>
+                </tr>
+
+                <tr style="background: #3e77ab; color:#fff" ng-hide="Atmhide">
+                    @*<td ng-repeat="(col, val) in BudgetList[1]"><b>{{val}} </b></td>*@
+                    <td class="text-center" ng-repeat="(col, val) in BudgetListCal">
+
+                        <b> {{val}} </b>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr style="background: #3e77ab; color:#fff" ng-hide="Perhide">
+           
+                    <td class="text-center" ng-repeat="(col, val) in BudgetListper">
+
+                        <b> {{val }} </b>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <input type="button" class="btn btn-success" id="btnAdd" value="Add" ng-click="AddNewRow()" ng-hide="ButtonEnableDisable"/>
+            <br />
+         
+        </div>
+
+
+
+
+
+
+        <div class="col-md-12">
+            <br />
+            <style>
+                table, th, td {
+                    /*border: 1px solid black;*/
+                    padding: 10px;
+                }
+            </style>
+            <table style="width:100%; border: 1px solid #3e77ab;">
+                <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                    <th>Sr.No.</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Price (USD)</th>
+                    <th class="text-right">Total</th>
+                </tr>
+                <tr style="border: 1px solid #3e77ab;" ng-repeat="item in CartItems">
+                    <td>{{$index +1}}</td>
+                    <td>{{item.PartNo}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td class="text-right">${{item.ProdPrice}}</td>
+                    <td class="text-right">${{item.TotalPrice}}</td>
+                </tr>
+            </table>
+            <br />
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <b>Comments for Planson</b>
+                <textarea rows="4" cols="50" class="form-control" ng-model="PlansonComment"  ng-disabled="{{BudEnableDisable}}"></textarea>
+            </div>
+
+            @*<div class="col-md-6">
+                <b>Comments for the approver</b>
+              
+            </div>*@
+
+
+            <div class="col-md-12">
+                <br />
+                <b>Submit Approval Email To:</b>
+                <table class="table">
+                    <tr ng-repeat="item in ApprovalEmailMul">
+                        <td>
+                        <input type="email" ng-model="item.AprEmail" class="form-control"  ng-disabled="BudEnableDisable"/>
+                        </td>
+                        <td>
+                            <textarea rows="4" cols="50" class="form-control" ng-model="item.Comments" placeholder =" Comments for the approver" ng-disabled="BudEnableDisable"></textarea>
+
+                        </td>
+                        <td>
+                            <input type="button" ng-click="removeRow($index)" class="btn btn-danger btn-sm" value="Remove" ng-hide="BudEnableDisable"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="btn btn-primary btn-sm" ng-click="addRow()" value="+ Insert Another Email" ng-hide="BudEnableDisable"/> 
+                        </td>
+                        
+                    </tr>
+                </table>
+            
+                @*<input type="text" class="form-control" ng-model="ApproverEmail" />*@
+                <br />
+
+                <input type="button" value="<< Back" class="btn btn-primary" ng-click="BackToPrevious()" />
+                <input type="button" value="Submit for Approval" ng-click="SaveAndNotify(BudgetListRecords)" class="btn btn-primary" ng-hide="BudEnableDisable" />
+
+                <br />
+                <br />
+
+                <br />
+
+            </div>
+
+        </div>
+
+    </div>
+    @*<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>*@
+</form>
+<script src="~/AngularJS/RequestFinalize/jsRequestFinalizeController.js"></script>
+<script src="~/AngularJS/RequestFinalize/jsRequestFinalizeFactory.js"></script>

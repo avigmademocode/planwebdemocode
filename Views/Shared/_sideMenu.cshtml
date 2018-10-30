@@ -1,0 +1,51 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+ 
+
+<!--BEGIN SIDEBAR MENU-->
+<nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+     data-position="right" class="navbar-default navbar-static-side">
+    <div class="sidebar-collapse menu-scroll">
+        <ul id="side-menu" class="nav">
+
+            <div class="clearfix"></div>
+            <li class="active">
+             
+                <a href="~/Home/Index">
+                    <i class="fa fa-fw fa-fw">
+                        <div class="icon-bg bg-orange">
+                           
+                        </div>
+                    </i><span class="menu-title" style="height:60px;"><b>Welcome @HttpContext.Current.Session["FirstName"].ToString()</b></span>
+                </a>
+            </li>
+
+            @foreach (System.Data.DataRow dr in (Session["listMenu"] as System.Data.DataTable).Rows)
+            {
+
+                <li>
+                    @if (@dr["url"] != DBNull.Value)
+                    {
+                        <a href="@Server.UrlDecode(@Url.Action((@dr["url"].ToString().Split('/'))[2].ToString(), (@dr["url"].ToString().Split('/'))[1].ToString()))">
+                            <i class="@dr["icontag"].ToString()">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">@dr["MenuName"]</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#">
+                            <i class="fa fa-desktop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">@dr["MenuName"]</span>
+                        </a>
+                    }
+
+
+                </li>
+            }   
+        </ul>
+    </div>
+</nav>
+<!--END SIDEBAR MENU-->

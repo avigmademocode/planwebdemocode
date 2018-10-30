@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/ViewProduct/jsAddProductController.js"></script>
+<script src="~/AngularJS/ViewProduct/jsAddProductFactory.js"></script>
+
+<div ng-controller="AddProductController">
+
+    <div class="col-md-12">
+        <div class="col-md-2 text-right"><b>Model</b></div>
+        <div class="col-md-4"><input type="text" ng-model="Model" ng-disabled="isDisabled" class="form-control" /></div>
+        <div class="col-md-2 text-right"><b>Part No.</b></div>
+        <div class="col-md-4"><input type="text" ng-model="PartNo" ng-disabled="isDisabled" class="form-control" /></div>
+    </div>
+
+    <div class="col-md-12">
+        <br />
+        <div class="col-md-2 text-right"><b>Specifications</b></div>
+        <div class="col-md-4">
+            <textarea rows="4" cols="50" class="form-control" ng-disabled="isDisabled" ng-model="Spec"></textarea>
+        </div>
+        <div class="col-md-2 text-right"><b>Manufacturer</b><br /><br /><br /><b>ProductType</b></div>
+        <div class="col-md-4">
+            <select ng-model="Manufacturer" ng-disabled="isDisabled" class="form-control">
+                <option value="">Select Manufacturer</option>
+                <option ng-repeat="x in ManufactureList"
+                        ng-selected="Manufacturer == x.ManufacturerId"
+                        value="{{x.ManufacturerId}}">
+                    {{x.ManufacturerDesc}}
+                </option>
+            </select>
+
+            <br />
+            <select ng-model="ProductType" ng-disabled="isDisabled" class="form-control">
+                <option value="">ProductType</option>
+                <option ng-repeat="x in ProdtypeList"
+                        ng-selected="ProductType == x.ProductTypeId"
+                        value="{{x.ProductTypeId}}">
+                    {{x.ProductType}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <br />
+        <div class="col-md-2 text-right"><b>Image</b></div>
+        <div class="col-md-4">
+            <input type="file" id="fileupload" ng-disabled="isDisabled" value="uf.ImageUpload" accept="image/*"
+                   onchange="angular.element(this).scope().SelectFileforUpload(this.files)" required />
+
+        </div>
+        <div class="col-md-2 text-right"></div>
+        <div class="col-md-4">
+            <b>IMPORTANT:</b> Resize image before uploading. The Image should be no more than 175 pixels in either dimension.
+        </div>
+
+    </div>
+
+
+    <div class="col-md-12">
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                /*border: 1px solid #dddddd;*/
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                /*background-color: #dddddd;*/
+            }
+        </style>
+        <br />
+        <table style="border: 1px solid #dddddd;">
+            <tr>
+                <th>Customer</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Active</th>
+                <th>Expiration Date</th>
+            </tr>
+            <tr ng-repeat="obj in custList" style="border: 1px solid #dddddd;">
+                <td><input type="hidden" ng-model="obj.CustId" value="obj.CustId">{{obj.CustName}}</td>
+                <td>
+                    <select ng-model="obj.ProdCatId" style="height:25px; width:200px" ng-disabled="{{isDisabled}}">
+                        <option value="">Select</option>
+                        <option ng-repeat="cat in catList" ng-if="cat.CustID ==obj.CustId"
+                                ng-selected="obj.ProdCatId == cat.ProdCatId"
+                                value="{{cat.ProdCatId}}">
+                            {{cat.ProdCatDesc}}
+                        </option>
+                    </select>
+                </td>
+                <td><input type="number" ng-model="obj.Price" ng-disabled="{{isDisabled}}"></td>
+                <td><input type="checkbox" ng-model="obj.IsActive" ng-disabled="{{isDisabled}}"></td>
+                <td><input type="date" style="height:25px; width:200px" ng-model="obj.ExpDate" ng-disabled="{{isDisabled}}"></td>
+            </tr>
+        </table>
+        <br />
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <input type="button" class="btn btn-primary" value="<< Back" ng-click="Back()" />
+            <input type="button" data-toggle="modal" data-target="#TierModal" ng-click="clearData()" class="btn btn-primary" value="Add Tier" ng-disabled="isTierDisabled" ng-hide="isDisabled" />
+            <input type="button" class="btn btn-primary" ng-click="SaveProductDtls(custList)" value="Save" ng-hide="isDisabled" />
+
+        </div>
+        <div class="col-md-4"></div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <!--Tier Modal -->
+    <div class="modal fade" id="TierModal" role="dialog">
+        <div class="modal-dialog" style="width:900px;">
+
+            <!--Tier Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Tier</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <form name="form" ng-submit="submitForm(TireData)">
+                                <div class="col-md-3">
+                                    <label>Select Customer:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select required class="form-control" ng-model="form.CustomerId" ng-change="GetCustData(form.CustomerId)"
+                                            ng-options="itemx.CustId as itemx.CustName for itemx in custList">
+                                        <option value="">--Select-- </option>
+                                    </select>
+                                </div>
+                                <br />  <br /> <br />
+                                <div class="row">
+
+                                    <table class="table-bordered">
+                                        <tr>
+                                            <th>Sr.No.</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Active</th>
+                                            <th>Effective Date</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="item in TireData">
+                                            <td>{{$index + 1}} .<span style="display:none">{{item.PCTRId}}</span></td>
+                                            <td><input required type="number" min="1"  class="form-control" ng-model="item.Qty" /></td>
+                                            <td><input required type="number" min="1"  class="form-control" ng-model="item.Price" /></td>
+                                            <td style="text-align:center;align-items:center"><input type="checkbox" required ng-model="item.IsActive" /> </td>
+                                            <td><input required type="date" class="form-control" ng-model="item.EffectiveFrom" /></td>
+                                            <td>
+                                                <input type="button" ng-click="removeRow($index)" class="btn-danger fa fa-star" value="Remove" />
+                                            </td>
+                                        </tr>
+                                        <tr class="tbl">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="padding-top:20px"><a href="" class="btn btn-warning btn-xs" ng-click="addRow()">+ Insert Another</a></td>
+                                            <td></td>
+                                        </tr>
+
+                                    </table>
+                                    <br /><br />
+                                          <div class="row">
+                                              <div class="col-md-1 col-md-offset-1">
+                                                  <button type="submit" class="btn btn-primary">Submit </button>
+                                              </div>
+                                              <div class="col-md-1">
+                                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                              </div>
+                                          </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<script>
+
+    $(document).ready(function () {
+        $('#submit1').click(function () {
+            setTimeout(function () {
+                $('#TierModal').modal('hide')
+            }, 4000);
+        });
+    });
+</script>*@

@@ -1,0 +1,533 @@
+﻿@{
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+<script>
+
+    localStorage.clear();
+</script>
+    <!--<div class="col-lg-16">-->
+    <div class="container">
+        <div class="row">
+
+            <!-- <table>
+                <tr>
+                       <td style="float:right;padding-left:20%">
+                    <div class="imgcontainer">
+                        <img src="~/Content/Images/loginBackground.png" alt="" style="width:100%;height:100%;">
+                        <div class="top-left">
+                         @*   @Html.Raw(@ViewBag.textPart)*@
+                        </div>
+                    </div>
+                </td>
+                    <td> -->
+            <div class="Absolute-Center is-Responsive">
+                <!--  "padding:0%"  style="padding:0%"-->
+                <div class="col-lg-12 col-md-10">   <!--"col-md-4 col-md-offset-3"-->
+                    <div class="panel panel-blue" style="background:#fff;">
+                        <div class="panel-heading" style="text-align:center;">
+                            <img src="~/Content/images/favicon.png" alt="Company logo" />
+                            Welcome to Planson International Portal
+                        </div>
+                        <div class="panel-body pan">
+                            <form action="#" class="form-horizontal">
+                                <div class="form-body pal">
+                                    <div class="form-group">
+                                        <label for="inputName" class="col-md-3 control-label">
+                                            Name
+                                        </label>
+                                        <div class="col-md-9">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-user"></i>
+                                                <input id="userid" type="text" placeholder="" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-md-3 control-label">
+                                            Password
+                                        </label>
+                                        <div class="col-md-9">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-lock"></i>
+                                                <input id="password" type="password" placeholder="" class="form-control" />
+                                            </div>
+                                            <span class="help-block mbn"><a href="#" id="RegisterUser1" data-toggle="modal" data-target="#myModalRegisteration"><small>Register for New User </small></a> &nbsp; &nbsp;<a href="#" id="forgotPassword" data-toggle="modal" data-target="#myModalForgotPassword"><small> Forgot password?</small> </a></span>
+                                        </div>
+                                    </div>
+                                   <!-- <div class="form-group mbn">
+                                        <div class="col-md-offset-3 col-md-7">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input tabindex="5" id="rememberMe" type="checkbox" />&nbsp;&nbsp; Keep me logged in
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div>
+                                        <span style="color:red;" id="message"></span>
+                                        @ViewBag.message
+                                    </div>
+                                </div>
+                                <div class="form-actions pal">
+                                    <div class="form-group mbn">
+                                        <div class="col-md-offset-5 col-md-10">
+                                            <!-- <div class="btn btn-primary" id="register">
+                                        &nbsp;Register
+                                    </div>-->
+                                                <div class="btn btn-primary" id="logindata">
+                                                    <i class="glyphicon glyphicon-log-in"></i>&nbsp;Login
+                                                </div>
+                                         </div>
+                                    </div>
+                                </div>
+
+                                    <div class="copyright" style="text-align:center;" >
+                                        <a href="https://plansonintl.com/">2018 © Planson International Ltd.</a>
+                                    </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </td>
+                </tr>
+            </table>-->
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModalForgotPassword">
+                <div class="modalShadow" style="display: none">
+                    <div class="center">
+                        <img src="~/Content/Images/loader.gif" />
+                    </div>
+                </div>
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Forgot Password</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="emailForm">
+                                <p>For recovery of password &hellip;</p><br />
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-1 control-label" style="padding-top:1%">
+                                        Email
+                                    </label>
+                                    <div class="col-md-10">
+                                        <div class="input-icon right">
+                                            <i class="fa fa-envelope"></i>
+                                            <input id="emailid" type="email" class="form-control" placeholder="name@example.com" required />
+                                            <div class="help-block with-errors">
+                                                <label id="emailerror" class="has-error">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="sendemail" value="submit">Send Email</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModalRegisteration">
+                <div class="modalShadow" style="display: none">
+                    <div class="center">
+                        <img src="~/Content/Images/loader.gif" />
+                    </div>
+                </div>
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="panel-heading" style="background-color:skyblue;color:black;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Registration</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table>
+                                <tr>
+                                    <td valign="top" style="padding-right:2%; ">
+                                        <div>
+                                            <div class="form-group">
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-user"></i>
+                                                    <input id="customerCode" type="text" placeholder="customer Code" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-envelope"></i>
+                                                    <input id="emailKey" type="email" placeholder="Email Key" class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-primary" id="req_Regis_Key">Request Registration Key</button>
+                                            </div>
+                                            <p style="margin-top: 20px; white-space: normal; max-width: 350px;">
+                                                Each organization with a customer portal has a unique code. Your code can be provided by an administrator within your organization.
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td valign="top" style="padding-left:2%;border-left:1px solid black;">
+                                        <div>
+                                            <form action="#" id="frmregistation">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input id="firstName" type="text" placeholder="First Name" class="form-control" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input id="lastName" type="text" placeholder="Last Name" class="form-control" required />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-user"></i>
+                                                            <input id="city" type="text" placeholder="City" class="form-control" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="ddlCountries"></select>
+                                                    </div>
+                                                    <div class="form-group" hidden>
+                                                        <select class="form-control" id="ddlCustomers"></select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-envelope"></i>
+                                                            <input id="regemail" type="email" placeholder="Email address" class="form-control" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-user"></i>
+                                                            <input id="autokey" type="text" placeholder="Key" class="form-control" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-lock"></i>
+                                                            <input id="rpassword" type="password" placeholder="Password" class="form-control" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-lock"></i>
+                                                            <input id="inputConfirmPassword" type="password" placeholder="Confirm Password" class="form-control" required />
+                                                            <span id='message'></span>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" class="btn btn-primary" id="registerUser">Register</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <ul id="pass_req" style="margin: 2% 2%; max-width: 100%;">
+                                            <li>Must be at least 5 characters long</li>
+                                            <li>Must contain at least one letter</li>
+                                            <li>Must contain at least one number or one of the following special characters: !@@#$%^&*~`</li>
+                                            <li>May not match your email address or key code</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+        </div>
+
+        @section scripts{
+            <script>
+                $(document).ready(function () {
+                    $('#req_Regis_Key').click(function () {
+                        //debugger;
+                        if (true) {
+                            if ($('#customerCode').val() == '') {
+                                alert('Please enter customer code.');
+                                return false;
+                            }
+                            var IsExists = false;
+                            var ddloption = document.getElementById('ddlCustomers').options;
+                            for (var i = 0; i < ddloption.length; i++) {
+                                if (ddloption[i].text == $('#customerCode').val()) {
+                                    IsExists = true;
+                                    break;
+                                }
+                            }
+                            if (!IsExists) {
+                                alert('Please enter valid customer code.');
+                                return false;
+                            }
+                        }
+
+                        if (!ValidateEmail($('#emailKey').val())) {
+                            alert('Invalid email.');
+                            return false;
+                        }
+
+                        var data = {
+                            "customerCode": $('#customerCode').val(),
+                            "emailKey": $('#emailKey').val(),
+                        };
+                        $.ajax({
+                            beforeSend: function () {
+                                $('.modalShadow').show();
+                            },
+                            url: "/Login/GenerateKey",
+                            type: "POST",
+                            data: data,
+                            dataType: "json",
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
+                            success: function (response) {
+                                if (response.Success) {
+                                    alert('Key sent successfully.');
+                                }
+                                else {
+                                    alert('Error while inserting into database/sending key.');
+                                }
+                            },
+                            error: function () {
+                                console.log('Generate key for customer fail!!!');
+                            },
+                            complete: function () {
+                                $('.modalShadow').hide();
+                            },
+                        });
+                    });
+
+                    $('#registerUser').click(function () {
+
+                        if ($.trim($("#firstName").val()) == '') {
+                            alert('Enter first name.');
+                            return false;
+                        }
+                        if ($.trim($("#lastName").val()) == '') {
+                            alert('Enter last name.');
+                            return false;
+                        }
+                        if ($.trim($("#city").val()) == '') {
+                            alert('Enter city.');
+                            return false;
+                        }
+
+                        if ($("#ddlCountries").val() <= 0) {
+                            alert('Select country.');
+                            return false;
+                        }
+
+                        if ($.trim($('#regemail').val()) == '') {
+                            alert('Enter email.');
+                            return false;
+                        }
+                        if (!ValidateEmail($('#regemail').val())) {
+                            alert('Invalid email.');
+                            return false;
+                        }
+
+                        if ($.trim($('#autokey').val()) == '') {
+                            alert('Enter key.');
+                            return false;
+                        }
+                        if ($.trim($('#rpassword').val()) == '' || $.trim($('#rpassword').val()) == $.trim($('#autokey').val()) || $.trim($('#rpassword').val()) == $.trim($('#regemail').val()) || !validatePassword($.trim($('#rpassword').val()))) {
+                            alert('Check password criteria.');
+                            return false;
+                        }
+
+                        if ($('#rpassword').val() != $('#inputConfirmPassword').val()) {
+                            alert('Mismatch password');
+                            return false;
+                        }
+
+                        var data = {
+                            "firstName": $.trim($("#firstName").val()),
+                            "lastName": $.trim($("#lastName").val()),
+                            "city": $.trim($("#city").val()),
+                            "country": $.trim($("#ddlCountries").val()),
+                            "email": $.trim($("#regemail").val()),
+                            "autokey": $.trim($("#autokey").val()),
+                            "password": $.trim($("#rpassword").val())
+                        };
+
+                        $.ajax({
+                            beforeSend: function () {
+                                $('.modalShadow').show();
+                            },
+
+                            url: "/Login/CreateUser",
+                            type: "POST",
+                            data: data,
+                            dataType: "json",
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
+
+                            success: function (response) {
+                                if (response.Success) {
+                                    alert('User created successfully.');
+                                }
+                                else {
+                                    alert('Error while User Creation...');
+                                }
+                            },
+
+                            error: function () {
+                                console.log('Register user Fail!!!');
+                            },
+                            complete: function () {
+                                $('.modalShadow').hide();
+                            }
+                        });
+
+                    });
+
+
+                    /*     $('#register').click(function () {
+                             $('#myModalRegisteration').modal('show');
+                             var ddlCustomers = $("#ddlCustomers");
+                             ddlCustomers.empty().append('<option selected="selected" value="0" disabled = "disabled">Loading.....</option>');
+                             var ddlCountries = $("#ddlCountries");
+                             ddlCountries.empty().append('<option selected="selected" value="0" disabled = "disabled">Loading.....</option>');
+                             $.ajax({
+                                 type: "POST",
+                                 url: "/custmaster/DetailsFrRegister",
+                                 data: '{}',
+                                 contentType: "application/json; charset=utf-8",
+                                 dataType: "json",
+                                 success: function (response) {
+                                     //debugger;
+                                     ddlCustomers.empty().append('<option selected="selected" value="0">Please select</option>');
+                                     $.each(response.customers, function () {
+                                         ddlCustomers.append($("<option></option>").val(this['Value']).html(this['Text']));
+                                     });
+
+                                     ddlCountries.empty().append('<option selected="selected" value="0">Please select</option>');
+                                     $.each(response.countries, function () {
+                                         ddlCountries.append($("<option></option>").val(this['Value']).html(this['Text']));
+                                     });
+                                 },
+                                 error: function (response) {
+                                     alert(response.responseText);
+                                 }
+                             });
+                         });
+                         */
+                    $('#sendemail').click(function () {
+                        (this).disabled;
+                        var sEmail = $('#emailid').val();
+                        if ($.trim(sEmail).length == 0) {
+                            alert('Please enter valid email address');
+                            e.preventDefault();
+                        }
+                        if ((sEmail).length > 0) {
+                            var data = { "emailid": $("#emailid").val() };
+                            $.ajax({
+                                url: "/Login/SendForgotPasword",
+                                type: "POST",
+                                data: data,
+                                dataType: "json",
+                                contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
+                                success: function (response) {
+                                    if (response.Success) {
+                                        $.get("@Url.Action("Index", "Home")", function () {
+
+                                            var link = "@Url.Action("Index", "Home")";
+                                            window.location.href = link;
+                                        });
+                                        alert('Email successfully sent.');
+                                        (this).enable;
+                                    }
+                                    else {
+                                        (this).enable;
+                                        alert('Username/password is invalid.');
+                                    }
+                                },
+                                error: function () {
+                                    console.log('Login Fail!!!');
+                                }
+                            });
+                        }
+                        else {
+                            alert('Invalid Email Address');
+                            e.preventDefault();
+                        }
+                    });
+                    $('#forgotPassword').click(function () {
+                        $('#myModalForgotPassword').modal('show');
+                    });
+
+                    /* Change  as per Aurora It reuirement*/
+                    $('#RegisterUser1').click(function () {
+                        $('#myModalRegisteration').modal('show');
+                        var ddlCustomers = $("#ddlCustomers");
+                        ddlCustomers.empty().append('<option selected="selected" value="0" disabled = "disabled">Loading.....</option>');
+                        var ddlCountries = $("#ddlCountries");
+                        ddlCountries.empty().append('<option selected="selected" value="0" disabled = "disabled">Loading.....</option>');
+                        $.ajax({
+                            type: "POST",
+                            url: "/custmaster/DetailsFrRegister",
+                            data: '{}',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                //debugger;
+                                ddlCustomers.empty().append('<option selected="selected" value="0">Please select</option>');
+                                $.each(response.customers, function () {
+                                    ddlCustomers.append($("<option></option>").val(this['Value']).html(this['Text']));
+                                });
+
+                                ddlCountries.empty().append('<option selected="selected" value="0">Please select</option>');
+                                $.each(response.countries, function () {
+                                    ddlCountries.append($("<option></option>").val(this['Value']).html(this['Text']));
+                                });
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+
+                    });
+
+                    $('#logindata').click(function () {
+                        var data = {
+                            "username": $("#userid").val(),
+                            "password": $("#password").val()
+                        };
+                        $.ajax({
+                            url: "/Login/validateuser",
+                            type: "POST",
+                            data: data,
+                            dataType: "json",
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
+                            success: function (response) {
+                                if (response.Success) {
+                                    $.get("@Url.Action("Index", "Home")", function () {
+
+                                        var link = "@Url.Action("Index", "Home")";
+                                        window.location.href = link;
+                                    });
+                                }
+                                else {
+                                    alert('Username/password is invalid.');
+                                }
+                            },
+                            error: function () {
+                                console.log('Login Fail!!!');
+                            }
+                        });
+                    });
+                });
+</script>
+
+        }

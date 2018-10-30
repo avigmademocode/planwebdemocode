@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ViewLayout.cshtml";
+}
+
+<h2>Index</h2>
+<script src="~/AngularJS/RequestOrder/jsRequestOrderController.js"></script>
+<script src="~/AngularJS/RequestOrder/jsRequestOrderFactory.js"></script>
+<div class="container">
+    <div class="col-md-12" ng-controller="RequestOrderController">
+        <div class="col-md-12">
+            <div class="col-md-6 text-left" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-right:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-12 row">
+                    <h4><b>Request</b></h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Reference</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].ReferenceNo}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Status</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].StatusName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Department</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].Department}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Office</b></div>
+                    <div class="col-md-6">Portland, United States</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Ship To</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].DsiplayName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Line Items</b></div>
+                    <div class="col-md-6">{{Prodcount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Delivery Term</b></div>
+                    <div class="col-md-6">{{RequestDetails[0].IncoTermDesc}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Total (USD)</b></div>
+                    <div class="col-md-6">${{RequestDetails[0].TotalOrderAmount}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Created By</b></div>
+                    <div class="col-md-6"> {{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}} </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">{{RequestDetails[0].UserName}}</div>
+                </div>
+
+                <div class="row" ng-repeat="app in ApprovarDetails">
+                    <div class="col-md-4"><b>Approver {{$index + 1}}</b></div>
+                    <div class="col-md-6">{{app.AprName}}<br />({{app.AprEmail}})</div>
+                </div>
+
+                @*<div class="row">
+                    <div class="col-md-4"><b>Financial</b></div>
+                    <div class="col-md-6">Financial Reviewer Name - Financial</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><b>Reviewer</b></div>
+                    <div class="col-md-6">Reviewer<br />(accountspayable@mercycorps.org)</div>
+                </div>*@
+            </div>
+            <div class="col-md-6" style="background:#e6e4e4; padding:15px; border-top:#808080 4px solid; border-left:#ffffff 4px solid; border-radius:10px">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Shipping Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</div>
+                    <div class="col-md-12"> {{SCity}} ,  {{SState}} ,  {{SZip}}</div>
+
+                    <div class="col-md-12"> {{SCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].SEmailId}}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <h4>
+                            <b>
+                                Billing Address
+                            </b>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                    <div class="col-md-12"> {{BAdd1}}, {{BAdd2}},  {{BAdd3}}</div>
+                    <div class="col-md-12"> {{BCity}} ,  {{BState}} ,  {{BZip}}</div>
+
+                    <div class="col-md-12"> {{BCountry}}</div>
+                    <div class="col-md-12"><br /></div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactPerson}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BContactNo}}</div>
+                    <div class="col-md-12">{{RequestDetails[0].BEmailId}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="tab">
+                    <ul>
+
+                        <li><a href="#tab-2">Items</a></li>
+
+                        <li><a href="#tab-4">Event Log</a></li>
+                    </ul>
+                    <div id="tab-2">
+                        <style>
+                            table, th, td {
+                                /*border: 1px solid black;*/
+                                padding: 10px;
+                            }
+                        </style>
+                        <table style="width:100%; border: 1px solid #3e77ab;">
+                            <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                                <th>SINO</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th class="text-right">Price (USD)</th>
+                                <th class="text-right">Extended</th>
+                            </tr>
+                            <tr style="border: 1px solid #3e77ab;" ng-repeat="item in CartItems">
+                                <td>{{$index +1}}</td>
+                                <td>{{item.PartNo}}</td>
+                                <td>{{item.Quantity}}</td>
+                                <td class="text-right">${{item.ProdPrice}}</td>
+                                <td class="text-right">${{item.TotalPrice}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="tab-4">
+                        <table style="width:100%; border: 1px solid #3e77ab;">
+                            <tr style="background:#3e77ab; color:#ffffff; padding:10px;">
+                                <th>Event</th>
+                                <th>Date / Time</th>
+                                <th>User</th>
+                                <th>Comments</th>
+                            </tr>
+                            <tr style="border: 1px solid #3e77ab;" ng-repeat="log in OrderLog">
+                                <td>{{log.NewStatus}}</td>
+                                <td>{{log.ActionDate}}</td>
+                                <td>{{log.FullName}}</td>
+                                <td>{{log.Remarks}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+   
+        
+        <div class="row">
+            <div class="offset-1 col-md-2">
+                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#ApproveModal" value="Approve Request" data-dismiss="modal" style="margin-left:4px;" />
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#DennyModal" value="Deny Request" data-dismiss="modal" />
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="Contact Planson" class="btn btn-primary" data-toggle="modal" data-target="#EmailModal" ng-click="EmailPOPUP()" style="margin-left:-23px;" />
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="Print Excel" class="btn btn-primary" style="margin-left:-30px;" />
+            </div>
+        </div>
+        <div class="modal fade" id="ApproveModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Are you sure want to Aprrove request?</p>
+                    </div>
+                    <div class="text-center">
+                        <a href="" class="btn btn-primary" ng-click="Approve()" data-dismiss="modal">Ok</a>
+                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="DennyModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Confirm Setting this Request Back</h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Are you sure want to Deny request?</p>
+                    </div>
+                    <div class="text-center">
+                        <a href="" class="btn btn-primary" ng-click="Denny()" data-dismiss="modal">Ok</a>
+                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Email popUp action="" -->
+            <!-- Modal -->
+            <div class="modal fade" id="EmailModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content action=""-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Contact Planson</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="saveTemplateData" class="form-horizontal" ng-submit="submitForm()">
+                                <table class="table-bordered" style="width:550px">
+                                    <tr>
+                                        <td><b>Message Type:</b>  </td>
+                                        <td>
+                                            <select required class="form-control" ng-model="form.MessageType" ng-change="SelectSub(form.MessageType)" ng-options="itemx.OrderIdRequired as itemx.ContactType for itemx in Contactlist">
+                                                <option value="">--Select-- </option>
+                                            </select>
+                                            {{form.MessageType}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Subject:</b>  </td>
+                                        <td><input type="text" class="form-control" ng-model="form.Subject" /> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Message:</b></td>
+                                        <td> <textarea class="form-control" cols="15" rows="4" ng-model="form.Message"> </textarea> </td>
+                                    </tr>
+                                </table>
+                                <br /><br />
+
+                                <input type="submit" ngClick="Submit" class="btn btn-primary" value="Send" />
+                                &nbsp;&nbsp;
+                                <input type="button" class="btn btn-danger" value="Close" data-dismiss="modal" />
+
+                            </form>
+                        </div>
+                        @*<div class="modal-footer">
+
+                            </div>*@
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+    $(function () {
+        $("#tab").tabs();
+    });
+</script>

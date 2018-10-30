@@ -1,0 +1,150 @@
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MyProject.Models.UserMaster>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "UserMaster", FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <td align="left">&nbsp;</td>
+           
+            <td align="center">
+                @Html.DropDownList("SearchField", (IEnumerable<SelectListItem>)ViewData["SearchFields"], new {style = "width:150px;height:33px"})
+                @Html.DropDownList("SearchCondition", (IEnumerable<SelectListItem>)ViewData["SearchConditions"], new { style = "width:150px;height:33px" })
+                @Html.TextBox("SearchText", ViewData["SearchText"] as String, new { style = "width:100px;height:33px" })
+                <input type="submit" value="Search" name="command" class="btn btn-default" />
+                <input type="submit" value="Clear" name="command" class="btn btn-default" /> 
+            </td>
+           
+            <td align="right">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left">
+                @Html.DropDownList("Export", (IEnumerable<SelectListItem>)ViewData["Exports"], new { style = "width:65px;height:33px" })
+                <input type="submit" value="Export" name="command" class="btn btn-default" />
+            </td>
+           
+            <td align="center">                
+                @*<input type="submit" value="Add New Record" name="command" class="btn btn-default" />*@
+            </td>
+           
+            <td align="right">
+                &nbsp;
+                @Html.DropDownList("PageSize", (IEnumerable<SelectListItem>)ViewData["PageSizes"], new { style = "width:70px;height:33px" })
+               <!-- <input type="submit" value="Page Size" name="command" class="btn btn-default" /> --> 
+            </td>
+        </tr>
+    </table>
+}
+
+<table class="table">
+    <tr>
+        <th class="hide">
+            @Html.ActionLink("User Id", "Index", new { sortOrder = ViewData["UserIdSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th>
+            @Html.ActionLink("Login Id", "Index", new { sortOrder = ViewData["LoginIdSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        @*<th>
+            @Html.ActionLink("Pwd", "Index", new { sortOrder = ViewData["PwdSortParm"], SearchText = ViewData["SearchText"] })
+        </th>*@
+        <th>
+            @Html.ActionLink("User", "Index", new { sortOrder = ViewData["UserNameSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th>
+            @Html.ActionLink("Planson User", "Index", new { sortOrder = ViewData["IsPlansonUserSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th>
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewData["FirstNameSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewData["LastNameSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th>
+            @Html.ActionLink("Locked", "Index", new { sortOrder = ViewData["LockedSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th>
+            @Html.ActionLink("Active", "Index", new { sortOrder = ViewData["IsActiveSortParm"], SearchText = ViewData["SearchText"] })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="hide">
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginId)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Pwd)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPlansonUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Locked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            <a  href="@Url.Action("Edit", "UserMaster", new {UserId=item.UserId })">
+                <span class='glyphicon glyphicon-pencil'></span>
+            </a>
+           
+            @*@Html.ActionLink("Edit", "Edit", new {
+ 						UserId = item.UserId 
+ 						})*@ |
+                <a href="@Url.Action("Details", "UserMaster", new {UserId=item.UserId })">
+                    <span class='glyphicon glyphicon-list-alt'></span>
+                </a>
+            @*@Html.ActionLink("Details", "Details", new {
+ 						UserId = item.UserId 
+ 						})*@ |
+            <a href="@Url.Action("Delete", "UserMaster", new {UserId=item.UserId })">
+                <span class='glyphicon glyphicon-trash'></span>
+            </a>
+            @*@Html.ActionLink("Delete", "Delete", new {
+ 						UserId = item.UserId 
+ 						})*@
+        </td>
+    </tr>
+}
+
+</table>
+
+<table class="table">
+    <tr>
+        <td align="center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewData["CurrentSort"], SearchText = ViewData["SearchText"] }))
+        </td>
+    </tr>
+</table>
+
+ 
+@section Scripts {
+    $("#pageTitle").html("User Master");
+        $("#PageSize").change(function () {
+
+    var pagesz = $("#PageSize :selected").val();
+
+    window.location = "Index?PageSize="+pagesz+"&command=Page Size";
+    });
+}

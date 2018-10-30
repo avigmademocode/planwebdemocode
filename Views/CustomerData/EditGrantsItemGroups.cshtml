@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "EditGrantsItemGroups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/CustomerData/jsAddEditStatusFactory.js"></script>
+<script src="~/AngularJS/CustomerData/jsAddEditStatusController.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+
+<div ng-controller="AddEditStatusController">
+    <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+            <select ng-model="CustomerId" class="form-control" ng-change="GetCategoryByCustomer()">
+                <option value="">Select Customer</option>
+                <option ng-repeat="x in custList" value="{{x.CustId}}">
+                    {{x.CustName}}
+                </option>
+            </select>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background: #f1f4f5">
+            <table style="width:100%;" class="tbl">
+                <tr style="background: #3e77ab; color:#fff">
+                    <th>SrNo</th>
+                    <th>Grant Title</th>
+                    <th>Required</th>
+                    <th>Length</th>
+                    <th>Required InItem Group</th>
+                    <th>Edit</th>
+                </tr>
+                <tr class="tbl" ng-repeat="frt in ProductCategories">
+                    <td>{{$index + 1}}.</td>
+                    <td>
+                        <input type="text" style="width:75%" ng-model="frt.ProdCatDesc" value="{{ frt.ProdCatDesc }}" ng-disabled="true" />
+                    </td>
+                    <td><input type="text" style="width:60px" value="1" ng-disabled="true" /></td>
+                    <td><input type="text" style="width:60px" value="10" ng-disabled="true" /></td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" ng-model="frt.IsEdit" value="{{IsChecked}}" ng-change="(frt.Ischange = 1); EditCategory(frt)" ng-disabled="(frt.IsDelete ? true :false)" data-toggle="modal" data-target="#myModal" /></td>
+                </tr>
+                <tr class="tbl">
+                    <td></td>
+                    <td style="padding-top:20px">
+                        <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" ng-click="ResetData()">+ Add Grant Title</a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <hr />
+            <div class="text-center">
+            <input type="button" value="<< Back" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+            <input type="button" class="btn btn-primary" ng-click="UpdateIncoterms(ProductCategories)" value="Edit Item Group Grant Setting" /></div>
+
+            <br />
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" ng-click="Checked()">&times;</button>
+                            <h4 class="modal-title">Add A Grant Title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <b>Grant Title</b>
+                            <input type="text" ng-model="categoryname" class="form-control" />
+                            <br />
+                            <b>Required</b>
+                            <input type="text" ng-model="categoryname" class="form-control" />
+                            <br />
+                            <b>Length</b>
+                            <input type="text" ng-model="categoryname" class="form-control" />
+                            <br />
+                            <div class="col-md-12" style="border-bottom:1px solid #d9d3d3">
+
+                                <div class="row" style="border-bottom:1px solid #d9d3d3">
+                                    <div class="col-md-6">
+                                        <b>Customers List</b>
+                                    </div>
+                                    <div class="col-md-6  text-center">
+                                        <b>Select Customers</b>
+                                    </div>
+                                </div>
+
+                                <div class="row" ng-repeat="x in Finalcustlist">
+                                    <div class="col-md-6">
+                                        {{x.CustName}}
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <input type="checkbox" ng-model="x.IsCat" ng-checked="x.IsCat==true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center" style="padding-top:30%">
+                                <input type="button" ng-click="SaveCategory()" class="btn btn-primary" value="Add Item Group Grant Setting" />
+                                <input type="button" class="btn btn-danger" ng-click="Checked()" data-dismiss="modal" value="Close">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+</div>

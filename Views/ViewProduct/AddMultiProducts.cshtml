@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "AddMultiProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/AngularJS/AddMultiProduct/jsAddMultiProductController.js"></script>
+<script src="~/AngularJS/AddMultiProduct/jsAddMultiProductFactory.js"></script>
+<script src="~/AngularJS/ViewProduct/jsViewProductFactory.js"></script>
+
+<div ng-controller="AddMultiProductController">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h4>
+                <b>Insert Multiple Products</b>
+            </h4>
+            <b>Insert Multiple Products :</b>
+            <br />
+            <p>Please uploaded a excel, saved as a .csv, document in the following format to update each product with a new category:</p>
+            <style>
+                .tbl {
+                    border: #808080 1px solid;
+                    padding: 5px;
+                }
+            </style>
+            <table class="tbl">
+                <tr class="tbl">
+                    <td class="tbl"><b>Model Name</b></td>
+                    <td class="tbl"><b>Part No.</b></td>
+                    <td class="tbl"><b>Specifications								</b></td>
+                    <td class="tbl"><b>Manufacturer</b></td>
+                    <td class="tbl"><b>Product Type</b></td>
+                    <td class="tbl"><b>Customer Category</b></td>
+                    <td class="tbl"><b>Customer Price</b></td>
+                    <td class="tbl"><b>Teir 1</b></td>
+                    <td class="tbl"><b>Tier 1 Threshold</b></td>
+                    <td class="tbl"><b>Teir 2</b></td>
+                    <td class="tbl"><b>Tier 2 Threshold...</b></td>
+                </tr>
+                <tr class="tbl">
+                    <td class="tbl"><b>Model Name</b></td>
+                    <td class="tbl"><b>Part No.</b></td>
+                    <td class="tbl"><b>Specifications								</b></td>
+                    <td class="tbl"><b>Manufacturer</b></td>
+                    <td class="tbl"><b>Product Type</b></td>
+                    <td class="tbl"><b>Customer Category</b></td>
+                    <td class="tbl"><b>Customer Price</b></td>
+                    <td class="tbl"><b>Tier 1</b></td>
+                    <td class="tbl"><b>Tier 1 Threshold</b></td>
+                    <td class="tbl"><b>Tier 2</b></td>
+                    <td class="tbl"><b>Tier 2 Threshold...</b></td>
+                </tr>
+            </table>
+            <p>Manufacturer, Product Type, and Category needs to match what currently exists on the Portal</p>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="showLoader">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+            <img src="~/Content/Images/tenor.gif"> <!-- or any other spinner -->
+        </div>
+        <!-- so this div containing img will be dislpayed only when the showLoader is equal to true-->
+
+    </div>
+    <div class="col-md-12" ng-show="display">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <b>Customer</b>
+                <select ng-model="CustomerID" class="form-control" required>
+                    <option value="">Select Customer</option>
+                    <option ng-repeat="x in custList" value="{{x.CustId}}" ng-selected="CustomerID == x.CustId">
+                        {{x.CustName}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <b>Product File</b>
+                <input type="file" id="FileUpload" class="form-control" name="fileupload" value="uf.ImageUpload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="angular.element(this).scope().SelectFileforUpload(this.files)" required />
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <br />
+            <div class="col-md-6">
+                <b>Has Tiers</b>
+                <select class="form-control" ng-model="Tier" required>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <b>Add Tier Pricing To Existing Products</b>
+                <br />
+                @*Yes&nbsp;<input type="radio" ng-model="IsYesNo" name="YesNo" ng-value="True" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                No&nbsp;<input type="radio" ng-model="IsYesNo" name="YesNo" ng-value="False" />*@
+
+                Yes&nbsp;<input type="radio" name="YesNo" value="'1'" ng-model="IsYes" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                No&nbsp;<input type="radio" id="radiobtn" name="YesNo" value="'0'" ng-model="IsYes" checked="checked" />
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <br />
+            <div class="col-md-10">
+                <input type="button" class="btn btn-primary" value="<< Back" ng-click="Back()" />
+                <input type="button" value="Insert Products" ng-click="SaveFile()" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    </div>
+

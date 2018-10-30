@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Change Incoterms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/CustomerData/jsChangeIncotermsFactory.js"></script>
+<script src="~/AngularJS/CustomerData/jsChangeIncotermsController.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+<div class="container">
+    <div ng-controller="ChangeIncotermsController">
+        <div class="col-md-12">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+                <select ng-model="CustomerId" class="form-control" ng-change="GetCustIncoTermData(CustomerId)">
+                    <option value="">Select Customer</option>
+                    <option ng-repeat="x in custList" value="{{x.CustId}}">
+                        {{x.CustName}}
+                    </option>
+                </select>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <div class="col-md-12">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" style="background: #f1f4f5">
+                <table style="width:100%;" class="tbl">
+                    <tr style="background: #3e77ab; color:#fff">
+                        <th>SrNo</th>
+                        <th>Incoterm</th>
+                        <th>Description</th>
+
+                        <th> Edit</th>
+                        <th> Delete</th>
+                    </tr>
+                    <tr class="tbl" ng-repeat="obj in CustIncoTermData">
+                        <td>{{$index + 1}}.</td>
+                        <td>
+                            <input type="text" style="width: 75%" ng-model="obj.IncoTermCode" maxlength="5" value="{{ obj.IncoTermCode }}" ng-disabled="true" />
+                        </td>
+                        <td>
+                            <input type="text" style="width:75%" ng-model="obj.IncoTermDesc" value="{{ obj.IncoTermDesc }}" ng-disabled="true" />
+                        </td>
+
+                        <td><input type="checkbox" ng-model="obj.IsEdit" value="{{IsChecked}}" ng-change="(obj.Ischange = 1); EditIncoterm(obj)" ng-disabled="(obj.IsDelete ? true :false)" data-toggle="modal" data-target="#myModal" /></td>
+                        <td><input type="checkbox" ng-model="obj.IsDelete" ng-change="(obj.Ischange = 1)" ng-disabled="(obj.IsEdit  ? true :false)" /></td>
+                    </tr>
+                    <tr class="tbl">
+                        <td></td>
+                        <td style="padding-top:20px">
+                            <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" ng-click="ResetData()">+ Add  Incoterm</a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <hr />
+                <div class="text-center">
+                    <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="btn btn-primary" value="Delete Incoterms"
+                           data-toggle="modal" data-target="#cancelModal" data-dismiss="modal" />
+
+                </div>
+
+                <br />
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" ng-click="Checked()">&times;</button>
+                                <h4 class="modal-title">Add  Incoterm</h4>
+                            </div>
+                            <div class="modal-body">
+                                <b>Incoterms</b>
+                                <input type="text" ng-model="IncoTermCode"  maxlength="5"  class="form-control" />
+                                <br />
+                                <b>Description</b>
+                                <input type="text" ng-model="IncoTermDesc" class="form-control" />
+                                <br />
+                                <div class="col-md-12" style="border-bottom:1px solid #d9d3d3">
+
+                                    <div class="col-md-6">
+                                        <b>Customers List</b>
+                                    </div>
+                                    <div class="col-md-6  text-center">
+                                        <b>Select Customers</b>
+                                    </div>
+                                </div>
+
+                                <div class="row" ng-repeat="x in Finalcustlist">
+                                    <div class="col-md-6">
+                                        {{x.CustName}}
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <input type="checkbox" ng-model="x.IsCat" ng-checked="x.IsCat==true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center" style="padding-top:30%">
+                                <input type="button" ng-click="SaveIncoTerm()" class="btn btn-primary" value="Save Incoterm" />
+                                <input type="button" class="btn btn-danger" ng-click="Checked()" data-dismiss="modal" value="Close">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="modal fade" id="cancelModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Are you sure want to Delete IncoTerm?</h4>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="text-center">
+                        <a href="" class="btn btn-primary" ng-click="UpdateIncoterms(CustIncoTermData)" data-dismiss="modal">Ok</a>
+                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+    </div>
+
+</div>

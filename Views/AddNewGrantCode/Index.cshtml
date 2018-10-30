@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngularJS/AddNewGrantCode/jsAddNewGrantCodeFactory.js"></script>
+<script src="~/AngularJS/AddNewGrantCode/jsAddNewGrantCodeController.js"></script>
+<script src="~/AngularJS/RequestFinalize/jsRequestFinalizeFactory.js"></script>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .table1 td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        /*background-color: #dddddd;*/
+    }
+</style>
+
+<div ng-controller="AddNewGrantCodeController">
+
+    <div class="col-md-12">
+        <div class="col-md-6 text-left" style="background: #f7f3f3; min-height: 350px; border-top: #3e77ab 4px solid; border-bottom: #3e77ab 4px solid; border-right: #ffffff 4px solid; ">
+            <div class="col-md-12 row">
+                <h4><b>Request</b></h4>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><b>Reference</b></div>
+                <div class="col-md-6">{{RequestDetails[0].ReferenceNo}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Status</b></div>
+                <div class="col-md-6">{{RequestDetails[0].StatusName}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Department</b></div>
+                <div class="col-md-6">{{RequestDetails[0].Department}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Office</b></div>
+                <div class="col-md-6">Portland, United States</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Ship To</b></div>
+                <div class="col-md-6">{{RequestDetails[0].DsiplayName}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Line Items</b></div>
+                <div class="col-md-6">{{Prodcount}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Delivery Term</b></div>
+                <div class="col-md-6">{{RequestDetails[0].IncoTermDesc}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Total (USD)</b></div>
+                <div class="col-md-6">${{RequestDetails[0].TotalOrderAmount}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Created By</b></div>
+                <div class="col-md-6"> {{RequestDetails[0].FirstName}} {{RequestDetails[0].LastName}} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-6">{{RequestDetails[0].UserName}}</div>
+            </div>
+
+            <div class="row" ng-repeat="app in ApprovarDetails">
+                <div class="col-md-4"><b>Approver {{$index + 1}}</b></div>
+                <div class="col-md-6">{{app.AprName}}<br />({{app.AprEmail}})</div>
+            </div>
+
+            @*<div class="row">
+                <div class="col-md-4"><b>Financial</b></div>
+                <div class="col-md-6">Financial Reviewer Name - Financial</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><b>Reviewer</b></div>
+                <div class="col-md-6">Reviewer<br />(accountspayable@mercycorps.org)</div>
+            </div>*@
+        </div>
+        <div class="col-md-6" style="background: #f7f3f3; min-height: 350px; border-top: #3e77ab 4px solid; border-bottom: #3e77ab 4px solid; border-left: #ffffff 4px solid; ">
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <h4>
+                        <b>
+                            Shipping Address
+                        </b>
+                    </h4>
+                </div>
+                <div class="col-md-12">
+
+                </div>
+                <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                <div class="col-md-12"> {{SAdd1}}, {{SAdd2}},  {{SAdd3}}</div>
+                <div class="col-md-12"> {{SCity}} ,  {{SState}} ,  {{SZip}}</div>
+
+                <div class="col-md-12"> {{SCountry}}</div>
+                <div class="col-md-12"><br /></div>
+                <div class="col-md-12">{{RequestDetails[0].SContactPerson}}</div>
+                <div class="col-md-12">{{RequestDetails[0].SContactNo}}</div>
+                <div class="col-md-12">{{RequestDetails[0].SEmailId}}</div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <h4>
+                        <b>
+                            Billing Address
+                        </b>
+                    </h4>
+                </div>
+                <div class="col-md-12">{{RequestDetails[0].CustomerName}}</div>
+                <div class="col-md-12"> {{BAdd1}}, {{BAdd2}},  {{BAdd3}}</div>
+                <div class="col-md-12"> {{BCity}} ,  {{BState}} ,  {{BZip}}</div>
+
+                <div class="col-md-12"> {{BCountry}}</div>
+                <div class="col-md-12"><br /></div>
+                <div class="col-md-12">{{RequestDetails[0].BContactPerson}}</div>
+                <div class="col-md-12">{{RequestDetails[0].BContactNo}}</div>
+                <div class="col-md-12">{{RequestDetails[0].BEmailId}}</div>
+            </div>
+        </div>
+
+        <style>
+            .tbl {
+                border: 1px solid #808080;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+
+    </div>
+    <br />
+
+    <div class="col-md-12" style="padding-bottom:50px;">
+
+        <table class="table1" style="width:100%">
+            <tr style="background: #3e77ab; color:#ffffff">
+                <th>Sr.No.</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th class="text-right">Price (USD)</th>
+                <th class="text-right">Amount</th>
+            </tr>
+            <tr ng-repeat="item in CartItems">
+                <td>{{$index +1}}</td>
+                <td>{{item.PartNo}}<br /><a href="#" style="border-bottom: 1px #0094ff solid; color: #0094ff; ">Product Specifications[+]</a></td>
+                <td>{{item.Quantity}}</td>
+                <td class="text-right">${{item.ProdPrice}}</td>
+                <td class="text-right">${{item.TotalPrice}}</td>
+            </tr>
+        </table>
+        <br />
+
+
+        <div>
+            <input type="button" value="<< Back" class="btn btn-primary" ng-click="BackToPrevious()" />
+            <input type="button" class="btn btn-primary" value="Click To Add New Grant Code" data-toggle="modal" data-target="#myModal" ng-click="GetNewGrantCode()" />
+
+
+        </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog" ng-hide="hideModal">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Budget Code</h4>
+                    </div>
+                    <div class="modal-body  ">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-10 text-center">
+                                <p>Enter Budget Code detail below. You will be able to add more codes as needed as assign items and quantities to them.</p>
+                            </div>
+                        </div>
+                        <div ng-repeat="obj in GrantCodeData" class="col-md-12">
+                            <div class="col-md-4 text-right"><b>{{obj.GrantTitle}} :</b></div>
+                            <div class="col-md-6">
+                                <input type="text" ng-model="obj.Data" class="form-control" />
+                                <br />
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <b><input type="checkbox" ng-model="RemItem" /> Add All Remaining Items</b>
+                            <br /><br />
+                            <input type="reset" class="btn btn-danger" value="Clear"  ng-click="ClearData(GrantCodeData)" />
+                            <input type="button" class="btn btn-primary" ng-click="AddGroup(GrantCodeData)" value="Enter" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

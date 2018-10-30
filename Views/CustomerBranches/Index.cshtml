@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+<link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/AngularJS/CustomerBranches/jsCustomerBranchesController.js"></script>
+<script src="~/AngularJS/CustomerBranches/jsCustomerBranchesFactory.js"></script>
+<script src="~/AngularJS/NewRequest/jsNewRequestFactory.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".main").accordion(
+            {
+                active: 9,
+                event: "mouseover"
+            });
+    });
+</script>
+<style>
+    .red-text {
+        color: red;
+    }
+</style>
+<div class="row" ng-controller="CustomerBranchesController" ng-init="form.CustomerId = 0">
+    <form name="formx" class="form-horizontal" ng-submit="submitForm()">
+        <hr />
+        <div class="col-md-offset-1 col-md-6 col-sm-8 col-xs-10">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Customer Name:</h5>
+                </div>
+                <div class="col-md-8">
+                    <select required class="form-control" ng-model="form.CustomerId" ng-change="GetBranchData(form.CustomerId)"
+                            ng-options="itemx.CustId as itemx.CustName for itemx in custList">
+                        <option value="">--Select-- </option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Branch Name:</h5>
+                </div>
+                <div class="col-md-8">
+
+                    <div class="col-md-8" ng-hide="IstxtHide">
+                        <select required class="form-control" ng-model="form.BranchName" ng-change="GetCustomerData(form.BranchName)"
+                                ng-options="itemx.BranchId as itemx.BranchName for itemx in Branchlst">
+                            <option value="0">--Select-- </option>
+                        </select>
+                    </div>
+
+                    <input type="text" class="form-control" ng-model="form.addbranchname" ng-hide="IsDdlHide" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Display Name:</h5>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" ng-model="form.DisplayName" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Head Office :</h5>
+                </div>
+                <div class="col-md-8">
+                    <label for="HOY">Yes: &nbsp; </label>    <input type="radio" id="HOY" name="ff" ng-value="true" ng-model="form.HeadOffice" /> &nbsp;&nbsp; &nbsp;<label for="HON">No: &nbsp;</label>  <input type="radio" name="ff" id="HON" ng-value="false" ng-model="form.HeadOffice" />
+                </div>
+            </div>
+            <br />
+            <div class="main">
+                <h4>&nbsp; &nbsp; &nbsp; PreSet Address:</h4>
+                <div>
+                    <label for="PAY">Yes: &nbsp; </label>    <input type="radio" id="PAY" name="PA" ng-value="true" ng-model="form.PreSet" /> &nbsp;&nbsp; &nbsp;<label for="PAN">No: &nbsp;</label>  <input type="radio" name="PA" id="PAN" ng-value="false" ng-model="form.PreSet" />
+                </div>
+            </div>
+            <div class="main">
+                <h4>&nbsp; &nbsp; &nbsp; Address: Branch Address</h4>
+                <div class="bg-danger">
+                    <input type="text" ng-model="form.SAdd1" class="form-control" placeholder="Branch Address1" ng-change="GetFullAddress()" required>
+                    <input type="text" ng-model="form.SAdd2" class="form-control" placeholder="Branch Address2" ng-change="GetFullAddress()">
+                    <input type="text" ng-model="form.SAdd3" class="form-control" placeholder="Branch Address3" ng-change="GetFullAddress()">
+                    <div>
+                        <angucomplete-alt id="ex1"
+                                          placeholder="City"
+                                          pause="100"
+                                          selected-object="selectedCityTo"
+                                          local-data="SCity"
+                                          search-fields="CityName"
+                                          title-field="CityName"
+                                          minlength="1"
+                                          initial-value="initialSCityValue"
+                                          match-class="highlight"
+                                          input-class="form-control"
+                                          title="Enter City Name" />
+                    </div>
+                    @*<input type="text" ng-model="form.SCity" class="form-control" placeholder="City">*@
+                    <input type="text" ng-model="form.SState" class="form-control" placeholder="State / Province / Region">
+                    @*<input type="text" ng-model="form.SCounrty" class="form-control" placeholder="Country">*@
+                    <input type="text" ng-model="form.SZip" class="form-control" placeholder="Postal / Zip Code">
+                    <div>
+                        <angucomplete-alt id="ex2"
+                                          placeholder="Country"
+                                          pause="100"
+                                          selected-object="selectedCountryTo"
+                                          local-data="SCountry"
+                                          search-fields="CountryName"
+                                          title-field="CountryName"
+                                          minlength="1"
+                                          initial-value="initialSCountryValue"
+                                          match-class="highlight"
+                                          input-class="form-control"
+                                          title="Enter Country Name" />
+
+                    </div>
+
+                    <input type="text" ng-model="form.Sname" class="form-control" placeholder="Branch Contact Name" required title="Enter Contact Person Name">
+                    <input type="text" id="Phno" ng-model="form.Sphone" class="form-control" placeholder="Branch Contact Phone" required title="Enter Contact No.">
+                    <span style="color:red" id="errmsg"></span>
+                    @*<input type="email" name="input" ng-model="form.Semail" class="form-control" placeholder="Branch Contact Email" required title="Enter Valid Email">
+                        <span class="error" ng-show="EmailForm.input.$error.email">
+                            Not valid email!
+                        </span>*@
+
+                    <input name="email" ng-model="form.Semail" type="text" ng-pattern="eml_add" ng-required="true" autocomplete="off" placeholder="Branch Contact Email" class="form-control">
+                    <span class="red-text" ng-if="formx.email.$error.required && formx.email.$dirty">Email Required!</span>
+                    <span class="red-text" ng-show="formx.email.$error.pattern">Invalid Email!</span>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Branch Full address :</h5>
+                </div>
+                <div class="col-md-8">
+
+
+                    <textarea class="form-control" ng-model="form.SFullAdd" rows="4" placeholder="Branch Full address"></textarea>
+                </div>
+            </div>
+            <br />
+            <div class="main">
+                <h4>&nbsp; &nbsp; &nbsp; Hide Billing Address:</h4>
+                <div>
+                    <input type="checkbox" ng-model="form.Hide" id="hd" /><label for="hd">&nbsp; &nbsp; Yes, Hide Billing Address</label>
+                </div>
+            </div>
+            <br />
+            <div class="main" ng-show="form.Hide!= true">
+                <h4>&nbsp; &nbsp; &nbsp; Address: Billing Address</h4>
+                <div class="bg-danger">
+                    <input type="checkbox" ng-click="CoppyAddress()" ng-model="chkCoppy" id="ckt" /><label for="ckt">&nbsp; &nbsp; Copy from Above</label>
+                    <br />
+                    <input type="text" ng-model="form.BAdd1" class="form-control" placeholder="Bill Address1">
+                    <input type="text" ng-model="form.BAdd2" class="form-control" placeholder="Bill Address2">
+                    <input type="text" ng-model="form.BAdd3" class="form-control" placeholder="Bill Address3">
+                    <div>
+                        <angucomplete-alt id="ex3"
+                                          placeholder="City"
+                                          pause="100"
+                                          selected-object="selectedBCityTo"
+                                          local-data="SCity"
+                                          search-fields="CityName"
+                                          title-field="CityName"
+                                          minlength="1"
+                                          initial-value="initialBCityValue"
+                                          match-class="highlight"
+                                          input-class="form-control" />
+                    </div>
+                    @*<input type="text" ng-model="form.SCity2" class="form-control" placeholder="City">*@
+                    <input type="text" ng-model="form.BState" class="form-control" placeholder="State / Province / Region" ng-change="GetFullAddress()">
+                    @*<input type="text" ng-model="form.BCountry" class="form-control" placeholder="Country">*@
+                    <input type="text" ng-model="form.BZip" class="form-control" placeholder="Postal / Zip Code" ng-change="GetFullAddress()">
+                    <div>
+                        <angucomplete-alt id="ex4"
+                                          placeholder="Country"
+                                          pause="100"
+                                          selected-object="selectedBCountryTo"
+                                          local-data="SCountry"
+                                          search-fields="CountryName"
+                                          title-field="CountryName"
+                                          minlength="1"
+                                          initial-value="initialBCountryValue"
+                                          match-class="highlight"
+                                          input-class="form-control" />
+                    </div>
+                    <input type="text" ng-model="form.Bname" class="form-control" placeholder="Bill Contact Name">
+                    <input type="text" ng-model="form.Bphone" class="form-control" placeholder="Bill Contact Phone">
+                    @*<input type="email" name="input1" ng-model="form.Bemail" class="form-control" placeholder="Bill Contact Email">
+                        <span class="error" ng-show="EmailForm.input1.$error.email">
+                            Not valid email!
+                        </span>*@
+
+                    <input name="email1" ng-model="form.Bemail" type="text" ng-pattern="eml_add" ng-required="true" autocomplete="off" placeholder="Bill Contact Email" class="form-control">
+                    <span class="red-text" ng-if="formx.email1.$error.required && formx.email1.$dirty">Email Required!</span>
+                    <span class="red-text" ng-show="formx.email1.$error.pattern">Invalid Email!</span>
+                    <br />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Needs Delivery Term:</h5>
+                </div>
+                <div class="col-md-8">
+                    <label for="NDY">Yes: &nbsp; </label>    <input type="radio" id="NDY" name="ND" ng-value="true" ng-model="form.NeedDelivery" /> &nbsp;&nbsp; &nbsp;<label for="NDN">No: &nbsp;</label>  <input type="radio" name="ND" id="NDN" ng-value="false" ng-model="form.NeedDelivery" />
+                </div>
+            </div>
+            <br />
+            <div class="main">
+                <h5>&nbsp; &nbsp; &nbsp;Needs Fee Warning:</h5>
+                <div>
+                    <input type="checkbox" ng-click="NeedWarningFun()" ng-model="form.NeedWarning" id="NW" /><label for="NW">&nbsp; &nbsp; Needs Fee Warning</label>
+                </div>
+            </div>
+            <br />
+            <div class="row" ng-show="form.NeedWarning== true">
+                <div class="col-md-4">
+                    <h5>Fee Warning:</h5>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" ng-model="form.FeeWarning" />
+                </div>
+            </div>
+            <br />
+            <div class="">
+                <input type="button" value="<< Back" class="btn btn-primary" ng-click="Back()" />
+                &nbsp; &nbsp; &nbsp;
+                <input class="btn btn-primary" value="Add New Branch " ng-click="AddNew()">
+                &nbsp; &nbsp; &nbsp;
+                <input class="btn btn-primary" type="submit" value="Save Info">
+            </div>
+        </div>
+    </form>
+</div>
+

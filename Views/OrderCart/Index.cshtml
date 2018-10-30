@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        /*border-spacing: 10px;
+        border-collapse: separate;
+        font-family: fontawesome;*/
+    }
+
+    td, th {
+        padding: 15px;
+    }
+
+    tr.noBorder td {
+        border: 0;
+    }
+</style>
+<script src="~/AngularJS/OrderCart/jsOrderCartFactory.js"></script>
+<script src="~/AngularJS/OrderCart/jsOrderCartController.js"></script>
+<div ng-controller="OrderCartController">
+    <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <table style="width:100%; padding:20px" border="1|0">
+                <tr bgcolor="#3a6f9f" style="color:#fff">
+                    <th>SrNo</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th style="width:100px">Total Price</th>
+                    <th>Remove</th>
+                </tr>
+                <tr ng-repeat="product in CartList track by $index">
+                    <td>{{$index + 1}}.</td>
+                    <td width="350px">{{product.ProdName}}</td>
+                    <td class="text-right">${{product.ProdPrice}}</td>
+                    <td><input type="number" style="width:90px" class="text-center" ng-model-options="{updateOn: 'blur'}" ng-change="CalculatePrice(product.ProdID, Quantity,product.ProdPrice,product.ProdName)" min="1" value="{{product.Quantity}}" ng-model="Quantity" /></td>
+                    <td class="text-right" style="width:90px">${{product.ProdPrice * product.Quantity | number: 2}}</td>
+                    <td><i class="fa fa-trash-o btn btn-default" ng-click="RemoveProduct($index, product.ProdID)" style="color:#ff0000" aria-hidden="true"></td>
+                </tr>
+                <tfoot>
+                    <tr class="noBorder">
+                        <td colspan="2"><input type="button" value="Back To Previous" class="btn btn-primary" ng-click="BackToPrevious()"></td>
+                        <td></td>
+                        <td class="text-right"><b>Total Amount:</b> </td>
+                        <td class="text-right"><b> ${{SubTotal | number: 2}}</b></td>
+                        <td><a href="#" ng-click="SaveOrderDetails(CartList)" class="btn btn-primary"><i class="fa fa-hand-o-right" aria-hidden="true">  Continue</i></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <br />
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="text-align:right">
+
+        </div>
+    </div>
+
+</div>

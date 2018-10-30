@@ -1,0 +1,87 @@
+@model MyProject.Models.UserMaster
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h5>Delete</h5>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginId)
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Pwd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pwd)
+        <dt>*@
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPlansonUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPlansonUser)
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        <dt>
+            @Html.DisplayNameFor(model => model.Locked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locked)
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+
+@section Scripts {
+    $("#pageTitle").html("User Master");
+
+}
+
+
+
+ 
